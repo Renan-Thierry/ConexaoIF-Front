@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&family=Poppins:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+        font-family: Poppins;
+}
+.container {
+    border-top: 0.4px solid #fff;
+    width: 100vw;
+    height: 100%;
+}
+.conteudo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 50%;
+}
+h1 {
+    color: #fff;
+    text-transform: uppercase;
+}
+.conteudo input{
+    width: 300px;
+    height: 3em;
+    margin-top: 2.5em;
+    box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
+}
+.conteudo button {
+    margin-top: 2.9em;
+    width: 180px;
+    height: 3em;
+    border: none;
+    box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
+    border-radius: 13px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #fff;
+}
+.table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+  
+  .table th {
+    border: 1px solid #cfcbcb;
+    padding: 8px;
+    color: black;
+  }
+  .table td {
+    border: 1px solid #fff;
+    padding: 8px;
+    color: #fff;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  .icones {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+  }
+.editForm {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.editForm button {
+  margin-top: 3em;
+  border-radius: 13px;
+  box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
+}

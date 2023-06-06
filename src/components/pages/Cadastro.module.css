@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&family=Poppins:wght@300;400&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Poppins;
+}
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+.container {
+    width: 80vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 23px;
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
+
+}
+.content_form {
+    height: 80vh;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-bottom: 1.2em;
+}
+.content_left{
+    height: 90vh;
+    width: 60%;
+    background-color: green;
+    border-top-left-radius: 23px;
+    border-bottom-left-radius: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #f0f0f0;
+    padding: 5em;
+    text-align: left;
+}
+.content_form hr {
+    width: 90%;
+    margin: 20px;
+    background-color: green;
+  }
+.content_left img {
+    height: 100%;
+    width: 100%;
+    margin-top: auto;
+    background:none
+}
