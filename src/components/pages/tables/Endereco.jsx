@@ -73,7 +73,7 @@ function Endereco() {
           value={filtroEndereco}
           onChange={(e) => setFiltroEndereco(e.target.value)}
         />
-            <Link to=""><button>Adicionar</button></Link>
+            <Link to="/CadastroEndereco"><button>Adicionar</button></Link>
           </div>
           {editEnderecoId ? (
             <div className={styles.editForm}>

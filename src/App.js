@@ -15,6 +15,7 @@ import Grupo from './components/pages/tables/Grupo';
 import Instituicao from './components/pages/tables/Instituicao';
 import Periodos from './components/pages/tables/Periodos';
 import Pessoas from './components/pages/tables/Pessoas';
+import CadastroEndereco from './components/pages/tables/getTables/CadastroEndereco';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/Instituicao" element={<Instituicao />} />
           <Route path="/Periodos" element={<Periodos />} />
           <Route path="/Pessoas" element={<Pessoas />} />
+          <Route path="/CadastroEndereco" element={<CadastroEndereco />} />
         </Routes>
       </Router>
     

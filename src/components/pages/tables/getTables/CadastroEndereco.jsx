@@ -3,3 +3,4 @@ function CadastroEndereco() {
         <h1>Cadastro de Endereco</h1>
     )
 }
+export default CadastroEndereco;
