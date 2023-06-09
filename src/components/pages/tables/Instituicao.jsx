@@ -1,6 +1,6 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
-import NavBar from "../../form/NavBar";
+import AdminNavBar from "../../form/AdminNavBar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
@@ -57,12 +57,13 @@ function Instituicao(){
       };
 
       const filtro_Instituicao = instituicoes.filter((instituicao) =>
-        instituicao.nome.toLowerCase().includes(filtroInstituicao.toLowerCase())
+      instituicao.nome && instituicao.nome.toLowerCase().includes(filtroInstituicao.toLowerCase())
       );
-  
+
     return(
       <>
-          <NavBar />
+      <div className={styles.containerAdminNavBar}>
+        <AdminNavBar /> 
           <div className={styles.container}>
             <main>
             <h1>Instituições</h1>
@@ -119,6 +120,7 @@ function Instituicao(){
               )}
             </main>
           </div>
+        </div>
       </>
     )
 }

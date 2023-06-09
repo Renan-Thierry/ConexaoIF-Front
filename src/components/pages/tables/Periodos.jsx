@@ -1,6 +1,6 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
-import NavBar from "../../form/NavBar";
+import AdminNavBar from "../../form/AdminNavBar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
@@ -57,12 +57,14 @@ function Periodos(){
       };
 
       const filtro_Periodo = Periodos.filter((periodo) =>
-        periodo.nome.toLowerCase().includes(filtroPeriodo.toLowerCase())
+      periodo.nome && periodo.nome.toLowerCase().includes(filtroPeriodo.toLowerCase())
       );
+
 
     return(
       <>
-          <NavBar />
+      <div className={styles.containerAdminNavBar}>
+        <AdminNavBar />
           <div className={styles.container}>
             <main>
             <h1>Periodos</h1>
@@ -112,6 +114,7 @@ function Periodos(){
               )}
             </main>
           </div>
+        </div>
       </>
     )
 }

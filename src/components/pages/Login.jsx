@@ -13,7 +13,7 @@ function Login(){
                     </Link>
                 </div>
                 <div className={styles.content_form}>
-                    <h1>Login</h1>
+                    <h1 className={styles.tittle_Login}>Login</h1>
                     <hr className={styles.hrtg}/>
                     <FormLogin />
                 </div>

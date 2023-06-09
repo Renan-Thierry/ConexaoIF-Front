@@ -10,7 +10,7 @@ function Cadastro(){
                 <img src={logo} alt="Login_image"/>
                 </div>
                 <div className={styles.content_form}>
-                    <h1>Cadastre-se</h1>
+                    <h1 className={styles.tittle_Cadastro}>Cadastre-se</h1>
                     <hr/>
                     <FormCadastro />
                 </div>

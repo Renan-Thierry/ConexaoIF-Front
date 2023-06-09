@@ -19,11 +19,20 @@ function Sidebar() {
       </button>
       
         <nav className={styles.navbar}>
-            <Link to="/" className={styles.item} style={{ color: 'inherit' }}>Home</Link>
-            <Link to="/Info" className={styles.item} style={{ color: 'inherit' }}>Info</Link>
-            <Link to="/ChatBot" className={styles.item} style={{ color: 'inherit' }}>Grupos</Link>
-            <Link to="/Sobre" className={styles.item} style={{ color: 'inherit' }}>Sobre</Link>
-            <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}>Entrar</Link>
+            <Link to="/Alunos" className={styles.item} style={{ color: 'inherit' }}>Alunos</Link>
+            <Link to="/Coordenador" className={styles.item} style={{ color: 'inherit' }}>Coordenadores</Link>
+            <Link to="/Curso" className={styles.item} style={{ color: 'inherit' }}>Curso</Link>
+            <Link to="/Endereco" className={styles.item} style={{ color: 'inherit' }}>Endereço</Link>
+            <Link to="/Grupo" className={styles.item} style={{ color: 'inherit' }}>Grupo</Link>
+            <Link to="/Instituicao" className={styles.item} style={{ color: 'inherit' }}>Instituicao</Link>
+            <Link to="/Mensagem" className={styles.item} style={{ color: 'inherit' }}>Mensagem</Link>
+            <Link to="/Periodos" className={styles.item} style={{ color: 'inherit' }}>Periodos</Link>
+            <Link to="/Pessoas" className={styles.item} style={{ color: 'inherit' }}>Pessoas</Link>
+            <Link to="/Professor" className={styles.item} style={{ color: 'inherit' }}>Professor</Link>
+            <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}>Sair</Link>
+
+
+            
 
         </nav>
     </div>

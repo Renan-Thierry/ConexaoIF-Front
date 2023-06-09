@@ -1,6 +1,6 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
-import NavBar from "../../form/NavBar";
+import AdminNavBar from "../../form/AdminNavBar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
@@ -57,12 +57,13 @@ function Grupo(){
       };
 
       const filtro_Grupo = grupos.filter((grupo) =>
-        grupo.nome.toLowerCase().includes(filtroGrupo.toLowerCase())
+      grupo.nome && grupo.nome.toLowerCase().includes(filtroGrupo.toLowerCase())
       );
 
     return(
       <>
-          <NavBar />
+      <div className={styles.containerAdminNavBar}>
+        <AdminNavBar />
           <div className={styles.container}>
             <main>
             <h1>Grupos</h1>
@@ -119,6 +120,7 @@ function Grupo(){
               )}
             </main>
           </div>
+        </div>
       </>
     )
 }

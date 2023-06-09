@@ -3,12 +3,12 @@
     height: 99vh;
     background-color: #161616;
     transition: transform 0.3s ease-in-out;
-    transform: translateX(-100%);
+    transform: translateX(0);
     border-right: 0.4px solid #fff;
   }
   
   .sidebar.open {
-    transform: translateX(0);
+    transform: translateX(-100%);
   }
   .container{
     width: 100vw;
@@ -20,26 +20,19 @@
     text-align: left;
     border-right: 0.4px solid #fff;
     border-bottom: 0.4px solid #fff;
-    margin-bottom: 4em;
+    margin-bottom: 1.5em;
     font-size: large;
     font-weight: bold;
 }
 .navbar  {
     display: flex;
-    display: flex;
     flex-direction: column;
-    gap: 40px;
     font-weight: 400;
     color: #fff;
 }
 .image  {
     width: 40px;
     height: 40px;
-}
-.item2 {
-    margin-top: 7.5em;
-    border-top: 0.4px solid #fff;
-    padding: 1em;
 }
 .item{
     height: 50px;
@@ -49,5 +42,9 @@
 }
 .item:hover {
     background-color: rgb(15, 14, 14);
+}
+.item2 {
+    margin-top: 17px;
+    border-top: 0.4px solid #fff;
 }
   

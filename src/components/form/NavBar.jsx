@@ -12,8 +12,6 @@ function NavBar () {
                 </Link>
                 <nav className={styles.navbar}>
                     <Link to="/" className={styles.item} style={{ color: 'inherit' }}>Home</Link>
-                    <Link to="/Info" className={styles.item} style={{ color: 'inherit' }}>Info</Link>
-                    <Link to="/ChatBot" className={styles.item} style={{ color: 'inherit' }}>Grupos</Link>
                     <Link to="/Sobre" className={styles.item} style={{ color: 'inherit' }}>Sobre</Link>
                     <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}>Entrar</Link>
                 </nav>

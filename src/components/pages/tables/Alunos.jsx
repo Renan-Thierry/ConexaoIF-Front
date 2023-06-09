@@ -1,6 +1,6 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
-import NavBar from "../../form/NavBar";
+import AdminNavBar from "../../form/AdminNavBar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BsPencil, BsFillTrashFill } from "react-icons/bs"
@@ -62,75 +62,77 @@ function Alunos() {
 
   return (
     <>
-      <NavBar />
-      <div className={styles.container}>
-        <main>
-          <h1>Alunos</h1>
-          <div className={styles.conteudo}>
-            <input
-              type="text"
-              placeholder="Pesquisar"
-              value={filtroAluno}
-              onChange={(e) => setFiltroAluno(e.target.value)}
-            />
-            <Link to="/ChatBot"><button>Adicionar</button></Link>
-          </div>
-          {editAlunosId ? (
-            <div className={styles.editForm}>
+    <div className={styles.containerAdminNavBar}>
+        <AdminNavBar />
+        <div className={styles.container}>
+          <main>
+            <h1>Alunos</h1>
+            <div className={styles.conteudo}>
               <input
                 type="text"
-                value={editAlunosDados.nome}
-                onChange={(e) => setEditAlunosDados({ ...editAlunosDados, nome: e.target.value })}
+                placeholder="Pesquisar"
+                value={filtroAluno}
+                onChange={(e) => setFiltroAluno(e.target.value)}
               />
-              <input
-                type="text"
-                value={editAlunosDados.email}
-                onChange={(e) => setEditAlunosDados({ ...editAlunosDados, email: e.target.value })}
-              />
-              <input
-                type="text"
-                value={editAlunosDados.telefone}
-                onChange={(e) => setEditAlunosDados({ ...editAlunosDados, telefone: e.target.value })}
-              />
-              <input
-                type="text"
-                value={editAlunosDados.matricula}
-                onChange={(e) => setEditAlunosDados({ ...editAlunosDados, matricula: e.target.value })}
-              />
-              <button onClick={saveEditAluno}>Salvar</button>
+              <Link to="/ChatBot"><button>Adicionar</button></Link>
             </div>
-          ) : (
-            <div>
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>NOME</th>
-                    <th>EMAIL</th>
-                    <th>TELEFONE</th>
-                    <th>MATRICULA</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtro_Alunos.map((aluno) => (
-                    <tr key={aluno.id}>
-                      <td>{aluno.id}</td>
-                      <td>{aluno.nome}</td>
-                      <td>{aluno.email}</td>
-                      <td>{aluno.telefone}</td>
-                      <td>{aluno.matricula}</td>
-                      <div className={styles.icones}>
-                        <BsPencil onClick={() => editAluno(aluno.id)} />
-                        <BsFillTrashFill onClick={() => removeAluno(aluno.id)} />
-                      </div>
+            {editAlunosId ? (
+              <div className={styles.editForm}>
+                <input
+                  type="text"
+                  value={editAlunosDados.nome}
+                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, nome: e.target.value })}
+                />
+                <input
+                  type="text"
+                  value={editAlunosDados.email}
+                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, email: e.target.value })}
+                />
+                <input
+                  type="text"
+                  value={editAlunosDados.telefone}
+                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, telefone: e.target.value })}
+                />
+                <input
+                  type="text"
+                  value={editAlunosDados.matricula}
+                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, matricula: e.target.value })}
+                />
+                <button onClick={saveEditAluno}>Salvar</button>
+              </div>
+            ) : (
+              <div>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>NOME</th>
+                      <th>EMAIL</th>
+                      <th>TELEFONE</th>
+                      <th>MATRICULA</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </main>
-      </div>
+                  </thead>
+                  <tbody>
+                    {filtro_Alunos.map((aluno) => (
+                      <tr key={aluno.id}>
+                        <td>{aluno.id}</td>
+                        <td>{aluno.nome}</td>
+                        <td>{aluno.email}</td>
+                        <td>{aluno.telefone}</td>
+                        <td>{aluno.matricula}</td>
+                        <div className={styles.icones}>
+                          <BsPencil onClick={() => editAluno(aluno.id)} />
+                          <BsFillTrashFill onClick={() => removeAluno(aluno.id)} />
+                        </div>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </main>
+        </div>
+    </div>
     </>
   );
 }

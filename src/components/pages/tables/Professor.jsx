@@ -1,6 +1,6 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
-import NavBar from "../../form/NavBar";
+import AdminNavBar from "../../form/AdminNavBar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
@@ -57,81 +57,83 @@ function Professor() {
     };
 
     const filtro_Professor = professores.filter((professor) =>
-      professor.nome.toLowerCase().includes(filtroProfessor.toLowerCase())
+    professor.nome && professor.nome.toLowerCase().includes(filtroProfessor.toLowerCase())
     );
 
     return(
     <>
-      <NavBar />
-      <div className={styles.container}>
-        <main>
-        <h1>Professores</h1>
-          <div className={styles.conteudo}>
-          <input
-          type="text"
-          placeholder="Pesquisar"
-          value={filtroProfessor}
-          onChange={(e) => setFiltroProfessor(e.target.value)}
-          />
-            <Link to="/Cadastro"><button>Adicionar</button></Link>
-          </div>
-          {editProfessorId ? (
-            <div className={styles.editForm}>
-              <input
-                type="text"
-                value={editProfessorDados.nome}
-                onChange={(e) => setEditProfessorDados({ ...editProfessorDados, nome: e.target.value })}
-              />
-              <input
-                type="text"
-                value={editProfessorDados.email}
-                onChange={(e) => setEditProfessorDados({ ...editProfessorDados, email: e.target.value })}
-              />
-              <input
-                type="text"
-                value={editProfessorDados.telefone}
-                onChange={(e) => setEditProfessorDados({ ...editProfessorDados, telefone: e.target.value })}
-              />
-              <input
-                type="text"
-                value={editProfessorDados.disciplina}
-                onChange={(e) => setEditProfessorDados({ ...editProfessorDados, disciplina: e.target.value })}
-              />
-              <button onClick={saveEditProfessor}>Salvar</button>
+    <div className={styles.containerAdminNavBar}>
+      <AdminNavBar />
+        <div className={styles.container}>
+          <main>
+          <h1>Professores</h1>
+            <div className={styles.conteudo}>
+            <input
+            type="text"
+            placeholder="Pesquisar"
+            value={filtroProfessor}
+            onChange={(e) => setFiltroProfessor(e.target.value)}
+            />
+              <Link to="/Cadastro"><button>Adicionar</button></Link>
             </div>
-          ) : (
-          <div>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>NOME</th>
-                  <th>EMAIL</th>
-                  <th>TELEFONE</th>
-                  <th>DISCIPLINA</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtro_Professor.map((professor) => {
-                    return (
-                      <tr key={professor.id}>
-                        <td>{professor.id}</td>
-                        <td>{professor.nome}</td>
-                        <td>{professor.email}</td>
-                        <td>{professor.telefone}</td>
-                        <td>{professor.disciplina}</td>
-                        <div className={styles.icones}>
-                          <BsPencil onClick={() => editProfessor(professor.id)}/>
-                          <BsFillTrashFill onClick={() => removeProfessor(professor.id)}/>
-                        </div>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
-        )}
-        </main>
+            {editProfessorId ? (
+              <div className={styles.editForm}>
+                <input
+                  type="text"
+                  value={editProfessorDados.nome}
+                  onChange={(e) => setEditProfessorDados({ ...editProfessorDados, nome: e.target.value })}
+                />
+                <input
+                  type="text"
+                  value={editProfessorDados.email}
+                  onChange={(e) => setEditProfessorDados({ ...editProfessorDados, email: e.target.value })}
+                />
+                <input
+                  type="text"
+                  value={editProfessorDados.telefone}
+                  onChange={(e) => setEditProfessorDados({ ...editProfessorDados, telefone: e.target.value })}
+                />
+                <input
+                  type="text"
+                  value={editProfessorDados.disciplina}
+                  onChange={(e) => setEditProfessorDados({ ...editProfessorDados, disciplina: e.target.value })}
+                />
+                <button onClick={saveEditProfessor}>Salvar</button>
+              </div>
+            ) : (
+            <div>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>EMAIL</th>
+                    <th>TELEFONE</th>
+                    <th>DISCIPLINA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtro_Professor.map((professor) => {
+                      return (
+                        <tr key={professor.id}>
+                          <td>{professor.id}</td>
+                          <td>{professor.nome}</td>
+                          <td>{professor.email}</td>
+                          <td>{professor.telefone}</td>
+                          <td>{professor.disciplina}</td>
+                          <div className={styles.icones}>
+                            <BsPencil onClick={() => editProfessor(professor.id)}/>
+                            <BsFillTrashFill onClick={() => removeProfessor(professor.id)}/>
+                          </div>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </div>
+          )}
+          </main>
+        </div>
       </div>
     </>
     )

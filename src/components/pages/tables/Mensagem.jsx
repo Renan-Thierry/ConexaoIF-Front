@@ -1,6 +1,6 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
-import NavBar from "../../form/NavBar";
+import AdminNavBar from "../../form/AdminNavBar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
@@ -57,12 +57,14 @@ function Mensagem(){
       };
 
       const filtro_Mensagem = mensagens.filter((mensagem) =>
-        mensagem.nome.toLowerCase().includes(filtroMensagem.toLowerCase())
+      mensagem.nome && mensagem.nome.toLowerCase().includes(filtroMensagem.toLowerCase())
       );
+
 
     return(
       <>
-          <NavBar />
+      <div className={styles.containerAdminNavBar}>
+        <AdminNavBar />
           <div className={styles.container}>
             <main>
             <h1>Mensagens</h1>
@@ -119,6 +121,7 @@ function Mensagem(){
               )}
             </main>
           </div>
+        </div>
       </>
     )
 }
