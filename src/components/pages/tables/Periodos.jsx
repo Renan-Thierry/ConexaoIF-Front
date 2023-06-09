@@ -57,7 +57,7 @@ function Periodos(){
       };
 
       const filtro_Periodo = Periodos.filter((periodo) =>
-      periodo.nome && periodo.nome.toLowerCase().includes(filtroPeriodo.toLowerCase())
+      periodo.semestrereferencia && periodo.semestrereferencia.toLowerCase().includes(filtroPeriodo.toLowerCase())
       );
 
 

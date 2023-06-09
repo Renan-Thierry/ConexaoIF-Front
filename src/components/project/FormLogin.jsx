@@ -22,7 +22,7 @@ function FormLogin() {
 
     if (loginUser) {
       alert("Login feito com Sucesso");
-      navegaçao("/Info"); // Redireciona para a rota "/ChatBot" após o login
+      navegaçao("/Alunos"); // Redireciona para a rota "/ChatBot" após o login
     } else {
       alert("Usuário e senha incorretos");
     }

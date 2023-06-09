@@ -57,7 +57,7 @@ function Mensagem(){
       };
 
       const filtro_Mensagem = mensagens.filter((mensagem) =>
-      mensagem.nome && mensagem.nome.toLowerCase().includes(filtroMensagem.toLowerCase())
+      mensagem.grupo && mensagem.grupo.toLowerCase().includes(filtroMensagem.toLowerCase())
       );
 
 

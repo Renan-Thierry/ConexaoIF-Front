@@ -12,7 +12,7 @@ function FormCadastro() {
       axios.post('http://127.0.0.1:5000/api/pessoa', newUser)
         .then((response) => {
           setUsuario(response.data);
-          navegacao('/ChatBot');
+          navegacao('/Alunos');
         })
         .catch((err) => console.log(err));
     }

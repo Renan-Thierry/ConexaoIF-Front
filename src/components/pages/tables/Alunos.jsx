@@ -57,8 +57,8 @@ function Alunos() {
   };
 
   const filtro_Alunos = alunos.filter((aluno) =>
-    aluno.nome.toLowerCase().includes(filtroAluno.toLowerCase())
-  );
+  aluno.nome && aluno.nome.toLowerCase().includes(filtroAluno.toLowerCase())
+);
 
   return (
     <>

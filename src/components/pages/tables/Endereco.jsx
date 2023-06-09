@@ -57,7 +57,7 @@ function Endereco() {
     };
 
     const filtro_Endereco = enderecos.filter((endereco) =>
-      endereco.nome && endereco.nome.toLowerCase().includes(filtroEndereco.toLowerCase())
+      endereco.rua && endereco.rua.toLowerCase().includes(filtroEndereco.toLowerCase())
     );
 
 

@@ -57,7 +57,7 @@ function Grupo(){
       };
 
       const filtro_Grupo = grupos.filter((grupo) =>
-      grupo.nome && grupo.nome.toLowerCase().includes(filtroGrupo.toLowerCase())
+      grupo.titulo && grupo.titulo.toLowerCase().includes(filtroGrupo.toLowerCase())
       );
 
     return(
@@ -81,12 +81,12 @@ function Grupo(){
                   <input
                     type="text"
                     value={editGrupoDados.titulo}
-                    onChange={(e) => setEditGrupoDados({ ...editGrupoDados, nome: e.target.value })}
+                    onChange={(e) => setEditGrupoDados({ ...editGrupoDados, titulo: e.target.value })}
                   />
                   <input
                     type="text"
                     value={editGrupoDados.link}
-                    onChange={(e) => setEditGrupoDados({ ...editGrupoDados, email: e.target.value })}
+                    onChange={(e) => setEditGrupoDados({ ...editGrupoDados, link: e.target.value })}
                   />
                   <button onClick={saveEditGrupo}>Salvar</button>
                 </div>
