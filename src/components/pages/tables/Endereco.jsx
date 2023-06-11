@@ -1,7 +1,6 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
 import AdminNavBar from "../../form/AdminNavBar";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
 
@@ -10,6 +9,31 @@ function Endereco() {
     const [editEnderecoId, setEditEnderecosId] = useState(null);
     const [editEnderecoDados, setEditEnderecoDados] = useState({});
     const [filtroEndereco, setFiltroEndereco] = useState("");  
+    const [novoEndereco, setNovoEndereco] = useState({
+      rua: "",
+      bairro: "",
+      cep: "",
+      numero: "",
+      complemento: ""
+    });
+    const [modoEdicao, setModoEdicao] = useState(false);
+    const [mensagemErro, setMensagemErro] = useState("");
+
+  const cadastrarEndereco = () => {
+    axios
+      .post("http://127.0.0.1:5000/api/endereco", novoEndereco)
+      .then((response) => {
+        setModoEdicao(false);
+        window.location.reload();
+      })
+      .catch((error) => {
+        if (error.response && error.response.data && error.response.data.message) {
+          setMensagemErro(error.response.data.message);
+        } else {
+          console.log(error);
+        }
+      });
+  };
 
     useEffect(() => {
       axios.get('http://127.0.0.1:5000/api/endereco')
@@ -50,6 +74,7 @@ function Endereco() {
           });
           setEnderecos(updatedEnderecos);
           setEditEnderecosId(null);
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
@@ -60,6 +85,10 @@ function Endereco() {
       endereco.rua && endereco.rua.toLowerCase().includes(filtroEndereco.toLowerCase())
     );
 
+    const adicionarEndereco = () => {
+      setModoEdicao(true);
+      setMensagemErro("");
+    };
 
     return(
     <>
@@ -75,48 +104,58 @@ function Endereco() {
             value={filtroEndereco}
             onChange={(e) => setFiltroEndereco(e.target.value)}
           />
-              <Link to="/CadastroEndereco"><button>Adicionar</button></Link>
+            <button onClick={adicionarEndereco}>Adicionar</button>
             </div>
             {editEnderecoId ? (
               <div className={styles.editForm}>
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Rua:</label>
                 <input
                   type="text"
                   value={editEnderecoDados.rua}
                   onChange={(e) => setEditEnderecoDados({ ...editEnderecoDados, rua: e.target.value })}
-                />
+                /></div>                
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Bairro:</label>
                 <input
                   type="text"
                   value={editEnderecoDados.bairro}
                   onChange={(e) => setEditEnderecoDados({ ...editEnderecoDados, bairro: e.target.value })}
-                />
+                /></div>
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Cep:</label>
                 <input
                   type="text"
                   value={editEnderecoDados.cep}
                   onChange={(e) => setEditEnderecoDados({ ...editEnderecoDados, cep: e.target.value })}
-                />
+                /></div>
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Número:</label>
                 <input
                   type="text"
                   value={editEnderecoDados.numero}
                   onChange={(e) => setEditEnderecoDados({ ...editEnderecoDados, numero: e.target.value })}
-                />
+                /></div>
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Complemento:</label>
                 <input
                   type="text"
                   value={editEnderecoDados.complemento}
                   onChange={(e) => setEditEnderecoDados({ ...editEnderecoDados, complemento: e.target.value })}
-                />
+                /></div>
                 <button onClick={saveEditEndereco}>Salvar</button>
               </div>
             ) : (
             <div>
-              <table className={styles.table}>
+                <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
                 <thead>
                   <tr>
-                    <th>Id</th>
-                    <th>Rua</th>
-                    <th>Bairro</th>
-                    <th>Cep</th>
-                    <th>Numero</th>
-                    <th>Complemento</th>
+                    <th>ID</th>
+                    <th>RUA</th>
+                    <th>BAIRRO</th>
+                    <th>CEP</th>
+                    <th>NÚMERO</th>
+                    <th>COMPLEMENTO</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -138,7 +177,58 @@ function Endereco() {
                     })}
                 </tbody>
               </table>
-            </div>
+              {modoEdicao ? (
+                  <div className={styles.editForm}>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Rua:</label>
+                      <input
+                        type="text"
+                        value={novoEndereco.rua}
+                        onChange={(e) => setNovoEndereco({ ...novoEndereco, rua: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Bairro:</label>
+                      <input
+                        type="text"
+                        value={novoEndereco.bairro}
+                        onChange={(e) => setNovoEndereco({ ...novoEndereco, bairro: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Cep:</label>
+                      <input
+                        type="text"
+                        value={novoEndereco.cep}
+                        onChange={(e) => setNovoEndereco({ ...novoEndereco, cep: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Número:</label>
+                      <input
+                        type="text"
+                        value={novoEndereco.numero}
+                        onChange={(e) => setNovoEndereco({ ...novoEndereco, numero: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Complemento:</label>
+                      <input
+                        type="text"
+                        value={novoEndereco.complemento}
+                        onChange={(e) => setNovoEndereco({ ...novoEndereco, complemento: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <button onClick={cadastrarEndereco}>Cadastrar</button>
+                    {mensagemErro && <p>{mensagemErro}</p>}
+                  </div>
+                ) : null}
+              </div>
             )}
           </main>
         </div>

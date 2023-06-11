@@ -1,7 +1,6 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
 import AdminNavBar from "../../form/AdminNavBar";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
 
@@ -10,6 +9,30 @@ function Pessoas() {
     const [editPessoaId, setEditPessoaId] = useState(null);
     const [editPessoaDados, setEditPessoaDados] = useState({});
     const [filtroPessoa, setFiltroPessoa] = useState("");
+    const [novaPessoa, setNovaPessoa] = useState({
+      nome: "",
+      email: "",
+      senha: "",
+      telefone: ""
+    });
+    const [modoEdicao, setModoEdicao] = useState(false);
+    const [mensagemErro, setMensagemErro] = useState("");
+
+  const cadastrarPessoa = () => {
+    axios
+      .post("http://127.0.0.1:5000/api/pessoa", novaPessoa)
+      .then((response) => {
+        setModoEdicao(false);
+        window.location.reload();
+      })
+      .catch((error) => {
+        if (error.response && error.response.data && error.response.data.message) {
+          setMensagemErro(error.response.data.message);
+        } else {
+          console.log(error);
+        }
+      });
+  };
 
     useEffect(() => {
       axios.get('http://127.0.0.1:5000/api/pessoa')
@@ -39,7 +62,7 @@ function Pessoas() {
         });
     };
   
-    const saveEditCoordenador = () => {
+    const saveEditPessoa = () => {
       axios.put(`http://127.0.0.1:5000/api/pessoa/${editPessoaId}`, editPessoaDados)
         .then((response) => {
           const updatedPessoas = pessoas.map((pessoa) => {
@@ -50,6 +73,7 @@ function Pessoas() {
           });
           setPessoas([...updatedPessoas]);
           setEditPessoaId(null);
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
@@ -59,6 +83,11 @@ function Pessoas() {
     const filtro_Pessoa = pessoas.filter((pessoa) =>
     pessoa.nome && pessoa.nome.toLowerCase().includes(filtroPessoa.toLowerCase())
     );
+
+    const adicionarPessoa = () => {
+      setModoEdicao(true);
+      setMensagemErro("");
+    };
 
     return(
     <>
@@ -74,36 +103,54 @@ function Pessoas() {
             value={filtroPessoa}
             onChange={(e) => setFiltroPessoa(e.target.value)}
             />
-              <Link to=""><button>Adicionar</button></Link>
+            <button onClick={adicionarPessoa}>Adicionar</button>
             </div>
             {editPessoaId ? (
               <div className={styles.editForm}>
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Nome:</label>
                 <input
                   type="text"
                   value={editPessoaDados.nome}
                   onChange={(e) => setEditPessoaDados({ ...editPessoaDados, nome: e.target.value })}
-                />
+                  required
+                /></div>
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Email:</label>
                 <input
-                  type="text"
+                  type="email"
                   value={editPessoaDados.email}
                   onChange={(e) => setEditPessoaDados({ ...editPessoaDados, email: e.target.value })}
-                />
+                  required
+                /></div>
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Senha:</label>
+                <input
+                  type="password"
+                  value={editPessoaDados.senha}
+                  onChange={(e) => setEditPessoaDados({ ...editPessoaDados, senha: e.target.value })}
+                  required
+                /></div>
+                <div className={styles.formGroup}>
+                <label style={{ color: 'white' }}>Telefone:</label>
                 <input
                   type="text"
                   value={editPessoaDados.telefone}
                   onChange={(e) => setEditPessoaDados({ ...editPessoaDados, telefone: e.target.value })}
-                />
-                <button onClick={saveEditCoordenador}>Salvar</button>
+                  required
+                /></div>
+                <button onClick={saveEditPessoa}>Salvar</button>
               </div>
             ) : (
             <div>
-              <table className={styles.table}>
+                <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
                 <thead>
                   <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>EMAIL</th>
+                    <th>SENHA</th>
+                    <th>TELEFONE</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,6 +160,7 @@ function Pessoas() {
                           <td>{pessoa.id}</td>
                           <td>{pessoa.nome}</td>
                           <td>{pessoa.email}</td>
+                          <td>{pessoa.senha}</td>
                           <td>{pessoa.telefone}</td>
                           <div className={styles.icones}>
                             <BsPencil onClick={() => editPessoa(pessoa.id)}/>
@@ -123,7 +171,49 @@ function Pessoas() {
                     })}
                 </tbody>
               </table>
-            </div>
+              {modoEdicao ? (
+                  <div className={styles.editForm}>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Nome:</label>
+                      <input
+                        type="text"
+                        value={novaPessoa.nome}
+                        onChange={(e) => setNovaPessoa({ ...novaPessoa, nome: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Email:</label>
+                      <input
+                        type="email"
+                        value={novaPessoa.email}
+                        onChange={(e) => setNovaPessoa({ ...novaPessoa, email: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Senha:</label>
+                      <input
+                        type="password"
+                        value={novaPessoa.senha}
+                        onChange={(e) => setNovaPessoa({ ...novaPessoa, senha: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Telefone:</label>
+                      <input
+                        type="text"
+                        value={novaPessoa.telefone}
+                        onChange={(e) => setNovaPessoa({ ...novaPessoa, telefone: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <button onClick={cadastrarPessoa}>Cadastrar</button>
+                    {mensagemErro && <p>{mensagemErro}</p>}
+                  </div>
+                ) : null}
+              </div>
             )}
           </main>
         </div>

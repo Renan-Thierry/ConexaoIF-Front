@@ -1,15 +1,56 @@
 import styles from './Tables.module.css'
 import React, { useEffect, useState } from "react";
 import AdminNavBar from "../../form/AdminNavBar";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
 
 function Mensagem(){
     const [mensagens, setMensagens] = useState([])
     const [editMensagemId, setEditMensagemId] = useState(null);
-    const [editMensagemDados, setEditMensagemDados] = useState({});
+    const [editMensagensDados, setEditMensagensDados] = useState({});
     const [filtroMensagem, setFiltroMensagem] = useState("");
+    const [alunoId, setAlunoId] = useState(null);
+    const [alunos, setAlunos] = useState([]);
+    const [grupoId, setGrupoId] = useState(null);
+    const [grupos, setGrupos] = useState([]);
+    const [novaMensagem, setNovaMensagem] = useState({
+      texto: "",
+      aluno: { id: null },
+      grupo: { id: null }
+    });
+    const [modoEdicao, setModoEdicao] = useState(false);
+    const [mensagemErro, setMensagemErro] = useState("");
+
+    const cadastrarMensagem = () => {
+      novaMensagem.aluno = { id: alunoId };
+      novaMensagem.grupo = { id: grupoId };
+      axios
+        .post("http://127.0.0.1:5000/api/mensagem", novaMensagem)
+        .then((response) => {
+          setModoEdicao(false);
+          window.location.reload();
+        })
+        .catch((error) => {
+          if (error.response && error.response.data && error.response.data.message) {
+            setMensagemErro(error.response.data.message);
+          } else {
+            console.log(error);
+          }
+        });
+    };
+    useEffect(() => {
+      axios
+        .get("http://127.0.0.1:5000/api/aluno")
+        .then((response) => setAlunos(response.data))
+        .catch((error) => console.log(error));
+    }, []);
+
+    useEffect(() => {
+      axios
+        .get("http://127.0.0.1:5000/api/grupo")
+        .then((response) => setGrupos(response.data))
+        .catch((error) => console.log(error));
+    }, []);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:5000/api/mensagem')
@@ -20,8 +61,8 @@ function Mensagem(){
       const removeMensagem = (id) => {
         axios.delete(`http://127.0.0.1:5000/api/mensagem/${id}`)
           .then((response) => {
-            const AttListaMensagens = mensagens.filter((mensagem) => mensagem.id !== id);
-            setMensagens(AttListaMensagens);
+            const AttListaMensagem = mensagens.filter((mensagem) => mensagem.id !== id);
+            setMensagens(AttListaMensagem);
           })
           .catch((error) => {
             console.log(error);
@@ -31,7 +72,7 @@ function Mensagem(){
       const editMensagem = (id) => {
         axios.get(`http://127.0.0.1:5000/api/mensagem/${id}`)
           .then((response) => {
-            setEditMensagemDados(response.data);
+            setEditMensagensDados(response.data);
             setEditMensagemId(id);
           })
           .catch((error) => {
@@ -40,16 +81,17 @@ function Mensagem(){
       };
     
       const saveEditMensagem = () => {
-        axios.put(`http://127.0.0.1:5000/api/mensagem/${editMensagemId}`, editMensagemDados)
+        axios.put(`http://127.0.0.1:5000/api/mensagem/${editMensagemId}`, editMensagensDados)
           .then((response) => {
-            const updatedMensagem = mensagens.map((mensagem) => {
+            const updatedMensagens = mensagens.map((mensagem) => {
               if (mensagem.id === editMensagemId) {
                 return response.data;
               }
               return mensagem;
             });
-            setMensagens(updatedMensagem);
+            setMensagens(updatedMensagens);
             setEditMensagemId(null);
+            window.location.reload();
           })
           .catch((error) => {
             console.log(error);
@@ -57,9 +99,13 @@ function Mensagem(){
       };
 
       const filtro_Mensagem = mensagens.filter((mensagem) =>
-      mensagem.grupo && mensagem.grupo.toLowerCase().includes(filtroMensagem.toLowerCase())
+      mensagem.texto && mensagem.texto.toLowerCase().includes(filtroMensagem.toLowerCase())
       );
 
+      const adicionarMensagem = () => {
+        setModoEdicao(true);
+        setMensagemErro("");
+      };
 
     return(
       <>
@@ -75,30 +121,68 @@ function Mensagem(){
               value={filtroMensagem}
               onChange={(e) => setFiltroMensagem(e.target.value)}
               />
-                <Link to="/ChatBot"><button>Adicionar</button></Link>
+              <button onClick={adicionarMensagem}>Adicionar</button>
               </div>
               {editMensagemId ? (
                 <div className={styles.editForm}>
+                  <div className={styles.formGroup}>
+                  <label style={{ color: 'white' }}>Texto:</label>
                   <input
                     type="text"
-                    value={editMensagemDados.grupo}
-                    onChange={(e) => setEditMensagemDados({ ...editMensagemDados, grupo: e.target.value })}
-                  />
-                  <input
-                    type="text"
-                    value={editMensagemDados.texto}
-                    onChange={(e) => setEditMensagemDados({ ...editMensagemDados, texto: e.target.value })}
-                  />
+                    value={editMensagensDados.texto}
+                    onChange={(e) => setEditMensagensDados({ ...editMensagensDados, texto: e.target.value })}
+                    required
+                  /></div>
+                  <div className={styles.formGroup}>
+                  <label style={{ color: 'white' }}>Aluno:</label>
+                  <select
+                    value={editMensagensDados.aluno.id}
+                    onChange={(e) =>
+                      setEditMensagensDados({
+                        ...editMensagensDados,
+                        aluno: { id: e.target.value }
+                      })
+                    }
+                  >
+                    <option value="">Selecione um aluno</option>
+                    {alunos.map((aluno) => (
+                      <option key={aluno.id} value={aluno.id}>
+                      {aluno.nome + " - " + aluno.periodo.semestrereferencia}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className={styles.formGroup}>
+                  <label style={{ color: 'white' }}>Grupo:</label>
+                  <select
+                    value={editMensagensDados.grupo.id}
+                    onChange={(e) =>
+                      setEditMensagensDados({
+                        ...editMensagensDados,
+                        grupo: { id: e.target.value}
+                      })
+                    }
+                  >
+                    <option value="">Selecione um grupo</option>
+                    {grupos.map((grupo) => (
+                      <option key={grupo.id} value={grupo.id}>
+                        {grupo.titulo}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                  
                   <button onClick={saveEditMensagem}>Salvar</button>
                 </div>
               ) : (
               <div>
-                <table className={styles.table}>
+                <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>GRUPO</th>
                       <th>TEXTO</th>
+                      <th>ALUNO/PERÍODO</th>
+                      <th>GRUPO</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -106,8 +190,9 @@ function Mensagem(){
                         return (
                           <tr key={mensagem.id}>
                             <td>{mensagem.id}</td>
-                            <td>{mensagem.grupo}</td>
                             <td>{mensagem.texto}</td>
+                            <td>{mensagem.aluno ? mensagem.aluno.nome + " - " + mensagem.aluno.periodo.semestrereferencia : ""}</td>
+                            <td>{mensagem.grupo ? mensagem.grupo.titulo : ""}</td>
                             <div className={styles.icones}>
                               <BsPencil onClick={() => editMensagem(mensagem.id)}/>
                               <BsFillTrashFill onClick={() => removeMensagem(mensagem.id)}/>
@@ -117,8 +202,51 @@ function Mensagem(){
                       })}
                   </tbody>
                 </table>
+                {modoEdicao ? (
+                  <div className={styles.editForm}>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Texto:</label>
+                      <input
+                        type="text"
+                        value={novaMensagem.texto}
+                        onChange={(e) => setNovaMensagem({ ...novaMensagem, texto: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Aluno:</label>
+                      <select
+                        value={alunoId}
+                        onChange={(e) => setAlunoId(e.target.value)}
+                      >
+                        <option value="">Selecione um aluno</option>
+                        {alunos.map((aluno) => (
+                          <option key={aluno.id} value={aluno.id}>
+                            {aluno.nome + " - " + aluno.periodo.semestrereferencia}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Grupo:</label>
+                      <select
+                        value={grupoId}
+                        onChange={(e) => setGrupoId(e.target.value)}
+                      >
+                        <option value="">Selecione um grupo</option>
+                        {grupos.map((grupo) => (
+                          <option key={grupo.id} value={grupo.id}>
+                            {grupo.titulo}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <button onClick={cadastrarMensagem}>Cadastrar</button>
+                    {mensagemErro && <p>{mensagemErro}</p>}
+                  </div>
+                ) : null}
               </div>
-              )}
+            )}
             </main>
           </div>
         </div>

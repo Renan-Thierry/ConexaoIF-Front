@@ -1,5 +1,6 @@
 import NavBar from '../form/NavBar';
 import styles from  './Sobre.module.css'
+import {FaGithub, FaInstagram, FaLinkedin} from 'react-icons/fa'
 
 function Sobre() {
     return(
@@ -16,6 +17,10 @@ function Sobre() {
             de aulas, atividades e projetos. Além disso, os professores também poderão compartilhar materiais de 
             estudo, realizar discussões em grupo e fornecer orientações relevantes para ajudar os alunos a se 
             adaptarem rapidamente ao ambiente acadêmico.</p>
+        </div>
+        <div>
+            <h3 className={styles.textoSobre}>Saiba mais do Projeto</h3>
+            <FaGithub size="60px" color="white"/>
         </div>
         </>
     )
