@@ -30,10 +30,6 @@ function Sidebar() {
             <Link to="/Pessoas" className={styles.item} style={{ color: 'inherit' }}>Pessoas</Link>
             <Link to="/Professor" className={styles.item} style={{ color: 'inherit' }}>Professor</Link>
             <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}>Sair</Link>
-
-
-            
-
         </nav>
     </div>
   );
