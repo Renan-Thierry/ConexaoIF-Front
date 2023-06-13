@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Cadastro from "./components/pages/Cadastro";
 import Login from "./components/pages/Login";
-import ChatBot from "./components/pages/ChatBot";
+import EmailForm from "./components/pages/EmailForm";
 import Sobre from './components/pages/Sobre';
 import Home from './components/pages/Home';
 import Professor from './components/pages/tables/Professor';
@@ -16,6 +16,7 @@ import Periodos from './components/pages/tables/Periodos';
 import Pessoas from './components/pages/tables/Pessoas';
 
 
+
 function App() {
   return (
     <>
@@ -24,7 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
           <Route path="/Cadastro" element={<Cadastro />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/ChatBot" element={<ChatBot />} />
+          <Route path="/EmailForm" element={<EmailForm />} />
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Professor" element={<Professor />} />
           <Route path="/Mensagem" element={<Mensagem />} />
