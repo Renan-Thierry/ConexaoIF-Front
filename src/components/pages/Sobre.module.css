@@ -17,7 +17,7 @@ body {
 .tittle_text {
     text-align: left;
     margin-left: 1em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     color: #f1f1f1;
 }
 p {
@@ -26,8 +26,4 @@ p {
     text-align: left;
     margin-left: 2.2em;
     color: #f1f1f1;
-}
-.textoSobre {
-    color: #fff;
-    margin: 80px 10px 30px;
 }

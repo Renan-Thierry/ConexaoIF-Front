@@ -25,6 +25,7 @@ function App() {
           <Route path="/Cadastro" element={<Cadastro />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/ChatBot" element={<ChatBot />} />
+          <Route path="/" element={<Autenticacao />}/>
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Professor" element={<Professor />} />
           <Route path="/Mensagem" element={<Mensagem />} />

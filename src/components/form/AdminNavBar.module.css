@@ -5,8 +5,6 @@
     transition: transform 0.3s ease-in-out;
     transform: translateX(0);
     border-right: 0.4px solid #fff;
-    position: fixed;
-    margin-right: 87.5%;
   }
   
   .sidebar.open {

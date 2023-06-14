@@ -2,9 +2,22 @@
     padding-left: .4em;
   }
 input {
-    height: 3.2em;
-    width: 2em;
-    margin: 15px 20px 0px 20px;
-    border-radius: 6px;
-    border: 1px solid grey;
+  flex: 1;
+  height: 38px; 
+  margin-left: 0;
+  margin-right: 100px;
+  font-family: inherit;
+  font-size: 14px; 
+  padding: 8px 12px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+    
+
   }
+  input:focus {
+    outline: none; 
+    box-shadow: 0 0 0 2px #3921a5; 
+  }
+  
+
+  

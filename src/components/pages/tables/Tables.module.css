@@ -10,9 +10,8 @@ body {
         font-family: Poppins;
 }
 .container {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
-    margin-left: 15%;
 }
 .conteudo {
     display: flex;
@@ -68,21 +67,22 @@ h1 {
   .icones {
     margin-top: 10px;
     display: flex;
+    margin-left: 10px;
     justify-content: center;
     gap: 30px;
     color: #fff;
     font-size: 15px;
     cursor: pointer;
   }
-  .editForm {
-    width: 50%;
-    max-width: 80vw;
-    margin: 0 auto;
-    margin-top: 30px;
-  }
+
+.editForm {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
 .editForm button {
-  margin-top: 1em;
-  border-radius: 8px;
+  margin-top: 3em;
+  border-radius: 13px;
   box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
 }
 
@@ -90,28 +90,58 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 100%;
 }
 .formGroup {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
+  
 }
 
 .formGroup label {
-  width: 120px;
+  width: 170px;
+  margin-right: 10px;
   color: white;
 }
 
-.formGroup input {
+.formGroup input, select{
   flex: 1;
-  height: 40px; 
+  height: 38px; 
+  margin-left: 0;
+  margin-right: 100px;
+  font-family: inherit;
+  font-size: 14px; 
+  padding: 8px 12px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
 }
-.formGroup select {
-  width: 33.5em;
-  height: 40px;
-  margin-left: 20px;
-  border-radius: 8px;
-  margin-top: 16px;
+.formGroup textarea{
+  flex: 1;
+  height: 100px; 
+  margin-left: 0;
+  margin-right: 100px;
+  font-family: inherit;
+  font-size: 14px; 
+  padding: 8px 12px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
 }
+
+.formGroup input:focus {
+  outline: none; 
+  box-shadow: 0 0 0 2px #3921a5; 
+}
+.formGroup select:focus {
+  outline: none; 
+  box-shadow: 0 0 0 2px #3921a5; 
+}
+.formGroup textarea:focus {
+  outline: none; 
+  box-shadow: 0 0 0 2px #3921a5; 
+}
+
+
+
+

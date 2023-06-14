@@ -4,7 +4,7 @@ import AdminNavBar from "../../form/AdminNavBar";
 import axios from "axios";
 import { BsPencil, BsFillTrashFill } from "react-icons/bs"
 
-function Alunos() { 
+function Alunos() {
   const [alunos, setAlunos] = useState([]);
   const [editAlunosId, setEditAlunosId] = useState(null);
   const [editAlunosDados, setEditAlunosDados] = useState({});
