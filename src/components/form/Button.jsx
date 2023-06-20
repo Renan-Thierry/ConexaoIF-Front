@@ -2,7 +2,7 @@ import styles from './Button.module.css'
 
 function Button({text}){
     return(
-        <div>
+        <div className={styles.componenteBtn}>
             <button className={styles.btn_Cadastro}>{text}</button>    
         </div>
     )

@@ -20,7 +20,7 @@ body {
     margin-bottom: 2em;
     color: #f1f1f1;
 }
-p {
+.tittle_text p {
     width: 95vw;
     font-size: medium;
     text-align: left;

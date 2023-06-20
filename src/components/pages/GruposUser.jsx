@@ -1,10 +1,12 @@
-import styles from './Tables.module.css'
-import React, { useEffect, useState } from "react";
-import AdminNavBar from "../../form/AdminNavBar";
+import UserNavBar from "../form/UserNavBar";
+import styles from '../styles/GruposUser.module.css'
 import axios from "axios";
-import {BsPencil, BsFillTrashFill} from "react-icons/bs"
+import {BsPencil, BsFillTrashFill, BsFillEnvelopeAtFill} from "react-icons/bs"
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom"
 
-function Grupo(){
+
+function GruposUser() {
     const [grupos, setGrupos] = useState([])
     const [editGrupoId, setEditGrupoId] = useState(null);
     const [editGruposDados, setEditGruposDados] = useState({});
@@ -100,11 +102,11 @@ function Grupo(){
 
     return(
       <>
+      <UserNavBar />
       <div className={styles.containerAdminNavBar}>
-        <AdminNavBar />
           <div className={styles.container}>
             <main>
-            <h1>Grupos</h1>
+            <h1>Lista de Grupos</h1>
               <div className={styles.conteudo}>
               <input
               type="text"
@@ -185,6 +187,7 @@ function Grupo(){
                             <div className={styles.icones}>
                               <BsPencil onClick={() => editGrupo(grupo.id)}/>
                               <BsFillTrashFill onClick={() => removeGrupo(grupo.id)}/>
+                              <Link to="/BotEmail" style={{ color: 'inherit' }}><BsFillEnvelopeAtFill /></Link>
                             </div>
                           </tr>
                         );
@@ -246,4 +249,5 @@ function Grupo(){
       </>
     )
 }
-export default Grupo;
+
+export default GruposUser;

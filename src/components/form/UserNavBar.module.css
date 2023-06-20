@@ -7,11 +7,11 @@
     border-right: 0.4px solid #fff;
     position: fixed;
     margin-right: 87.5%;
-  }
-  .sidebar.open {
+}
+.sidebar.open {
     transform: translateX(-100%);
-  }
-  .container{
+}
+.container{
     width: 100vw;
     font-family: Poppins;
 }
@@ -27,18 +27,18 @@
     color: #fff;
     padding: 15px;
 }
-
-.navbar  {
+.UserNavbar  {
     display: flex;
     flex-direction: column;
     font-weight: 400;
     color: #fff;
 }
 .image  {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     margin-right: 8em;
-    margin-left: 1.5em;
+    margin-left: 30%;
+    border-radius: 50%;
 }
 .item{
     height: 50px;
@@ -50,7 +50,7 @@
     background-color: rgb(15, 14, 14);
 }
 .item2 {
-    margin-top: 17px;
+    margin-top: 60vh;
     border-top: 0.4px solid #fff;
 }
   

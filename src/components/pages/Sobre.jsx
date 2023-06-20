@@ -1,6 +1,6 @@
 import NavBar from '../form/NavBar';
-import styles from  './Sobre.module.css'
-import {FaGithub, FaInstagram, FaLinkedin} from 'react-icons/fa'
+import styles from  '../styles/Sobre.module.css'
+import {FaGithub} from 'react-icons/fa'
 
 function Sobre() {
     return(

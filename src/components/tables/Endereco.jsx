@@ -1,8 +1,8 @@
-import styles from './Tables.module.css'
+import styles from '../styles/Tables.module.css';
 import React, { useEffect, useState } from "react";
-import AdminNavBar from "../../form/AdminNavBar";
+import AdminNavBar from "../form/AdminNavBar";
 import axios from "axios";
-import {BsPencil, BsFillTrashFill} from "react-icons/bs"
+import {BsPencil, BsFillTrashFill} from "react-icons/bs";
 
 function Endereco() {
     const [enderecos, setEnderecos] = useState([]);

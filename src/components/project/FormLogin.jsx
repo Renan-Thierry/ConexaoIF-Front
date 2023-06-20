@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../form/Button";
-import styles from "./FormLogin.module.css";
+import styles from "../styles/FormLogin.module.css";
 import axios from "axios";
 
 function FormLogin() {
@@ -11,7 +11,7 @@ function FormLogin() {
   const [senha, setSenha] = useState('');
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/pessoa')
+    axios.get('http://127.0.0.1:5000/api/coordenador')
       .then((response) => setUser(response.data))
       .catch((err) => console.log(err));
   }, []);
@@ -22,7 +22,7 @@ function FormLogin() {
 
     if (loginUser) {
       alert("Login feito com Sucesso");
-      navegaçao("/Alunos"); // Redireciona para a rota "/ChatBot" após o login
+      navegaçao("/GruposUser");
     } else {
       alert("Usuário e senha incorretos");
     }

@@ -1,4 +1,4 @@
-import styles from './Home.module.css'
+import styles from '../styles/Home.module.css'
 import logo2 from '../../img/www.gif'
 import NavBar from '../form/NavBar';
 import { Link } from 'react-router-dom'
@@ -10,14 +10,14 @@ function Home() {
         <main className={styles.conteudo}>
             <section className={styles.sessao1}>
                 <div className={styles.conteudo1}>
-                    <h1 className={styles.conteudo_titulo}>DocDis</h1>
+                    <h1 className={styles.conteudo_titulo}>ConexaoIF</h1>
                     <h2 className={styles.conteudo_subTitulo}>conectando alunos e professores na jornada acadêmica!</h2>
-                    <Link to="/ChatBot"><button className={styles.btn}>Criar Grupo</button></Link>
+                    <Link to="/Login"><button className={styles.btn}>Entre Agora!</button></Link>
                 </div>
                 <img src={logo2} alt='Imagem inicial' className={styles.image2}/>
             </section>
             <section className={styles.conteudo_secundario}>
-                <h3 className={styles.tittle_secundario}>O que o DocDis faz por voce?</h3>
+                <h3 className={styles.tittle_secundario}>O que o ConexaoIF faz por voce?</h3>
                 <div className={styles.conteudo_texto}>
                     <p className={styles.texto}><strong>Vantagem</strong>Permite que os professores criem grupos específicos para suas turmas, 
                     facilitando a comunicação direta e eficiente com os alunos. Isso elimina a necessidade de utilizar 

@@ -1,24 +1,24 @@
 import FormLogin from '../project/FormLogin';
-import styles from './Login.module.css';
+import styles from '../styles/Login.module.css';
 import { Link } from "react-router-dom";
+import logo from '../../img/connections.png'
 
 function Login(){
     return(
-        <div className={styles.wrapper}>
-            <div className={styles.container}>
-                <div className={styles.content_left}>
-                <h1 className={styles.tittle_left}>Ainda nao possui uma conta?</h1>
-                    <Link to="/Cadastro">
-                        <button className={styles.button_left}>Cadastre-se</button>
-                    </Link>
+            <div className={styles.conteudoLogin}>
+                <div className={styles.titulo}>
+                    <h1>ConexaoIF</h1>
+                    <p>Conectando de forma rapida e eficiente Professores e alunos na sua jornada acadêmica.</p>
                 </div>
-                <div className={styles.content_form}>
-                    <h1 className={styles.tittle_Login}>Login</h1>
-                    <hr className={styles.hrtg}/>
-                    <FormLogin />
+                <div className={styles.formulario}>
+                    <img src={logo} alt="Logo do site" />
+                        <FormLogin />
+                    <hr/>
+                    <h3>Ainda não tem acesso?</h3>
+                    <Link to="/Cadastro"><button className={styles.botaoCadastro}>Cadastrar</button></Link>
                 </div>
-            </div>
         </div>
+        
     )
 }
 export default Login;

@@ -1,8 +1,8 @@
-import styles from './Tables.module.css'
+import styles from '../styles/Tables.module.css';
 import React, { useEffect, useState } from "react";
-import AdminNavBar from "../../form/AdminNavBar";
+import AdminNavBar from "../form/AdminNavBar";
 import axios from "axios";
-import {BsPencil, BsFillTrashFill} from "react-icons/bs"
+import {BsPencil, BsFillTrashFill} from "react-icons/bs";
 
 function Professor() {
     const [professores, setProfessor] = useState([]);
@@ -108,7 +108,7 @@ function Professor() {
       <AdminNavBar />
         <div className={styles.container}>
           <main>
-          <h1>Professores</h1>
+          <h1 className={styles}>Professores</h1>
             <div className={styles.conteudo}>
             <input
             type="text"

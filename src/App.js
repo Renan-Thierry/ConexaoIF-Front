@@ -1,19 +1,21 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Cadastro from "./components/pages/Cadastro";
 import Login from "./components/pages/Login";
-import ChatBot from "./components/pages/ChatBot";
 import Sobre from './components/pages/Sobre';
 import Home from './components/pages/Home';
-import Professor from './components/pages/tables/Professor';
-import Mensagem from './components/pages/tables/Mensagem';
-import Coordenador from './components/pages/tables/Coordenador';
-import Alunos from './components/pages/tables/Alunos';
-import Curso from './components/pages/tables/Curso';
-import Endereco from './components/pages/tables/Endereco';
-import Grupo from './components/pages/tables/Grupo';
-import Instituicao from './components/pages/tables/Instituicao';
-import Periodos from './components/pages/tables/Periodos';
-import Pessoas from './components/pages/tables/Pessoas';
+import Professor from './components/tables/Professor';
+import Mensagem from './components/tables/Mensagem';
+import Coordenador from './components/tables/Coordenador';
+import Alunos from './components/tables/Alunos';
+import Curso from './components/tables/Curso';
+import Endereco from './components/tables/Endereco';
+import Grupo from './components/tables/Grupo';
+import Instituicao from './components/tables/Instituicao';
+import Periodos from './components/tables/Periodos';
+import Pessoas from './components/tables/Pessoas';
+import BotEmail from './components/pages/BotEmail';
+import GruposUser from './components/pages/GruposUser';
+import EditPerfil from './components/pages/EditPerfil';
 
 
 function App() {
@@ -24,7 +26,6 @@ function App() {
         <Route path="/" element={<Home />} />
           <Route path="/Cadastro" element={<Cadastro />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/ChatBot" element={<ChatBot />} />
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Professor" element={<Professor />} />
           <Route path="/Mensagem" element={<Mensagem />} />
@@ -36,6 +37,9 @@ function App() {
           <Route path="/Instituicao" element={<Instituicao />} />
           <Route path="/Periodos" element={<Periodos />} />
           <Route path="/Pessoas" element={<Pessoas />} />
+          <Route path="/BotEmail" element={<BotEmail />} />
+          <Route path="/GruposUser" element={<GruposUser />} />
+          <Route path="/EditPerfil" element={<EditPerfil />} />
         </Routes>
       </Router>
     

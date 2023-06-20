@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import styles from './FormCadastro.module.css'
+import styles from '../styles/FormCadastro.module.css'
 import Button from '../form/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

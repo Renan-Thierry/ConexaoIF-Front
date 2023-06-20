@@ -14,7 +14,8 @@ function Sidebar() {
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
       <button onClick={toggleSidebar}>
       <Link to="/" style={{ color: 'inherit' }}>
-        <img src={logo} alt="Logo do site" className={styles.image}/>DocDis
+        <img src={logo} alt="Logo do site" className={styles.image}/>
+        <p>ConexaoIF</p>
     </Link>
       </button>
       
