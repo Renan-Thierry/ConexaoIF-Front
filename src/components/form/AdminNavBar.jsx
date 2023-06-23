@@ -25,7 +25,7 @@ function Sidebar() {
             <Link to="/Endereco" className={styles.item} style={{ color: 'inherit' }}>Endereço</Link>
             <Link to="/Grupo" className={styles.item} style={{ color: 'inherit' }}>Grupo</Link>
             <Link to="/Instituicao" className={styles.item} style={{ color: 'inherit' }}>Instituicao</Link>
-            <Link to="/Mensagem" className={styles.item} style={{ color: 'inherit' }}>Mensagem</Link>
+            <Link to="/Lista" className={styles.item} style={{ color: 'inherit' }}>Lista</Link>
             <Link to="/Periodos" className={styles.item} style={{ color: 'inherit' }}>Periodos</Link>
             <Link to="/Pessoas" className={styles.item} style={{ color: 'inherit' }}>Pessoas</Link>
             <Link to="/Professor" className={styles.item} style={{ color: 'inherit' }}>Professor</Link>

@@ -5,7 +5,7 @@ import EmailForm from "./components/pages/EmailForm";
 import Sobre from './components/pages/Sobre';
 import Home from './components/pages/Home';
 import Professor from './components/pages/tables/Professor';
-import Mensagem from './components/pages/tables/Mensagem';
+import Lista from './components/pages/tables/Lista';
 import Coordenador from './components/pages/tables/Coordenador';
 import Alunos from './components/pages/tables/Alunos';
 import Curso from './components/pages/tables/Curso';
@@ -28,7 +28,7 @@ function App() {
           <Route path="/EmailForm" element={<EmailForm />} />
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Professor" element={<Professor />} />
-          <Route path="/Mensagem" element={<Mensagem />} />
+          <Route path="/Lista" element={<Lista />} />
           <Route path="/Coordenador" element={<Coordenador />} />
           <Route path="/Alunos" element={<Alunos />} />
           <Route path="/Curso" element={<Curso />} />

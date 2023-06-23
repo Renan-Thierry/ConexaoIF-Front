@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    width: 100vw;
+    height: 100%;
+    padding-top: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50%;
+    color: #fff
+}
+.container h1 {
+    margin-bottom: 50px;
+}
+.conteudo_pagina {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.tipos_mensagens{
+    width: 50%;
+    height: 100%;
+    padding-right: 3em;
+}
+.tipos_mensagens label {
+    display: flex;
+    margin: .5em;
+}
+.tipos_mensagens input {
+    width: 90%;
+    padding: .4em;
+}
+.btn1 {
+    margin-bottom: 4.6em;
+}
+.tipos_mensagens button {  
+    width: 95px; 
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
+    margin-top: 1em;
+}
+.dados_msg {
+    width: 50%;
+    height: 100%;
+    padding-left: 3em;
+    border-left: .4px solid #fff;
+    display: flex;
+}
+.dados_msg label {
+    display: flex;
+    margin: .5em;
+}
+.dados_msg input {
+    width: 500px;
+    padding: .4em;
+}
+.dados_msg textarea {
+    width: 500px;
+    margin-left: 1.5em;
+    border-radius: 8px;
+    padding: .4em;
+}
+.dados_msg span {
+    display: flex;
+    justify-content: center;
+}
+.dados_msg button {
+    width: 95px; 
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
+    margin-top: 1em;
+    margin-left: 1.5em;
+}
