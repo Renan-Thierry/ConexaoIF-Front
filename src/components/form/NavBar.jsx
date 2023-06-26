@@ -1,6 +1,7 @@
-import styles from './NavBar.module.css'
+import styles from './NavBar.module.css';
 import { Link } from 'react-router-dom';
-import logo from '../../img/connections.png'
+import logo from '../../img/connections.png';
+import { VscSignIn } from "react-icons/vsc";
 
 
 function NavBar () {
@@ -13,7 +14,7 @@ function NavBar () {
                 <nav className={styles.navbar}>
                     <Link to="/" className={styles.item} style={{ color: 'inherit' }}>Home</Link>
                     <Link to="/Sobre" className={styles.item} style={{ color: 'inherit' }}>Sobre</Link>
-                    <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}>Entrar</Link>
+                    <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}><VscSignIn /></Link>
                 </nav>
       </header>
   </>

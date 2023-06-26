@@ -7,7 +7,7 @@ function Login(){
     return(
             <div className={styles.conteudoLogin}>
                 <div className={styles.titulo}>
-                    <h1>ConexaoIF</h1>
+                    <h1>Conexao<span>IF</span></h1>
                     <p>Conectando de forma rapida e eficiente Professores e alunos na sua jornada acadêmica.</p>
                 </div>
                 <div className={styles.formulario}>

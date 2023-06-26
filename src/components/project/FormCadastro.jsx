@@ -1,47 +1,130 @@
-import {useState} from 'react'
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/FormCadastro.module.css'
 import Button from '../form/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function FormCadastro() {
-    const [usuario, setUsuario] = useState({});
-    const navegacao = useNavigate();
-  
-    function createUser(newUser) {
-      axios.post('http://127.0.0.1:5000/api/pessoa', newUser)
-        .then((response) => {
-          setUsuario(response.data);
-          navegacao('/Alunos');
-        })
-        .catch((err) => console.log(err));
-    }
-  
-    function handleChange(e) {
-      setUsuario({ ...usuario, [e.target.name]: e.target.value })
-    }
+  const [cursos, setCursos] = useState([]);
+  const [cursoId, setCursoId] = useState(null);
+  // eslint-disable-next-line
+  const [accessToken, setAccessToken] = useState("");
+  const [novoCoordenador, setNovoCoordenador] = useState({
+    nome: '',
+    email: '',
+    senha: '',
+    telefone: '',
+    disciplina: '',
+    registrodeTrabalho: '',
+    curso: { id: null },
+  });
+  const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-      const nome = event.target.elements.nome.value;
-      const email = event.target.elements.email.value;
-      const senha = event.target.elements.senha.value;
-      const telefone = event.target.elements.telefone.value;
-      const disciplina = event.target.elements.disciplina.value;
-      const newUser = { nome, email, senha, telefone, disciplina };
-      createUser(newUser);
-    };
-  
-    return (
-      <div>
-        <form className={styles.content_form} onSubmit={handleSubmit}>
-          <input type="text" placeholder="Nome" name="nome" onChange={handleChange} required />
-          <input type="email" placeholder="Email" name="email" onChange={handleChange} required />
-          <input type="password" placeholder="Senha" name="senha" onChange={handleChange} required />
-          <input type="tel" placeholder="Telefone" name="telefone" onChange={handleChange} required />
-          <input type="text" placeholder="Disciplina" name="disciplina" onChange={handleChange} required />
-          <Button text="Cadastre-se" type="submit" />
-        </form>
-      </div>
-    );
+  const cadastrarCoordenador = (coordenador) => {
+    axios
+      .post('http://127.0.0.1:5000/api/coordenador', coordenador)
+      .then((response) => {
+        console.log(response.data);
+        setAccessToken(response.data.access_token);
+        localStorage.setItem("accessToken", response.data.access_token); 
+        alert('Cadastro feito com sucesso');
+        navigate('/GruposUser');
+      })
+      .catch((error) => {
+        alert('Cadastro não foi efetivado');
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get('http://127.0.0.1:5000/api/curso')
+      .then((response) => setCursos(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNovoCoordenador((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const coordenador = { ...novoCoordenador, curso: { id: cursoId } };
+    cadastrarCoordenador(coordenador);
+  };
+
+  return (
+    <div className={styles.formGroup}>
+      <form className={styles.content_form} onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Nome"
+          name="nome"
+          value={novoCoordenador.nome}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={novoCoordenador.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          name="senha"
+          value={novoCoordenador.senha}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="tel"
+          placeholder="Telefone"
+          name="telefone"
+          value={novoCoordenador.telefone}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Disciplina"
+          name="disciplina"
+          value={novoCoordenador.disciplina}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Registro de Trabalho"
+          name="registrodeTrabalho"
+          value={novoCoordenador.registrodeTrabalho}
+          onChange={handleChange}
+          required
+        />
+        <select
+          name="cursoId"
+          value={cursoId}
+          onChange={(e) => setCursoId(e.target.value)}
+          required
+        >
+          <option value="">Selecione um Curso</option>
+          {cursos.map((curso) => (
+            <option key={curso.id} value={curso.id}>
+              {curso.nome}
+            </option>
+          ))}
+        </select>
+        <Button type="submit" text="Cadastrar"></Button>
+      </form>
+    </div>
+  );
 }
+
 export default FormCadastro;

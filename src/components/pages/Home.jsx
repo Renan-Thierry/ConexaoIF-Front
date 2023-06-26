@@ -1,16 +1,14 @@
 import styles from '../styles/Home.module.css'
 import logo2 from '../../img/www.gif'
-import NavBar from '../form/NavBar';
 import { Link } from 'react-router-dom'
 
 function Home() {
     return(
         <div className={styles.container}>
-            <NavBar />
         <main className={styles.conteudo}>
             <section className={styles.sessao1}>
                 <div className={styles.conteudo1}>
-                    <h1 className={styles.conteudo_titulo}>ConexaoIF</h1>
+                    <h1 className={styles.conteudo_titulo}>Conexao<span>IF</span></h1>
                     <h2 className={styles.conteudo_subTitulo}>conectando alunos e professores na jornada acadêmica!</h2>
                     <Link to="/Login"><button className={styles.btn}>Entre Agora!</button></Link>
                 </div>

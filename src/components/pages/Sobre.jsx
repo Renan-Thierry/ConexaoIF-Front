@@ -1,11 +1,11 @@
-import NavBar from '../form/NavBar';
+import SideBar from '../form/SideBar';
 import styles from  '../styles/Sobre.module.css'
 import {FaGithub} from 'react-icons/fa'
 
 function Sobre() {
     return(
         <>
-        <NavBar />
+        <SideBar />
         <div className={styles.container}>
             <h1 className={styles.tittle_text}>Sobre o Projeto</h1>
             <p> O Projeto DocDis tem como objetivo estabelecer uma rede de comunicacao interna entre professores 
@@ -18,8 +18,8 @@ function Sobre() {
             estudo, realizar discussões em grupo e fornecer orientações relevantes para ajudar os alunos a se 
             adaptarem rapidamente ao ambiente acadêmico.</p>
         </div>
-        <div>
-            <h3 className={styles.textoSobre}>Saiba mais do Projeto</h3>
+        <div className={styles.conteudoIcon}>
+            <h3>Saiba mais do Projeto</h3>
             <FaGithub size="60px" color="white"/>
         </div>
         </>

@@ -10,24 +10,30 @@ body {
     font-family: Poppins;
 }
 .container {
-    border-top: 0.4px solid #fff;
-    width: 100vw;
+    width: 80vw;
     height: 100%;
+    color: #fff;
+    margin: 0 auto;
+    padding-top: 8%;
 }
 .tittle_text {
     text-align: left;
     margin-left: 1em;
     margin-bottom: 2em;
-    color: #f1f1f1;
 }
 .tittle_text p {
-    width: 95vw;
     font-size: medium;
     text-align: left;
     margin-left: 2.2em;
-    color: #f1f1f1;
 }
-.textoSobre {
+.conteudoIcon {
+    margin: 80px 10px 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     color: #fff;
-    margin: 80px 10px 30px;
+}
+.conteudoIcon h3 {
+    margin-bottom: 2em;
 }

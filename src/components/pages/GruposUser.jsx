@@ -1,28 +1,43 @@
-import UserNavBar from "../form/UserNavBar";
 import styles from '../styles/GruposUser.module.css'
 import axios from "axios";
-import {BsPencil, BsFillTrashFill, BsFillEnvelopeAtFill} from "react-icons/bs"
+import {BsPencil, BsFillTrashFill} from "react-icons/bs"
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import SideBar from "../form/SideBar";
+
 
 
 function GruposUser() {
+    const navegação = useNavigate();
     const [grupos, setGrupos] = useState([])
     const [editGrupoId, setEditGrupoId] = useState(null);
     const [editGruposDados, setEditGruposDados] = useState({});
     const [filtroGrupo, setFiltroGrupo] = useState("");
+    const [periodoId, setPeriodoId] = useState(null);
+    const [periodos, setPeriodos] = useState([]);
     const [coordenadorId, setCoordenadorId] = useState(null);
     const [coordenadores, setCoordenadores] = useState([]);
     const [novoGrupo, setNovoGrupo] = useState({
       titulo: "",
       link: "",
-      semestreturma: "",
+      mensagem: "",
+      periodo: { id: null },
       coordenador: { id: null }
     });
     const [modoEdicao, setModoEdicao] = useState(false);
     const [mensagemErro, setMensagemErro] = useState("");
 
+    useEffect(() => {
+      const accessToken = localStorage.getItem("accessToken");
+    
+      if (!accessToken) {
+        navegação("/Login");
+      } 
+
+    }, [navegação]);
+
     const cadastrarGrupo = () => {
+      novoGrupo.periodo = { id: periodoId };
       novoGrupo.coordenador = { id: coordenadorId };
       axios
         .post("http://127.0.0.1:5000/api/grupo", novoGrupo)
@@ -38,6 +53,12 @@ function GruposUser() {
           }
         });
     };
+    useEffect(() => {
+      axios
+        .get("http://127.0.0.1:5000/api/periodo")
+        .then((response) => setPeriodos(response.data))
+        .catch((error) => console.log(error));
+    }, []);
     useEffect(() => {
       axios
         .get("http://127.0.0.1:5000/api/coordenador")
@@ -102,11 +123,11 @@ function GruposUser() {
 
     return(
       <>
-      <UserNavBar />
+      <SideBar />
       <div className={styles.containerAdminNavBar}>
           <div className={styles.container}>
             <main>
-            <h1>Lista de Grupos</h1>
+            <h1>Grupos</h1>
               <div className={styles.conteudo}>
               <input
               type="text"
@@ -135,13 +156,32 @@ function GruposUser() {
                     required
                   /></div>
                   <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Semestre da Turma:</label>
-                  <input
+                  <label style={{ color: 'white' }}>Mensagem:</label>
+                  <textarea
                     type="text"
-                    value={editGruposDados.semestreturma}
-                    onChange={(e) => setEditGruposDados({ ...editGruposDados, semestreturma: e.target.value })}
+                    value={editGruposDados.mensagem}
+                    onChange={(e) => setEditGruposDados({ ...editGruposDados, mensagem: e.target.value })}
                     required
                   /></div>
+                  <div className={styles.formGroup}>
+                  <label style={{ color: 'white' }}>Período:</label>
+                  <select
+                    value={editGruposDados.periodo.id}
+                    onChange={(e) =>
+                      setEditGruposDados({
+                        ...editGruposDados,
+                        periodo: { id: e.target.value }
+                      })
+                    }
+                  >
+                    <option value="">Selecione um periodo</option>
+                    {periodos.map((periodo) => (
+                      <option key={periodo.id} value={periodo.id}>
+                        {periodo.semestrereferencia}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                   <div className={styles.formGroup}>
                     <label style={{ color: 'white' }}>Coordenador:</label>
                     <select
@@ -171,7 +211,8 @@ function GruposUser() {
                       <th>ID</th>
                       <th>TÍTULO</th>
                       <th>LINK</th>
-                      <th>SEMESTRE DA TURMA</th>
+                      <th>MENSAGEM</th>
+                      <th>PERÍODO</th>
                       <th>COORDENADOR</th>
                     </tr>
                   </thead>
@@ -182,12 +223,12 @@ function GruposUser() {
                             <td>{grupo.id}</td>
                             <td>{grupo.titulo}</td>
                             <td>{grupo.link}</td>
-                            <td>{grupo.semestreturma}</td>
+                            <td>{grupo.mensagem}</td>
+                            <td>{grupo.periodo ? grupo.periodo.semestrereferencia : ""}</td>
                             <td>{grupo.coordenador ? grupo.coordenador.nome : ""}</td>
                             <div className={styles.icones}>
                               <BsPencil onClick={() => editGrupo(grupo.id)}/>
                               <BsFillTrashFill onClick={() => removeGrupo(grupo.id)}/>
-                              <Link to="/BotEmail" style={{ color: 'inherit' }}><BsFillEnvelopeAtFill /></Link>
                             </div>
                           </tr>
                         );
@@ -215,13 +256,27 @@ function GruposUser() {
                       />
                     </div>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Semestre da Turma:</label>
-                      <input
+                      <label style={{ color: 'white' }}>Mensagem:</label>
+                      <textarea
                         type="text"
-                        value={novoGrupo.semestreturma}
-                        onChange={(e) => setNovoGrupo({ ...novoGrupo, semestreturma: e.target.value })}
+                        value={novoGrupo.mensagem}
+                        onChange={(e) => setNovoGrupo({ ...novoGrupo, mensagem: e.target.value })}
                         required
                       />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label style={{ color: 'white' }}>Período:</label>
+                      <select
+                        value={periodoId}
+                        onChange={(e) => setPeriodoId(e.target.value)}
+                      >
+                        <option value="">Selecione um periodo</option>
+                        {periodos.map((periodo) => (
+                          <option key={periodo.id} value={periodo.id}>
+                            {periodo.semestrereferencia}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     <div className={styles.formGroup}>
                       <label style={{ color: 'white' }}>Coordenador:</label>

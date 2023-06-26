@@ -23,6 +23,9 @@ body {
     display: flex;
     flex-direction: column;
 }
+.titulo span {
+    color: green;
+}
 .titulo h1 {
     font-size: 55px;
     margin-left: 20px;
