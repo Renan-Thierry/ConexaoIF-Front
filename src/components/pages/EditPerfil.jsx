@@ -1,9 +1,9 @@
 import styles from '../styles/EditPerfil.module.css';
 import React, { useEffect, useState } from "react";
+import SideBar from "../form/SideBar";
 import axios from "axios";
 import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import SideBar from '../form/SideBar';
 
 
 function EditPerfil() {
@@ -14,7 +14,9 @@ function EditPerfil() {
     // eslint-disable-next-line
   const [filtroCoordenador, setFiltroCoordenador] = useState("");
   const [cursos, setCursos] = useState([]);
-  
+      // eslint-disable-next-line
+  const [mensagemErro, setMensagemErro] = useState('');
+
   
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -58,12 +60,16 @@ function EditPerfil() {
         setEditCoordenadoresId(id);
       })
       .catch((error) => {
-        console.log(error);
-      });
+        if (error.response && error.response.data && error.response.data.message) {
+          alert(error.response.data.message);
+        } else {
+          console.log(error);
+        }});
   };
 
   const saveEditCoordenador = () => {
-    axios.put(`http://127.0.0.1:5000/api/coordenador/${editCoordenadoresId}`, editCoordenadoresDados)
+    axios
+      .put(`http://127.0.0.1:5000/api/coordenador/${editCoordenadoresId}`, editCoordenadoresDados)
       .then((response) => {
         const updatedCoordenadores = coordenadores.map((coordenador) => {
           if (coordenador.id === editCoordenadoresId) {
@@ -76,10 +82,16 @@ function EditPerfil() {
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response && error.response.data && error.response.data.message) {
+          alert(error.response.data.message);
+        } else {
+          console.log(error);
+          alert('Email ou Senha já existentes');
+        }
       });
   };
-
+  
+  
   const filtro_coordenador = coordenadores.filter((coordenador) =>
     coordenador.nome && coordenador.nome.toLowerCase().includes(filtroCoordenador.toLowerCase())
   );
@@ -175,6 +187,7 @@ function EditPerfil() {
                   </select>
                 </div>
                 <button onClick={saveEditCoordenador}>Salvar</button>
+                {mensagemErro && <p>{mensagemErro}</p>} {/* Exibe a mensagem de erro */}
               </div>
             ) : (
               <div>

@@ -23,8 +23,10 @@ body {
     display: flex;
     flex-direction: column;
 }
-.titulo span {
+
+.conteudo_titulo span {
     color: green;
+    font-weight: bold;
 }
 .titulo h1 {
     font-size: 55px;
@@ -81,4 +83,21 @@ body {
 }
 .botaoCadastro:hover {
     background-color: rgb(12, 99, 12);;
+}
+.conteudo1 {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.conteudo_titulo {
+    font-weight: 700;
+    font-family: 'Titillium Web';
+    font-size: 54px;
+    color: #fff;
+}
+.conteudo_subTitulo {
+    font-weight: 400;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 30%;
 }

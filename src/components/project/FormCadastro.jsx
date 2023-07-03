@@ -31,8 +31,11 @@ function FormCadastro() {
         navigate('/GruposUser');
       })
       .catch((error) => {
-        alert('Cadastro não foi efetivado');
-        console.error(error);
+        if (error.response && error.response.data && error.response.data.message) {
+          alert(error.response.data.message);
+        } else {
+          console.log(error);
+        }
       });
   };
 

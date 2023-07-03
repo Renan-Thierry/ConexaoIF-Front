@@ -1,9 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import styles from './SideBar.module.css';
 import logo from '../../img/connections.png';
-import { VscOrganization, VscAccount, VscSignOut, VscEdit, VscPersonAdd, VscMail, VscBook, VscInfo } from "react-icons/vsc";
+import { VscOrganization, VscSignOut, VscEdit, VscPersonAdd, VscMail, VscLinkExternal, VscInfo } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
 
 function SideBar() {
+  const navegação = useNavigate();
+
+  const logout = () => {
+    // Limpar os dados de autenticação (por exemplo, o token) do armazenamento local
+    localStorage.removeItem("accessToken");
+
+    // Redirecionar para a página de login
+    navegação("/Login");
+  };
     return(
         <div className={styles.SideBar}>
             <ul>
@@ -39,9 +49,9 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/GuiaUsuario" style={{ color: 'inherit' }}>
-                        <span className={styles.icone}><VscBook /></span>
-                        <span className={styles.titulo}>Guia do Usuario</span>
+                    <Link to="/AlunosConectados" style={{ color: 'inherit' }}>
+                        <span className={styles.icone}><VscLinkExternal /></span>
+                        <span className={styles.titulo}>Alunos Conectados</span>
                     </Link>
                 </li>
                 <li>
@@ -51,13 +61,7 @@ function SideBar() {
                     </Link>
                 </li>
                 <li className={styles.usuario}>
-                    <Link to="" style={{ color: 'inherit' }}>
-                        <span className={styles.icone}><VscAccount /></span>
-                        <span className={styles.titulo}>Usuario</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/Login" style={{ color: 'inherit' }}>
+                    <Link to="/Login" style={{ color: 'inherit' }} onClick={logout}>
                         <span className={styles.icone}><VscSignOut /></span>
                         <span className={styles.titulo}>Sair</span>
                     </Link>
@@ -68,3 +72,4 @@ function SideBar() {
 }
 
 export default SideBar;
+

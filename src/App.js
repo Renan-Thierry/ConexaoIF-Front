@@ -17,8 +17,8 @@ import EmailForm from './components/pages/EmailForm';
 import GruposUser from './components/pages/GruposUser';
 import EditPerfil from './components/pages/EditPerfil';
 import AdicionarAlunos from './components/pages/AdicionarAlunos';
-import GuiaUsuario from './components/pages/GuiaUsuario';
 import Lista from './components/pages/Lista';
+import AlunosConectados from './components/pages/AlunosConectados';
 
 
 function App() {
@@ -44,8 +44,8 @@ function App() {
           <Route path="/GruposUser" element={<GruposUser />} />
           <Route path="/EditPerfil" element={<EditPerfil />} />
           <Route path="/AdicionarAlunos" element={<AdicionarAlunos />} />
-          <Route path="/GuiaUsuario" element={<GuiaUsuario />} />
           <Route path="/Lista" element={<Lista />} />
+          <Route path="/AlunosConectados" element={<AlunosConectados />} />
         </Routes>
       </Router>
     

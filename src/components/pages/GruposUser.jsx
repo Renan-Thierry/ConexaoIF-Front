@@ -1,9 +1,9 @@
+import SideBar from "../form/SideBar";
 import styles from '../styles/GruposUser.module.css'
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SideBar from "../form/SideBar";
 
 
 
@@ -139,6 +139,8 @@ function GruposUser() {
               </div>
               {editGrupoId ? (
                 <div className={styles.editForm}>
+                  <form  onSubmit={saveEditGrupo}>
+
                   <div className={styles.formGroup}>
                   <label style={{ color: 'white' }}>Título:</label>
                   <input
@@ -201,7 +203,8 @@ function GruposUser() {
                       ))}
                     </select>
                   </div>
-                  <button onClick={saveEditGrupo}>Salvar</button>
+                  <button type="submit">Salvar</button>
+                  </form>
                 </div>
               ) : (
               <div>
@@ -237,6 +240,7 @@ function GruposUser() {
                 </table>
                 {modoEdicao ? (
                   <div className={styles.editForm}>
+                    <form onSubmit={cadastrarGrupo}>
                     <div className={styles.formGroup}>
                       <label style={{ color: 'white' }}>Título:</label>
                       <input
@@ -269,6 +273,7 @@ function GruposUser() {
                       <select
                         value={periodoId}
                         onChange={(e) => setPeriodoId(e.target.value)}
+                        required
                       >
                         <option value="">Selecione um periodo</option>
                         {periodos.map((periodo) => (
@@ -283,6 +288,7 @@ function GruposUser() {
                       <select
                         value={coordenadorId}
                         onChange={(e) => setCoordenadorId(e.target.value)}
+                        required
                       >
                         <option value="">Selecione um coordenador</option>
                         {coordenadores.map((coordenador) => (
@@ -292,8 +298,9 @@ function GruposUser() {
                         ))}
                       </select>
                     </div>
-                    <button onClick={cadastrarGrupo}>Cadastrar</button>
+                    <button type="submit">Cadastrar</button>
                     {mensagemErro && <p>{mensagemErro}</p>}
+                    </form>
                   </div>
                 ) : null}
               </div>

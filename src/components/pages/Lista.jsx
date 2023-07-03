@@ -1,9 +1,9 @@
 import styles from  '../styles/Lista.module.css'
 import React, { useEffect, useState } from 'react';
 import { useNavigate} from 'react-router-dom';
+import SideBar from '../form/SideBar';
 import axios from 'axios';
 import Select from 'react-select';
-import SideBar from '../form/SideBar';
 
 
 function Lista() {
@@ -30,7 +30,7 @@ function Lista() {
 
   }, [navigate]);
 
-  // useEffect para carregar os dados dos alunos e cursos ao renderizar o componente
+
   useEffect(() => {
     axios
       .get('http://127.0.0.1:5000/api/aluno')
@@ -43,7 +43,7 @@ function Lista() {
       .catch((error) => console.log(error));
   }, []);
 
-  // useEffect para carregar os grupos quando um curso é selecionado na nova lista
+
   useEffect(() => {
     if (novaLista.cursoId !== '') {
       axios
@@ -56,20 +56,18 @@ function Lista() {
     }
   }, [novaLista.cursoId]);
 
-  
 
-  // Função para lidar com a seleção de um curso
   const handleCursoSelect = (selectedOption) => {
     setNovaLista({
       ...novaLista,
       cursoId: selectedOption.value,
       grupoId: '',
-      cursoSelecionado: selectedOption, // Store the selected curso object
+      cursoSelecionado: selectedOption, 
 
     });
   };
 
-  // Função para lidar com a seleção de um grupo
+
   const handleGrupoSelect = (selectedOption) => {
     const selectedGrupo = selectedOption ? selectedOption.value : null;
     setNovaLista({ ...novaLista, grupoId: selectedGrupo });
@@ -78,15 +76,12 @@ function Lista() {
 
   };
 
-  // Função para lidar com a seleção de alunos
   const handleAlunosSelect = (selectedOptions) => {
     setAlunosSelecionados(selectedOptions);
   };
   
- 
-  // Função para gerar o arquivo JSON
   const generateJsonFile = () => {
-    // Função para gerar o arquivo JSON
+
     if (!novaLista.cursoId) {
       alert('Por favor, selecione um curso');
       return;
@@ -102,10 +97,7 @@ function Lista() {
       return;
     }
   
-    // Resto do código para gerar o arquivo JSON
-    // ...
-  
-  
+    const grupoId = novaLista.grupoId !== null ? novaLista.grupoId : '';
 
     const jsonData = {
       emails: alunosSelecionados.map((aluno) => ({
@@ -116,11 +108,12 @@ function Lista() {
         titulo: grupoSelecionado ? grupoSelecionado.titulo : '',
         curso_id: novaLista.cursoId,
         mensagem: grupoSelecionado ? grupoSelecionado.mensagem : '',
+        grupo_id: grupoId,
       })),
     };
 
     const dataStr = JSON.stringify(jsonData, null, 2);
-    const filePath = 'C:\\Users\\55839\\Documents\\back\\lista.json';
+    const filePath = '//mnt//c//Users//marqu//OneDrive//Área de Trabalho//ConexaoIF//ConexaoIF-Back//helpers//utils//lista.json';
     
     axios
       .post('http://127.0.0.1:5000/api/salvar-json', { filePath, dataStr })
