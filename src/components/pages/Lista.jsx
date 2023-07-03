@@ -1,26 +1,34 @@
-import styles from './Tables.module.css';
+import styles from  '../styles/Lista.module.css'
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import AdminNavBar from '../../form/AdminNavBar';
+import { useNavigate} from 'react-router-dom';
+import SideBar from '../form/SideBar';
 import axios from 'axios';
 import Select from 'react-select';
 
+
 function Lista() {
-  // Estados para armazenar os dados dos alunos, cursos, grupos, alunos selecionados, grupo selecionado,
-  // nova lista de alunos, mensagem de sucesso e grupos mensagem
+  const navigate = useNavigate();
+
   const [alunos, setAlunos] = useState([]);
   const [cursos, setCursos] = useState([]);
   const [grupos, setGrupos] = useState([]);
   const [alunosSelecionados, setAlunosSelecionados] = useState([]);
   const [grupoSelecionado, setGrupoSelecionado] = useState(null);
+  const [grupoEscolhido, setGrupoEscolhido] = useState(null);
   const [novaLista, setNovaLista] = useState({
     alunosSelecionados: [],
     cursoId: '',
     grupoId: '',
   });
-  const [mensagemSucesso, setMensagemSucesso] = useState('');
   const [gruposMensagem, setGruposMensagem] = useState([]);
-  const [isButtonClicked, setButtonClicked] = useState(false);
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+  
+    if (!accessToken) {
+      navigate("/Login");
+    } 
+
+  }, [navigate]);
 
   // useEffect para carregar os dados dos alunos e cursos ao renderizar o componente
   useEffect(() => {
@@ -48,12 +56,16 @@ function Lista() {
     }
   }, [novaLista.cursoId]);
 
+  
+
   // Função para lidar com a seleção de um curso
   const handleCursoSelect = (selectedOption) => {
     setNovaLista({
       ...novaLista,
       cursoId: selectedOption.value,
       grupoId: '',
+      cursoSelecionado: selectedOption, // Store the selected curso object
+
     });
   };
 
@@ -62,16 +74,40 @@ function Lista() {
     const selectedGrupo = selectedOption ? selectedOption.value : null;
     setNovaLista({ ...novaLista, grupoId: selectedGrupo });
     setGrupoSelecionado(selectedGrupo);
+    setGrupoEscolhido(selectedOption);
+
   };
 
   // Função para lidar com a seleção de alunos
   const handleAlunosSelect = (selectedOptions) => {
     setAlunosSelecionados(selectedOptions);
   };
+  
  
   // Função para gerar o arquivo JSON
   const generateJsonFile = () => {
-    setButtonClicked(true);
+    // Função para gerar o arquivo JSON
+    if (!novaLista.cursoId) {
+      alert('Por favor, selecione um curso');
+      return;
+    }
+  
+    if (!grupoSelecionado) {
+      alert('Por favor, selecione um grupo');
+      return;
+    }
+  
+    if (alunosSelecionados.length === 0) {
+      alert('Por favor, selecione pelo menos um aluno');
+      return;
+    }
+  
+    // Resto do código para gerar o arquivo JSON
+    // ...
+  
+  
+
+    const grupoId = novaLista.grupoId !== null ? novaLista.grupoId : '';
 
     const jsonData = {
       emails: alunosSelecionados.map((aluno) => ({
@@ -82,31 +118,31 @@ function Lista() {
         titulo: grupoSelecionado ? grupoSelecionado.titulo : '',
         curso_id: novaLista.cursoId,
         mensagem: grupoSelecionado ? grupoSelecionado.mensagem : '',
+        grupo_id: grupoId,
       })),
     };
 
     const dataStr = JSON.stringify(jsonData, null, 2);
-    const filePath = 'C:\\Users\\wanderson\\Documents\\back-end\\lista.json';
-
+    const filePath = 'C:\\Users\\wanderson\\Videos\\back\\helpers\\utils\\lista.json';
+    
     axios
       .post('http://127.0.0.1:5000/api/salvar-json', { filePath, dataStr })
       .then(() => {
-        setMensagemSucesso("Dados gerado com sucesso!");
+        navigate('/EmailForm'); // Navega para a rota '/EmailForm'
       })
       .catch((error) => {
         console.log(error);
-        setMensagemSucesso("Erro ao gerar o arquivo JSON.");
       });
   };
 
   
   return (
     <>
-      <div className={styles.containerAdminNavBar}>
-        <AdminNavBar />
-        <div className={styles.container}>
-          <main>
-            <h1>Formulário de Lista de Alunos</h1>
+    <SideBar />
+    <div className={styles.containerAdminNavBar}>
+          <div className={styles.container}>
+            <main>
+            <h1>Mensagem</h1>
             <div className={styles.conteudo}>{/* Content */}</div>
             <div>
               <div className={styles.editForm}>
@@ -118,8 +154,10 @@ function Lista() {
                       label: curso.nome,
                       className: styles.blueOption,
                     }))}
-                    value={cursos.find((curso) => curso.id === novaLista.cursoId)}
+                    value={novaLista.cursoSelecionado}
+
                     onChange={handleCursoSelect}
+                    required
                   />
                 </div>
                 <div className={styles.formGroup}>
@@ -131,9 +169,10 @@ function Lista() {
                       className: styles.blueOption,
                       mensagem: gruposMensagem[index], // Retrieve the mensagem from gruposMensagem array
                     }))}
-                    value={grupoSelecionado}
+                    value={grupoEscolhido}
                     onChange={handleGrupoSelect}
                     placeholder="Selecione um grupo"
+                    required
                   />
                 </div>
                 <div className={styles.formGroup}>
@@ -153,28 +192,21 @@ function Lista() {
                       }))}
                     value={alunosSelecionados}
                     onChange={handleAlunosSelect}
+                    required
                   />
                 </div>
               </div>
-              <div>
-                <div></div>
-                <div>
-        <br />
-        <button onClick={generateJsonFile}>Gerar</button>
+              <div className={styles.editForm}>
+
+        <button onClick={generateJsonFile}>Gerar Lista</button>
         </div>
-        <div>
-        <br />
-        {mensagemSucesso && <p>{mensagemSucesso}</p>}
-        {isButtonClicked ? (
-        <Link to="/EmailForm">Ir para o Bot-email</Link>
-        ) : (
-          <span>Bloqueado - Gerar arquivo antes</span>
-         )}
-                </div>
-              </div>
+            <div>
+            <div>
             </div>
-          </main>
-        </div>
+            </div>
+            </div>
+            </main>
+      </div>
       </div>
     </>
   );

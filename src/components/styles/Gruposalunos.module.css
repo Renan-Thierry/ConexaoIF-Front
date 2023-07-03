@@ -14,15 +14,21 @@ body {
     height: 100vh;
 }
 .conteudo {
-    display: flex;
+  display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 50%;
-    width: 80vw;
+    margin-left: 100px;
+    gap: 40%;
+    width: 80%;
+}
+.content_form button {
+  margin-right: .2em;
+  margin-top: 1em;
+  cursor: pointer;
 }
 .container h1 {
     margin-top: 1.5em;
-    margin-left: 40%;
+    margin-left: 26%;
     color: #fff;
     text-transform: uppercase;
 }
@@ -46,10 +52,10 @@ body {
     background-color: green;
 }
 .table {
-    width: 85%;
-    border-collapse: collapse;
-    margin: 0 auto;
-    margin-top: 50px;
+  width: 85%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  margin-top: 30px;
   }
   
   .table th {
@@ -69,13 +75,13 @@ body {
   }
   .icones {
     margin-top: 10px;
+    margin-left: 2em;
     display: flex;
     justify-content: center;
     gap: 30px;
     color: #fff;
     font-size: 15px;
     cursor: pointer;
-    margin-left: 2em;
   }
   .editForm {
     width: 50%;
@@ -117,7 +123,6 @@ body {
   padding: 8px 12px; 
   border: 1px solid #ccc; 
   border-radius: 4px; 
-  margin-top: 15px;
 }
 .formGroup textarea{
   flex: 1;

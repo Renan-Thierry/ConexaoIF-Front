@@ -23,6 +23,11 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.conteudo_titulo span {
+    color: green;
+    font-weight: bold;
+}
 .titulo h1 {
     font-size: 55px;
     margin-left: 20px;
@@ -78,4 +83,20 @@ body {
 }
 .botaoCadastro:hover {
     background-color: rgb(12, 99, 12);;
+}
+.conteudo1 {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.conteudo_titulo {
+    font-weight: 700;
+    font-family: 'Courier New', Courier, monospace, sans-serifS;
+    font-size: 54px;
+    color: #fff;
+}
+.conteudo_subTitulo {
+    font-weight: 400;
+    font-size: 14px;
+    color: #fff;
 }

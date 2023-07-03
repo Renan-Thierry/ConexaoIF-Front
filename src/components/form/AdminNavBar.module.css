@@ -5,8 +5,9 @@
     transition: transform 0.3s ease-in-out;
     transform: translateX(0);
     border-right: 0.4px solid #fff;
+    position: fixed;
+    margin-right: 87.5%;
   }
-  
   .sidebar.open {
     transform: translateX(-100%);
   }
@@ -23,7 +24,10 @@
     margin-bottom: 1.5em;
     font-size: large;
     font-weight: bold;
+    color: #fff;
+    padding: 15px;
 }
+
 .navbar  {
     display: flex;
     flex-direction: column;
@@ -33,6 +37,8 @@
 .image  {
     width: 40px;
     height: 40px;
+    margin-right: 8em;
+    margin-left: 1.5em;
 }
 .item{
     height: 50px;

@@ -14,7 +14,8 @@ function Sidebar() {
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
       <button onClick={toggleSidebar}>
       <Link to="/" style={{ color: 'inherit' }}>
-        <img src={logo} alt="Logo do site" className={styles.image}/>DocDis
+        <img src={logo} alt="Logo do site" className={styles.image}/>
+        <p>ConexaoIF</p>
     </Link>
       </button>
       
@@ -24,16 +25,11 @@ function Sidebar() {
             <Link to="/Curso" className={styles.item} style={{ color: 'inherit' }}>Curso</Link>
             <Link to="/Endereco" className={styles.item} style={{ color: 'inherit' }}>Endereço</Link>
             <Link to="/Grupo" className={styles.item} style={{ color: 'inherit' }}>Grupo</Link>
+            <Link to="/Alunogrupo" className={styles.item} style={{ color: 'inherit' }}>Alunogrupo</Link>
             <Link to="/Instituicao" className={styles.item} style={{ color: 'inherit' }}>Instituicao</Link>
-            <Link to="/Lista" className={styles.item} style={{ color: 'inherit' }}>Lista</Link>
             <Link to="/Periodos" className={styles.item} style={{ color: 'inherit' }}>Periodos</Link>
-            <Link to="/Pessoas" className={styles.item} style={{ color: 'inherit' }}>Pessoas</Link>
             <Link to="/Professor" className={styles.item} style={{ color: 'inherit' }}>Professor</Link>
             <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}>Sair</Link>
-
-
-            
-
         </nav>
     </div>
   );

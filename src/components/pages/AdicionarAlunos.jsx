@@ -1,10 +1,16 @@
-import styles from './Tables.module.css'
+import styles from '../styles/AdicionarAlunos.module.css';
 import React, { useEffect, useState } from "react";
-import AdminNavBar from "../../form/AdminNavBar";
+import SideBar from "../form/SideBar";
 import axios from "axios";
-import { BsPencil, BsFillTrashFill } from "react-icons/bs"
+import { BsPencil, BsFillTrashFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
-function Alunos() {
+
+
+
+function Alunos() { 
+  const navegação = useNavigate();
   const [alunos, setAlunos] = useState([]);
   const [editAlunosId, setEditAlunosId] = useState(null);
   const [editAlunosDados, setEditAlunosDados] = useState({});
@@ -16,32 +22,65 @@ function Alunos() {
   const [novoAluno, setNovoAluno] = useState({
     nome: "",
     email: "",
-    senha: "",
     telefone: "",
     matricula: "",
     periodo: { id: null },
     curso: { id: null }
   });
   const [modoEdicao, setModoEdicao] = useState(false);
+  // eslint-disable-next-line
   const [mensagemErro, setMensagemErro] = useState("");
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+  
+    if (!accessToken) {
+      navegação("/Login");
+    } 
 
-  const cadastrarAluno = () => {
+  }, [navegação]);
+
+
+  const cadastrarAluno = (aluno) => {
+    if (!novoAluno.senha) {
+      const senhaAleatoria = uuidv4(); // Gera um valor aleatório único
+      setNovoAluno({ ...novoAluno, senha: senhaAleatoria });
+    }
     novoAluno.periodo = { id: periodoId };
     novoAluno.curso = { id: cursoId };
+    const emailExistente = alunos.some(aluno => aluno.email === novoAluno.email);
+    if (emailExistente) {
+        alert("O e-mail informado já está sendo utilizado.");
+        return;
+    }
     axios
-      .post("http://127.0.0.1:5000/api/aluno", novoAluno)
+      .post('http://127.0.0.1:5000/api/aluno', aluno)
       .then((response) => {
+        console.log(response.data);
         setModoEdicao(false);
         window.location.reload();
       })
       .catch((error) => {
         if (error.response && error.response.data && error.response.data.message) {
-          setMensagemErro(error.response.data.message);
+          alert(error.response.data.message);
         } else {
           console.log(error);
         }
       });
   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNovoAluno((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const aluno = { ...novoAluno, periodo: { id: periodoId}, curso: { id: cursoId } };
+    cadastrarAluno(aluno);
+  };
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:5000/api/periodo")
@@ -99,7 +138,12 @@ function Alunos() {
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response && error.response.data && error.response.data.message) {
+          alert(error.response.data.message);
+        } else {
+          console.log(error);
+          alert('Preencha todos os campos');
+        }
       });
     };
 
@@ -114,8 +158,8 @@ function Alunos() {
 
   return (
     <>
+    <SideBar />
     <div className={styles.containerAdminNavBar}>
-        <AdminNavBar />
         <div className={styles.container}>
           <main>
             <h1>Alunos</h1>
@@ -146,30 +190,7 @@ function Alunos() {
                   onChange={(e) => setEditAlunosDados({ ...editAlunosDados, email: e.target.value })}
                   required
                 /></div>
-                <div className={styles.formGroup}>
-                <label style={{ color: 'white' }}>Senha:</label>
-                 <input
-                  type="password"
-                  value={editAlunosDados.senha}
-                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, senha: e.target.value })}
-                  required
-                /></div>
-                <div className={styles.formGroup}>
-                <label style={{ color: 'white' }}>Telefone:</label>
-                <input
-                  type="text"
-                  value={editAlunosDados.telefone}
-                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, telefone: e.target.value })}
-                  required
-                /></div>
-                <div className={styles.formGroup}>
-                <label style={{ color: 'white' }}>Matrícula:</label>
-                <input
-                  type="text"
-                  value={editAlunosDados.matricula}
-                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, matricula: e.target.value })}
-                  required
-                /></div>
+            
                 <div className={styles.formGroup}>
                   <label style={{ color: 'white' }}>Período:</label>
                   <select
@@ -210,7 +231,10 @@ function Alunos() {
                 </div>
                 
                 <button onClick={saveEditAluno}>Salvar</button>
+
               </div>
+
+              
             ) : (
               <div>
                 <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
@@ -219,9 +243,6 @@ function Alunos() {
                       <th>ID</th>
                       <th>NOME</th>
                       <th>EMAIL</th>
-                      <th>SENHA</th>
-                      <th>TELEFONE</th>
-                      <th>MATRICULA</th>
                       <th>PERÍODO</th>
                       <th>CURSO</th>
                     </tr>
@@ -232,9 +253,6 @@ function Alunos() {
                         <td>{aluno.id}</td>
                         <td>{aluno.nome}</td>
                         <td>{aluno.email}</td>
-                        <td>{aluno.senha}</td>
-                        <td>{aluno.telefone}</td>
-                        <td>{aluno.matricula}</td>
                         <td>{aluno.periodo ? aluno.periodo.semestrereferencia : ""}</td>
                         <td>{aluno.curso ? aluno.curso.nome : ""}</td>
                         <div className={styles.icones}>
@@ -247,82 +265,63 @@ function Alunos() {
                 </table>
                 {modoEdicao ? (
                   <div className={styles.editForm}>
+                  <form  onSubmit={handleSubmit}>
+
+                  <div className={styles.formGroup}>
+                  <label style={{ color: 'white' }}>Nome:</label>
+                    <input
+                      type="text"
+                      placeholder="Nome"
+                      name="nome"
+                      value={novoAluno.nome}
+                      onChange={handleChange}
+                      required
+                    /></div>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Nome:</label>
-                      <input
-                        type="text"
-                        value={novoAluno.nome}
-                        onChange={(e) => setNovoAluno({ ...novoAluno, nome: e.target.value })}
-                        required
-                      />
-                    </div>
+                  <label style={{ color: 'white' }}>Email:</label>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      name="email"
+                      value={novoAluno.email}
+                      onChange={handleChange}
+                      required
+                    /></div>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Email:</label>
-                      <input
-                        type="email"
-                        value={novoAluno.email}
-                        onChange={(e) => setNovoAluno({ ...novoAluno, email: e.target.value })}
-                        required
-                      />
-                    </div>
+                  <label style={{ color: 'white' }}>Período:</label>
+                    <select
+                      name="periodoId"
+                      value={periodoId}
+                      onChange={(e) => setPeriodoId(e.target.value)}
+                      required
+                    >
+                      <option value="">Selecione um Período</option>
+                      {periodos.map((periodo) => (
+                        <option key={periodo.id} value={periodo.id}>
+                          {periodo.semestrereferencia}
+                        </option>
+                      ))}
+                    </select></div>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Senha:</label>
-                      <input
-                        type="password"
-                        value={novoAluno.senha}
-                        onChange={(e) => setNovoAluno({ ...novoAluno, senha: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Telefone:</label>
-                      <input
-                        type="text"
-                        value={novoAluno.telefone}
-                        onChange={(e) => setNovoAluno({ ...novoAluno, telefone: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Matrícula:</label>
-                      <input
-                        type="text"
-                        value={novoAluno.matricula}
-                        onChange={(e) => setNovoAluno({ ...novoAluno, matricula: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Período:</label>
-                      <select
-                        value={periodoId}
-                        onChange={(e) => setPeriodoId(e.target.value)}
-                      >
-                        <option value="">Selecione um periodo</option>
-                        {periodos.map((periodo) => (
-                          <option key={periodo.id} value={periodo.id}>
-                            {periodo.semestrereferencia}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Curso:</label>
-                      <select
-                        value={cursoId}
-                        onChange={(e) => setCursoId(e.target.value)}
-                      >
-                        <option value="">Selecione um curso</option>
-                        {cursos.map((curso) => (
-                          <option key={curso.id} value={curso.id}>
-                            {curso.nome}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <button onClick={cadastrarAluno}>Cadastrar</button>
-                    {mensagemErro && <p>{mensagemErro}</p>}
-                  </div>
+                  <label style={{ color: 'white' }}>Curso:</label>
+                    <select
+                      name="cursoId"
+                      value={cursoId}
+                      onChange={(e) => setCursoId(e.target.value)}
+                      required
+                    >
+                      <option value="">Selecione um Curso</option>
+                      {cursos.map((curso) => (
+                        <option key={curso.id} value={curso.id}>
+                          {curso.nome}
+                        </option>
+                      ))}
+                    </select></div>
+                    <button type="submit" >Salvar</button>
+                    
+                  </form></div>
+                  
+                  
                 ) : null}
               </div>
             )}
