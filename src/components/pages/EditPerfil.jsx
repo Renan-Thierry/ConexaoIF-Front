@@ -100,15 +100,12 @@ function EditPerfil() {
   return (
     <>
       <SideBar />
-      <div className={styles.containerAdminNavBar}>
-        <div className={styles.container}>
-          <main>
+          <main className={styles.conteudo}>
             <h1>Coordenador</h1>
-            
             {editCoordenadoresId ? (
               <div className={styles.editForm}>
                 <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Nome:</label>
+                  <label>Nome:</label>
                   <input
                     type="text"
                     value={editCoordenadoresDados.nome}
@@ -118,7 +115,7 @@ function EditPerfil() {
                   />
                 </div>
                 <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Email:</label>
+                  <label>Email:</label>
                   <input
                     type="email"
                     value={editCoordenadoresDados.email}
@@ -128,7 +125,7 @@ function EditPerfil() {
                   />
                 </div>
                 <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Senha:</label>
+                  <label>Senha:</label>
                   <input
                     type="password"
                     value={editCoordenadoresDados.senha}
@@ -138,7 +135,7 @@ function EditPerfil() {
                   />
                 </div>
                 <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Telefone:</label>
+                  <label>Telefone:</label>
                   <input
                     type="text"
                     value={editCoordenadoresDados.telefone}
@@ -148,7 +145,7 @@ function EditPerfil() {
                   />
                 </div>
                 <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Disciplina:</label>
+                  <label>Disciplina:</label>
                   <input
                     type="text"
                     value={editCoordenadoresDados.disciplina}
@@ -158,7 +155,7 @@ function EditPerfil() {
                   />
                 </div>
                 <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Registro de Trabalho:</label>
+                  <label>Registro de Trabalho:</label>
                   <input
                     type="text"
                     value={editCoordenadoresDados.registrodeTrabalho}
@@ -168,7 +165,7 @@ function EditPerfil() {
                   />
                 </div>
                 <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Curso:</label>
+                  <label>Curso:</label>
                   <select
                     value={editCoordenadoresDados.curso.id}
                     onChange={(e) =>
@@ -190,7 +187,7 @@ function EditPerfil() {
                 {mensagemErro && <p>{mensagemErro}</p>} {/* Exibe a mensagem de erro */}
               </div>
             ) : (
-              <div>
+              <section className={styles.section_tabela}>
                 <table className={styles.table} >
                   <thead>
                     <tr>
@@ -217,20 +214,21 @@ function EditPerfil() {
                           <td>{coordenador.registrodeTrabalho}</td>
                           <td>{coordenador.curso ? coordenador.curso.nome : ""}</td>
                           <div className={styles.icones}>
-                            <BsPencil onClick={() => editCoordenador(coordenador.id)} />
-                            <BsFillTrashFill onClick={() => removeCoordenador(coordenador.id)} />
+                            <button onClick={() => editCoordenador(coordenador.id)} className={styles.icone1}>
+                              <BsPencil />
+                            </button>
+                            <button onClick={() => removeCoordenador(coordenador.id)} className={styles.icone2}>
+                              <BsFillTrashFill />
+                            </button>
                           </div>
                         </tr>
                       );
                     })}
                   </tbody>
                 </table>
-                
-              </div>
+              </section>
             )}
           </main>
-        </div>
-      </div>
     </>
   );
 }

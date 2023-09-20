@@ -4,6 +4,7 @@ import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from '../form/Button';
 
 
 
@@ -124,25 +125,20 @@ function GruposUser() {
     return(
       <>
       <SideBar />
-      <div className={styles.containerAdminNavBar}>
-          <div className={styles.container}>
-            <main>
+          <main className={styles.conteudo}>
             <h1>Grupos</h1>
-              <div className={styles.conteudo}>
-              <input
-              type="text"
-              placeholder="Pesquisar"
-              value={filtroGrupo}
-              onChange={(e) => setFiltroGrupo(e.target.value)}
-              />
-              <button onClick={adicionarGrupo}>Adicionar</button>
-              </div>
+              {!editGrupoId && (
+                <form className={styles.form_filtro}>
+                <input type="text" placeholder="Pesquisar" value={filtroGrupo} onChange={(e) => setFiltroGrupo(e.target.value)}/>
+                <Button text="Adicionar" onClick={adicionarGrupo}/>
+              </form>
+              )}
               {editGrupoId ? (
                 <div className={styles.editForm}>
                   <form  onSubmit={saveEditGrupo}>
 
                   <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Título:</label>
+                  <label>Título:</label>
                   <input
                     type="text"
                     value={editGruposDados.titulo}
@@ -150,7 +146,7 @@ function GruposUser() {
                     required
                   /></div>
                   <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Link:</label>
+                  <label>Link:</label>
                   <input
                     type="text"
                     value={editGruposDados.link}
@@ -158,7 +154,7 @@ function GruposUser() {
                     required
                   /></div>
                   <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Mensagem:</label>
+                  <label>Mensagem:</label>
                   <textarea
                     type="text"
                     value={editGruposDados.mensagem}
@@ -166,7 +162,7 @@ function GruposUser() {
                     required
                   /></div>
                   <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Período:</label>
+                  <label>Período:</label>
                   <select
                     value={editGruposDados.periodo.id}
                     onChange={(e) =>
@@ -185,7 +181,7 @@ function GruposUser() {
                   </select>
                 </div>
                   <div className={styles.formGroup}>
-                    <label style={{ color: 'white' }}>Coordenador:</label>
+                    <label>Coordenador:</label>
                     <select
                       value={editGruposDados.coordenador.id}
                       onChange={(e) =>
@@ -207,7 +203,7 @@ function GruposUser() {
                   </form>
                 </div>
               ) : (
-              <div>
+              <section className={styles.section_tabela}>
                 <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
                   <thead>
                     <tr>
@@ -230,8 +226,12 @@ function GruposUser() {
                             <td>{grupo.periodo ? grupo.periodo.semestrereferencia : ""}</td>
                             <td>{grupo.coordenador ? grupo.coordenador.nome : ""}</td>
                             <div className={styles.icones}>
-                              <BsPencil onClick={() => editGrupo(grupo.id)}/>
-                              <BsFillTrashFill onClick={() => removeGrupo(grupo.id)}/>
+                              <button onClick={() => editGrupo(grupo.id)} className={styles.icone1}>
+                                <BsPencil />
+                              </button>
+                              <button onClick={() => removeGrupo(grupo.id)} className={styles.icone2}>
+                                <BsFillTrashFill />
+                              </button>
                             </div>
                           </tr>
                         );
@@ -242,7 +242,7 @@ function GruposUser() {
                   <div className={styles.editForm}>
                     <form onSubmit={cadastrarGrupo}>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Título:</label>
+                      <label>Título:</label>
                       <input
                         type="text"
                         value={novoGrupo.titulo}
@@ -251,7 +251,7 @@ function GruposUser() {
                       />
                     </div>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Link:</label>
+                      <label>Link:</label>
                       <input
                         type="text"
                         value={novoGrupo.link}
@@ -260,7 +260,7 @@ function GruposUser() {
                       />
                     </div>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Mensagem:</label>
+                      <label>Mensagem:</label>
                       <textarea
                         type="text"
                         value={novoGrupo.mensagem}
@@ -269,7 +269,7 @@ function GruposUser() {
                       />
                     </div>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Período:</label>
+                      <label>Período:</label>
                       <select
                         value={periodoId}
                         onChange={(e) => setPeriodoId(e.target.value)}
@@ -284,7 +284,7 @@ function GruposUser() {
                       </select>
                     </div>
                     <div className={styles.formGroup}>
-                      <label style={{ color: 'white' }}>Coordenador:</label>
+                      <label>Coordenador:</label>
                       <select
                         value={coordenadorId}
                         onChange={(e) => setCoordenadorId(e.target.value)}
@@ -303,11 +303,9 @@ function GruposUser() {
                     </form>
                   </div>
                 ) : null}
-              </div>
+              </section>
             )}
             </main>
-          </div>
-        </div>
       </>
     )
 }

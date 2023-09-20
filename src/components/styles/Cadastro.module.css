@@ -1,42 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&family=Poppins:wght@300;400&display=swap');
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    font-family: Poppins;
+:root {
+    --bg-color: rgb(18, 18, 20);
+    --color: rgb(225, 225, 230);
+    --corPadrao: #03A64A;
 }
 .container {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center; 
-}
-.content_form {
-    height: 80vh;
-    width: 35%;
-    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    border: 0.4px solid #fff;
-    box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
-    border-radius: 23px;
 }
-.content_form input {
-    width: 28vw;
-    padding: 0.4em;
+.conteudo_cadastro {
+    width: 85%;
+    color: var(--color);
+    margin-bottom: 40px;
 }
-.content_form hr {
-    width: 90%;
-    margin: 10px;
-    background-color: green;
-  }
-.content_form h1{
-    color: #fff;
-    margin-top: .6em;
+.logo2 {
+    display: flex;
+    margin-bottom: 70px;
+}
+.conteudo_cadastro h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+.conteudo_cadastro p {
+    margin-bottom: 40px;
+    color: grey;
+}
+.conteudo_cadastro h3 {
+    color: var(--corPadrao);
+}
+.conteudo_cadastro img {
+    width: 30px;
+    margin-right: 5px;
+    color: var(--color);
+}
+.conteudo_cadastro span {
+    color: var(--corPadrao);
+}
+.formCadastro {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (min-width:769px) and (max-width:1024px) {
+    .container{
+        flex-direction: row-reverse;
+        padding-left: 30px;
+    }
+    .conteudo_cadastro {
+        margin-bottom: 50px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .container {
+        height: 100vh;
+        flex-direction: row-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .conteudo_cadastro {
+        width: 60%;
+    }
+    .formCadastro {
+        width: 40%;
+        margin-left: 80px;
+    }
 }

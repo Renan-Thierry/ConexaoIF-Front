@@ -5,9 +5,7 @@ import axios from "axios";
 import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
-
-
-
+import Button from '../form/Button';
 
 function Alunos() { 
   const navegação = useNavigate();
@@ -34,7 +32,6 @@ function Alunos() {
     const accessToken = localStorage.getItem("accessToken");
   
     if (!accessToken) {
-      navegação("/Login");
     } 
 
   }, [navegação]);
@@ -159,116 +156,85 @@ function Alunos() {
   return (
     <>
     <SideBar />
-    <div className={styles.containerAdminNavBar}>
-        <div className={styles.container}>
-          <main>
-            <h1>Alunos</h1>
-            <div className={styles.conteudo}>
-              <input
-                type="text"
-                placeholder="Pesquisar"
-                value={filtroAluno}
-                onChange={(e) => setFiltroAluno(e.target.value)}
-              />
-            <button onClick={adicionarAluno}>Adicionar</button>
-            </div>
-            {editAlunosId ? (
-              <div className={styles.editForm}>
-                <div className={styles.formGroup}>
-                <label style={{ color: 'white' }}>Nome:</label>
-                <input
-                  type="text"
-                  value={editAlunosDados.nome}
-                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, nome: e.target.value })}
-                  required
-                /></div>
-                <div className={styles.formGroup}>
-                <label style={{ color: 'white' }}>Email:</label>
-                <input
-                  type="email"
-                  value={editAlunosDados.email}
-                  onChange={(e) => setEditAlunosDados({ ...editAlunosDados, email: e.target.value })}
-                  required
-                /></div>
-            
-                <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Período:</label>
-                  <select
-                    value={editAlunosDados.periodo.id}
-                    onChange={(e) =>
-                      setEditAlunosDados({
-                        ...editAlunosDados,
-                        periodo: { id: e.target.value }
-                      })
-                    }
-                  >
-                    <option value="">Selecione um periodo</option>
-                    {periodos.map((periodo) => (
-                      <option key={periodo.id} value={periodo.id}>
-                        {periodo.semestrereferencia}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Curso:</label>
-                  <select
-                    value={editAlunosDados.curso.id}
-                    onChange={(e) =>
-                      setEditAlunosDados({
-                        ...editAlunosDados,
-                        curso: { id: e.target.value }
-                      })
-                    }
-                  >
-                    <option value="">Selecione um curso</option>
-                    {cursos.map((curso) => (
-                      <option key={curso.id} value={curso.id}>
-                        {curso.nome}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                
-                <button onClick={saveEditAluno}>Salvar</button>
-
+      <main className={styles.conteudo}>
+        <h1>Alunos</h1>
+        {!editAlunosId &&(
+        <form className={styles.form_filtro}>
+          <input type="text" placeholder="Pesquisar" value={filtroAluno} onChange={(e) => setFiltroAluno(e.target.value)}/>
+          <Button text="Adicionar" onClick={adicionarAluno}/>
+        </form>
+        )}
+          {editAlunosId ? (
+            <div className={styles.editForm}>
+              <div className={styles.formGroup}>
+                <label>Nome:</label>
+                <input type="text" value={editAlunosDados.nome} onChange={(e) => setEditAlunosDados({ ...editAlunosDados, nome: e.target.value })} required/>
               </div>
-
-              
-            ) : (
-              <div>
-                <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>NOME</th>
-                      <th>EMAIL</th>
-                      <th>PERÍODO</th>
-                      <th>CURSO</th>
+              <div className={styles.formGroup}>
+                <label>Email:</label>
+                <input type="email" value={editAlunosDados.email} onChange={(e) => setEditAlunosDados({ ...editAlunosDados, email: e.target.value })} required/>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Período:</label>
+                <select value={editAlunosDados.periodo.id} onChange={(e) => setEditAlunosDados({...editAlunosDados, periodo: { id: e.target.value }})}>
+                  <option value="">Selecione um periodo</option>
+                  {periodos.map((periodo) => (
+                    <option key={periodo.id} value={periodo.id}>
+                      {periodo.semestrereferencia}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Curso:</label>
+                <select value={editAlunosDados.curso.id} onChange={(e) => setEditAlunosDados({...editAlunosDados, curso: { id: e.target.value }})}>
+                  <option value="">Selecione um curso</option>
+                  {cursos.map((curso) => (
+                    <option key={curso.id} value={curso.id}>
+                      {curso.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button onClick={saveEditAluno}>Salvar</button>
+            </div>   
+          ) : (
+            <section className={styles.section_tabela}>
+              <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Periodo</th>
+                    <th>Curso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtro_Alunos.map((aluno) => (
+                    <tr key={aluno.id}>
+                      <td>{aluno.id}</td>
+                      <td>{aluno.nome}</td>
+                      <td>{aluno.email}</td>
+                      <td>{aluno.periodo ? aluno.periodo.semestrereferencia : ""}</td>
+                      <td>{aluno.curso ? aluno.curso.nome : ""}</td>
+                      <div className={styles.icones}>
+                        <button onClick={() => editAluno(aluno.id)} className={styles.icone1}>
+                          <BsPencil />
+                        </button>
+                        <button onClick={() => removeAluno(aluno.id)} className={styles.icone2}>
+                          <BsFillTrashFill />
+                        </button>
+                      </div>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {filtro_Alunos.map((aluno) => (
-                      <tr key={aluno.id}>
-                        <td>{aluno.id}</td>
-                        <td>{aluno.nome}</td>
-                        <td>{aluno.email}</td>
-                        <td>{aluno.periodo ? aluno.periodo.semestrereferencia : ""}</td>
-                        <td>{aluno.curso ? aluno.curso.nome : ""}</td>
-                        <div className={styles.icones}>
-                          <BsPencil onClick={() => editAluno(aluno.id)} />
-                          <BsFillTrashFill onClick={() => removeAluno(aluno.id)} />
-                        </div>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                {modoEdicao ? (
-                  <div className={styles.editForm}>
-                  <form  onSubmit={handleSubmit}>
-
-                  <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Nome:</label>
+                  ))}
+                </tbody>
+              </table>
+              {modoEdicao ? (
+                <div className={styles.editForm}>
+                <form  onSubmit={handleSubmit}>
+                  <div className={styles.formGroup}>  
+                  <label>Nome:</label>
                     <input
                       type="text"
                       placeholder="Nome"
@@ -278,7 +244,7 @@ function Alunos() {
                       required
                     /></div>
                     <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Email:</label>
+                  <label>Email:</label>
                     <input
                       type="email"
                       placeholder="Email"
@@ -288,7 +254,7 @@ function Alunos() {
                       required
                     /></div>
                     <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Período:</label>
+                  <label>Período:</label>
                     <select
                       name="periodoId"
                       value={periodoId}
@@ -303,7 +269,7 @@ function Alunos() {
                       ))}
                     </select></div>
                     <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Curso:</label>
+                  <label>Curso:</label>
                     <select
                       name="cursoId"
                       value={cursoId}
@@ -318,16 +284,11 @@ function Alunos() {
                       ))}
                     </select></div>
                     <button type="submit" >Salvar</button>
-                    
-                  </form></div>
-                  
-                  
-                ) : null}
-              </div>
-            )}
-          </main>
-        </div>
-    </div>
+                  </form></div>   
+              ) : null}
+            </section>
+          )}
+        </main>
     </>
   );
 }

@@ -128,11 +128,10 @@ function AlunosConectados() {
   return (
     <>
       <SideBar />
-      <div className={styles.containerAdminNavBar}>
-        <div className={styles.container}>
-          <main>
+          <main className={styles.conteudo}>
             <h1>Alunos Conectados</h1>
-            <div className={styles.conteudo}>
+            {!modoEdicao && (
+              <form className={styles.form_filtro}>
               <input
                 type="text"
                 placeholder="id/nome do grupo/nome do aluno"
@@ -140,8 +139,9 @@ function AlunosConectados() {
                 onChange={(e) => setFiltroAlunoGrupo(e.target.value)}
               />
             <button onClick={adicionarAlunoGrupo} style={{ visibility: 'hidden' }}></button>
-            </div>
-            <div>
+            </form>
+            )}
+            <section className={styles.section_tabela}>
               <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
                 <thead>
                   <tr>
@@ -152,7 +152,6 @@ function AlunosConectados() {
                     <th>ID DO GRUPO</th>
                     <th> TÍTULO DO GRUPO</th>
                     <th>CURSO</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -166,19 +165,20 @@ function AlunosConectados() {
                         <td>{alunoGrupo.grupo ? alunoGrupo.grupo.id : ""}</td>
                         <td>{alunoGrupo.grupo ? alunoGrupo.grupo.titulo : ""}</td>
                         <td>{alunoGrupo.aluno && alunoGrupo.aluno.curso ? alunoGrupo.aluno.curso.nome : ""}</td>
-                        <td>
-                          <BsFillTrashFill onClick={() => removeAlunoGrupo(alunoGrupo.id)} />
-                        </td>
+                        <div className={styles.icones}>
+                        <button onClick={() => removeAlunoGrupo(alunoGrupo.id)} className={styles.icone2}>
+                          <BsFillTrashFill />
+                        </button>
+                      </div>  
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
-
               {modoEdicao ? (
                 <div className={styles.editForm}>
                   <div className={styles.formGroup}>
-                    <label style={{ color: 'white' }}>Aluno:</label>
+                    <label>Aluno:</label>
                     <select
                       value={novoAlunoGrupo.aluno_id || ""}
                       onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, aluno_id: e.target.value })}
@@ -193,7 +193,7 @@ function AlunosConectados() {
                     </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label style={{ color: 'white' }}>Grupo:</label>
+                    <label>Grupo:</label>
                     <select
                       value={novoAlunoGrupo.grupo_id || ""}
                       onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, grupo_id: e.target.value })}
@@ -212,10 +212,8 @@ function AlunosConectados() {
 
                 </div>
               ) : null}
-            </div>
+            </section>
           </main>
-        </div>
-      </div>
     </>
   );
 }

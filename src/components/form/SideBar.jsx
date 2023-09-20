@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from './SideBar.module.css';
 import logo from '../../img/connections.png';
-import { VscOrganization, VscSignOut, VscEdit, VscPersonAdd, VscMail, VscLinkExternal, VscInfo } from "react-icons/vsc";
+import { VscOrganization, VscSignOut, VscEdit, VscPersonAdd, VscMail, VscLinkExternal, VscInfo, VscAccount } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
 
 function SideBar() {
@@ -60,10 +60,17 @@ function SideBar() {
                         <span className={styles.titulo}>Sobre</span>
                     </Link>
                 </li>
+                
                 <li className={styles.usuario}>
                     <Link to="/Login" style={{ color: 'inherit' }} onClick={logout}>
                         <span className={styles.icone}><VscSignOut /></span>
                         <span className={styles.titulo}>Sair</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/Sobre" style={{ color: 'inherit' }}>
+                        <span className={styles.icone}><VscAccount /></span>
+                        <span className={styles.titulo}>Usuario</span>
                     </Link>
                 </li>
             </ul>

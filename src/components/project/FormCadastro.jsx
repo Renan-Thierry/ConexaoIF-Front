@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/FormCadastro.module.css'
-import Button from '../form/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -61,62 +60,17 @@ function FormCadastro() {
   };
 
   return (
-    <div className={styles.formGroup}>
-      <form className={styles.content_form} onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome"
-          name="nome"
-          value={novoCoordenador.nome}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={novoCoordenador.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          name="senha"
-          value={novoCoordenador.senha}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="tel"
-          placeholder="Telefone"
-          name="telefone"
-          value={novoCoordenador.telefone}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Disciplina"
-          name="disciplina"
-          value={novoCoordenador.disciplina}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Registro de Trabalho"
-          name="registrodeTrabalho"
-          value={novoCoordenador.registrodeTrabalho}
-          onChange={handleChange}
-          required
-        />
-        <select
-          name="cursoId"
-          value={cursoId}
-          onChange={(e) => setCursoId(e.target.value)}
-          required
-        >
+    <>
+    <main className={styles.form_Cadastro}>
+      <h2>Crie sua conta</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Nome" name="nome" value={novoCoordenador.nome} onChange={handleChange} required/>
+        <input type="email" placeholder="Email" name="email" value={novoCoordenador.email} onChange={handleChange} required/>
+        <input type="password" placeholder="Senha" name="senha" value={novoCoordenador.senha} onChange={handleChange} required/>
+        <input type="tel" placeholder="Telefone" name="telefone" value={novoCoordenador.telefone} onChange={handleChange} required/>
+        <input type="text" placeholder="Disciplina" name="disciplina" value={novoCoordenador.disciplina} onChange={handleChange} required/>
+        <input type="text" placeholder="Registro de Trabalho" name="registrodeTrabalho" value={novoCoordenador.registrodeTrabalho} onChange={handleChange} required/>
+        <select name="cursoId" value={cursoId} onChange={(e) => setCursoId(e.target.value)} required>
           <option value="">Selecione um Curso</option>
           {cursos.map((curso) => (
             <option key={curso.id} value={curso.id}>
@@ -124,9 +78,10 @@ function FormCadastro() {
             </option>
           ))}
         </select>
-        <Button type="submit" text="Cadastrar"></Button>
+        <button>Cadastrar</button>
       </form>
-    </div>
+    </main>
+    </>
   );
 }
 

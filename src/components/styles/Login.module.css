@@ -1,103 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&family=Poppins:wght@300;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Poppins:wght@500&family=Titillium+Web:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
 }
-body {
-    font-family: Poppins;
+:root {
+    --bg-color: rgb(18, 18, 20);
+    --color: rgb(225, 225, 230);
+    --corPadrao: #03A64A;
 }
 .conteudoLogin {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 10%;
-}
-.titulo{
-    width: 30%;
+    width: 100vw;
     height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.conteudo_titulo span {
-    color: green;
-    font-weight: bold;
-}
-.titulo h1 {
-    font-size: 55px;
-    margin-left: 20px;
-    margin-top: 2.5em;
-    font-family: 'Titillium Web';
-    font-weight: 600 bold;
-    color: #fff;
-}
-.titulo p {
-    text-align: left;
-    font-size: 20px;
-    width: 50vw;
-    color: #fff;
-}
-.formulario{
-    width: 30%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    border-radius: 23px;
-    border: 0.4px solid #fff;
-}
-.formulario img {
-    width: 50px;
-    height: 50px;
-    margin: 30px;
-}
-.formulario input {
-    width: 28em;
-}
-.formulario hr {
-    width: 90%;
-    margin: 0 auto;
-}
-.formulario h3{
-    color: #fff;
-    margin: 0.5em;
-}
-.formulario button {
-    margin: 1.5em;
-}
-.botaoCadastro {
-    width: 15em;
-    height: 50px;
-    box-shadow: 4px 5px 4px rgba(0,0,0,0.25);
-    cursor: pointer;
-    text-transform: uppercase;
-    border-radius: 8px;
-    background-color: green;
-    color: #fff;
-}
-.botaoCadastro:hover {
-    background-color: rgb(12, 99, 12);;
+    justify-content: center;
 }
 .conteudo1 {
+    width: 85%;
+    color: var(--color);
+    margin-top: 80px;
+}
+.logo {
     display: flex;
-    flex-direction: column;
-    gap: 25px;
+    margin-bottom: 70px;
+    font-size: 1.2em;
 }
-.conteudo_titulo {
-    font-weight: 700;
-    font-family: 'Titillium Web';
-    font-size: 54px;
-    color: #fff;
+.conteudo1 img {
+    width: 30px;
+    margin-right: 5px;
 }
-.conteudo_subTitulo {
-    font-weight: 400;
-    font-size: 18px;
-    color: #fff;
-    margin-bottom: 30%;
+.conteudo1 > h1 {
+    font-size: 3.2em;
+    width: 80%;
+    line-height: 1.1em;
+}
+.conteudo1 span {
+    color: var(--corPadrao);
+}
+.formulario {
+    width: 100%;
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+@media screen and (min-width:769px) and (max-width:1024px) {
+    .conteudoLogin{
+        flex-direction: row;
+        padding-left: 30px;
+    }
+    .conteudo1 {
+        margin-bottom: 50px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .conteudoLogin {
+        height: 100vh;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .conteudo1 {
+        width: 35%;
+        margin-left: 80px;
+    }
+    .formulario {
+        width: 35%;
+    }
 }

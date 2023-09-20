@@ -26,6 +26,22 @@
       "telefone": "982176732",
       "matricula": 9854387543,
       "id": 1
+    },
+    {
+      "nome": "joao2",
+      "email": "joao@gmail.com",
+      "senha": "joao",
+      "telefone": "982176732",
+      "matricula": 9854387543,
+      "id": 2
+    },
+    {
+      "nome": "joao3",
+      "email": "joao@gmail.com",
+      "senha": "joao",
+      "telefone": "982176732",
+      "matricula": 9854387543,
+      "id": 3
     }
   ],
   "Cursos": [

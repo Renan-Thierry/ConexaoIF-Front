@@ -1,8 +1,8 @@
 import React, { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../form/Button";
 import styles from '../styles/FormLogin.module.css'
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 function FormLogin() {
@@ -10,16 +10,11 @@ function FormLogin() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [coordenadores, setCoordenadores] = useState([]);
-  
   // eslint-disable-next-line
   const [accessToken, setAccessToken] = useState("");
   
-
   const handleSubmit = (e) => {
   e.preventDefault();
-
-  
-  
 
   axios
     .post("http://127.0.0.1:5000/api/login", {
@@ -53,27 +48,22 @@ function FormLogin() {
       .catch((error) => console.log(error));
   }, []);
 
-
   return (
-    <div>
-      <form className={styles.content_form} onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-          required
-        />
-        <Button text="Entrar" type="submit" />
-      </form>
-    </div>
+    <>
+      <main className={styles.content_Form}>
+        <form onSubmit={handleSubmit}>
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+          <input type="password" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} required/>
+          <p>Esqueci minha senha</p>
+            <button className={styles.btn_Login} type="submit">Entrar</button>
+        </form>
+        <hr/>
+        <h3>Ainda não tem acesso?</h3>
+        <Link to="/Cadastro">
+            <button className={styles.btn_Cadastro}>Cadastre-se</button>
+        </Link>
+      </main>
+    </>
   );
 }
 

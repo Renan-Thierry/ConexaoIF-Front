@@ -19,7 +19,7 @@
     gap: 70%;
 }
 .image {
-    height: 50px;
+    height: 40px;
 }
 .navbar  {
     display: flex;
@@ -27,7 +27,23 @@
     font-weight: 400;
     color: #fff;
 }
+.navbar .Menu_Hamburguer {
+    font-size: 40px;
+    display: none;
+}
 .item2{
     margin-left: 3.5em;
     font-size: 22px;
+}
+
+@media screen and (max-width: 768px) {
+    .cabecalho {
+        gap: 80%;
+    }
+    .navbar .Menu_Hamburguer {
+        display: block;
+    }
+    .navbar .item {
+        display: none;
+    }
 }

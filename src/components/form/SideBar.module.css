@@ -45,10 +45,19 @@
     background: none;
 }
 .SideBar ul li.usuario {
-    margin-top: 155px;
+    margin-top: 140px;
 }
 .spanIF {
     color: green;
     font-size: larger;
     font-weight: 500;
+}
+@media screen and (max-width: 768px) {
+    .SideBar {
+        width: 60px;
+    }
+    .SideBar:hover {
+        width: 60px;
+    }
+    
 }
