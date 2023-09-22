@@ -25,50 +25,50 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/EditPerfil" style={{ color: 'inherit' }}>
+                    <Link style={{ color: 'inherit' }}>    {/*to="/EditPerfil"*/}
                         <span className={styles.icone}><VscEdit /></span>
                         <span className={styles.titulo}>Editar Perfil</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/AdicionarAlunos" style={{ color: 'inherit' }}>
+                    <Link style={{ color: 'inherit' }}>    {/*to="/AdicionarAlunos"*/}
                         <span className={styles.icone}><VscPersonAdd /></span>
                         <span className={styles.titulo}>Adicionar Alunos</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/GruposUser" style={{ color: 'inherit' }}>
+                    <Link style={{ color: 'inherit' }}>     {/*to="/GruposUser"*/}
                         <span className={styles.icone}><VscOrganization /></span>
                         <span className={styles.titulo}>Listar Grupos</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Lista" style={{ color: 'inherit' }}>
+                    <Link style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
                         <span className={styles.icone}><VscMail /></span>
                         <span className={styles.titulo}>Enviar Mensagem</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/AlunosConectados" style={{ color: 'inherit' }}>
+                    <Link style={{ color: 'inherit' }}>       {/*to="/AlunosConectados"*/}
                         <span className={styles.icone}><VscLinkExternal /></span>
                         <span className={styles.titulo}>Alunos Conectados</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Sobre" style={{ color: 'inherit' }}>
+                    <Link style={{ color: 'inherit' }}>        {/*to="/Sobre*/}
                         <span className={styles.icone}><VscInfo /></span>
                         <span className={styles.titulo}>Sobre</span>
                     </Link>
                 </li>
                 
                 <li className={styles.usuario}>
-                    <Link to="/Login" style={{ color: 'inherit' }} onClick={logout}>
+                    <Link to="/Login" style={{ color: 'inherit' }} onClick={logout}>        
                         <span className={styles.icone}><VscSignOut /></span>
                         <span className={styles.titulo}>Sair</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Sobre" style={{ color: 'inherit' }}>
+                    <Link  style={{ color: 'inherit' }}>   {/*to="/Sobre"*/}
                         <span className={styles.icone}><VscAccount /></span>
                         <span className={styles.titulo}>Usuario</span>
                     </Link>

@@ -12,11 +12,11 @@
 }
 .cabecalho {
     display: flex;
-    flex-direction: row;  /*ordena em linha*/
+    flex-direction: row;  
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     padding: 24px;
-    gap: 70%;
+    gap: 50%;
 }
 .image {
     height: 40px;
@@ -27,9 +27,17 @@
     font-weight: 400;
     color: #fff;
 }
-.navbar .Menu_Hamburguer {
-    font-size: 40px;
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+.navbar li {
+    margin-left: 60px;
+}
+.Menu_Hamburguer {
     display: none;
+    font-size: 40px;
+    color: #fff;
 }
 .item2{
     margin-left: 3.5em;
@@ -38,12 +46,41 @@
 
 @media screen and (max-width: 768px) {
     .cabecalho {
-        gap: 80%;
+        gap: 10%;
+        align-items: flex-start;
+    } 
+    .Menu_Hamburguer {
+        display: block;     
     }
-    .navbar .Menu_Hamburguer {
+    .navbar {
+        justify-content: end;
+        padding: 10px;
+    }
+    .cabecalho > div{
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+    }
+    .navbar ul {
         display: block;
+        background-color: rgb(32, 32, 36);
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.479);
+        height: 300px;
+        flex-direction: column;
+        align-items: center;
+        padding-right: 100px;
+        border-radius: 5px;
     }
-    .navbar .item {
+    .navbar li {
+        padding-left: 70px;
+        margin-top: 60px;
+    }
+    .btn_sair {
+        display: none;
+    }
+    .open {
         display: none;
     }
 }

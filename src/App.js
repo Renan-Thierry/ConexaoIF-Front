@@ -19,6 +19,7 @@ import EditPerfil from './components/pages/EditPerfil';
 import AdicionarAlunos from './components/pages/AdicionarAlunos';
 import Lista from './components/pages/Lista';
 import AlunosConectados from './components/pages/AlunosConectados';
+import Desenvolvimento from './components/pages/Desenvolvimento';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Router>
         <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Desenvolvimento" element={<Desenvolvimento />} />
           <Route path="/Cadastro" element={<Cadastro />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Sobre" element={<Sobre />} />
