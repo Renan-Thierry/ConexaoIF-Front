@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import logo2 from '../../img/www.gif'
 import { Link } from 'react-router-dom'
-import NavBar from '../form/NavBar';
+import NavBar from '../utils/NavBar';
 
 function Home() {
     return(

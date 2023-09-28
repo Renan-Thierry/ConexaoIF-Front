@@ -1,6 +1,6 @@
 import styles from '../styles/EditPerfil.module.css';
 import React, { useEffect, useState } from "react";
-import SideBar from "../form/SideBar";
+import SideBar from "../utils/SideBar";
 import axios from "axios";
 import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -17,17 +17,13 @@ function EditPerfil() {
       // eslint-disable-next-line
   const [mensagemErro, setMensagemErro] = useState('');
 
-  
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
   
     if (!accessToken) {
       navegação("/Login");
     } 
-
   }, [navegação]);
-
-  
 
   useEffect(() => {
     axios
@@ -91,12 +87,10 @@ function EditPerfil() {
       });
   };
   
-  
   const filtro_coordenador = coordenadores.filter((coordenador) =>
     coordenador.nome && coordenador.nome.toLowerCase().includes(filtroCoordenador.toLowerCase())
   );
   
- 
   return (
     <>
       <SideBar />
@@ -104,77 +98,47 @@ function EditPerfil() {
             <h1>Coordenador</h1>
             {editCoordenadoresId ? (
               <div className={styles.editForm}>
+              <h1>Editar Perfil</h1>
                 <div className={styles.formGroup}>
                   <label>Nome:</label>
-                  <input
-                    type="text"
-                    value={editCoordenadoresDados.nome}
-                    onChange={(e) =>
-                      setEditCoordenadoresDados({ ...editCoordenadoresDados, nome: e.target.value })
-                    }required
-                  />
+                  <input type="text" value={editCoordenadoresDados.nome} onChange={(e) => {
+                      const nomeSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+                      setEditCoordenadoresDados({ ...editCoordenadoresDados, nome: nomeSemEspacosEspeciais })}} required />
                 </div>
                 <div className={styles.formGroup}>
                   <label>Email:</label>
-                  <input
-                    type="email"
-                    value={editCoordenadoresDados.email}
-                    onChange={(e) =>
-                      setEditCoordenadoresDados({ ...editCoordenadoresDados, email: e.target.value })
-                    }required
-                  />
+                  <input type="email" value={editCoordenadoresDados.email} onChange={(e) => {
+                      const emailSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9@.]/g, ''); 
+                      setEditCoordenadoresDados({ ...editCoordenadoresDados, email: emailSemEspacosEspeciais })}} required />
                 </div>
                 <div className={styles.formGroup}>
                   <label>Senha:</label>
-                  <input
-                    type="password"
-                    value={editCoordenadoresDados.senha}
-                    onChange={(e) =>
-                      setEditCoordenadoresDados({ ...editCoordenadoresDados, senha: e.target.value })
-                    }required
-                  />
+                  <input type="password" value={editCoordenadoresDados.senha} onChange={(e) => {
+                      const senhaSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9@.!]/g, ''); 
+                      setEditCoordenadoresDados({ ...editCoordenadoresDados, senha: senhaSemEspacosEspeciais })}} required />
                 </div>
                 <div className={styles.formGroup}>
                   <label>Telefone:</label>
-                  <input
-                    type="text"
-                    value={editCoordenadoresDados.telefone}
-                    onChange={(e) =>
-                      setEditCoordenadoresDados({ ...editCoordenadoresDados, telefone: e.target.value })
-                    }required
-                  />
+                  <input type="number" value={editCoordenadoresDados.telefone} onChange={(e) => {
+                      const telefoneSemEspacosEspeciais = e.target.value.replace(/[^0-9]/g, '');
+                      setEditCoordenadoresDados({ ...editCoordenadoresDados, telefone: telefoneSemEspacosEspeciais })}} required />
                 </div>
                 <div className={styles.formGroup}>
                   <label>Disciplina:</label>
-                  <input
-                    type="text"
-                    value={editCoordenadoresDados.disciplina}
-                    onChange={(e) =>
-                      setEditCoordenadoresDados({ ...editCoordenadoresDados, disciplina: e.target.value })
-                    }required
-                  />
+                  <input type="text" value={editCoordenadoresDados.disciplina} onChange={(e) => {
+                      const disciplinaSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+                      setEditCoordenadoresDados({ ...editCoordenadoresDados, disciplina: disciplinaSemEspacosEspeciais })}} required />
                 </div>
                 <div className={styles.formGroup}>
                   <label>Registro de Trabalho:</label>
-                  <input
-                    type="text"
-                    value={editCoordenadoresDados.registrodeTrabalho}
-                    onChange={(e) =>
-                      setEditCoordenadoresDados({ ...editCoordenadoresDados, registrodeTrabalho: e.target.value })
-                    }required
-                  />
+                  <input type="text" value={editCoordenadoresDados.registrodeTrabalho} onChange={(e) => {
+                      const registroSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+                      setEditCoordenadoresDados({ ...editCoordenadoresDados, registrodeTrabalho: registroSemEspacosEspeciais })}} required />
                 </div>
                 <div className={styles.formGroup}>
                   <label>Curso:</label>
-                  <select
-                    value={editCoordenadoresDados.curso.id}
-                    onChange={(e) =>
-                      setEditCoordenadoresDados({
-                        ...editCoordenadoresDados,
-                        curso: { id: e.target.value }
-                      })
-                    }
-                  >
+                  <select value={editCoordenadoresDados.curso.id} onChange={(e) =>
+                      setEditCoordenadoresDados({...editCoordenadoresDados, curso: { id: e.target.value }})}>
                     <option value="">Selecione um curso</option>
                     {cursos.map((curso) => (
                       <option key={curso.id} value={curso.id}>
@@ -184,21 +148,21 @@ function EditPerfil() {
                   </select>
                 </div>
                 <button onClick={saveEditCoordenador}>Salvar</button>
-                {mensagemErro && <p>{mensagemErro}</p>} {/* Exibe a mensagem de erro */}
+                {mensagemErro && <p>{mensagemErro}</p>}
               </div>
             ) : (
               <section className={styles.section_tabela}>
                 <table className={styles.table} >
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>NOME</th>
-                      <th>EMAIL</th>
-                      <th>SENHA</th>
-                      <th>TELEFONE</th>
-                      <th>DISCIPLINA</th>
-                      <th>REGISTRO DE TRABALHO</th>
-                      <th>CURSO</th>
+                      <th>Id</th>
+                      <th>Nome</th>
+                      <th>Email</th>
+                      <th>Senha</th>
+                      <th>Telefone</th>
+                      <th>Disciplina</th>
+                      <th>Registro de trabalho</th> 
+                      <th>Curso</th>
                     </tr>
                   </thead>
                   <tbody>

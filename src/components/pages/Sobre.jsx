@@ -1,4 +1,4 @@
-import SideBar from "../form/SideBar";
+import SideBar from "../utils/SideBar";
 import styles from  '../styles/Sobre.module.css'
 import {FaGithub} from 'react-icons/fa'
 import { useNavigate } from "react-router-dom";

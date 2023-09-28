@@ -1,6 +1,6 @@
 import styles from '../styles/AlunosConectados.module.css';
 import React, { useEffect, useState } from "react";
-import SideBar from "../form/SideBar";
+import SideBar from "../utils/SideBar";
 import axios from "axios";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";

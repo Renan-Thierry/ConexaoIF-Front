@@ -1,11 +1,11 @@
 import styles from '../styles/AdicionarAlunos.module.css';
 import React, { useEffect, useState } from "react";
-import SideBar from "../form/SideBar";
+import SideBar from "../utils/SideBar";
 import axios from "axios";
 import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
-import Button from '../form/Button';
+import Button from '../utils/Button';
 
 function Alunos() { 
   const navegação = useNavigate();
@@ -18,12 +18,12 @@ function Alunos() {
   const [cursoId, setCursoId] = useState(null);
   const [cursos, setCursos] = useState([]);
   const [novoAluno, setNovoAluno] = useState({
-    nome: "",
-    email: "",
-    telefone: "",
-    matricula: "",
-    periodo: { id: null },
-    curso: { id: null }
+                                              nome: "",
+                                              email: "",
+                                              telefone: "",
+                                              matricula: "",
+                                              periodo: { id: null },
+                                              curso: { id: null }
   });
   const [modoEdicao, setModoEdicao] = useState(false);
   // eslint-disable-next-line

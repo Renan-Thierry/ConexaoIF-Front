@@ -6,10 +6,8 @@
     padding: 0;
 }
 :root {
-  --cor0: #262626;
-  --cor1: #027333;
-  --font0: 'Bebas Neue', sans-serif;
-  --font1: 'Secular One', sans-serif;
+  --cor0: rgb(18, 18, 20);
+  --cor1: #03A64A;
 }
 .conteudo h1{
   font-family: var(--font0);

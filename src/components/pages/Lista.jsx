@@ -1,7 +1,7 @@
 import styles from  '../styles/Lista.module.css'
 import React, { useEffect, useState } from 'react';
 import { useNavigate} from 'react-router-dom';
-import SideBar from '../form/SideBar';
+import SideBar from '../utils/SideBar';
 import axios from 'axios';
 import Select from 'react-select';
 

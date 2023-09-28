@@ -47,7 +47,7 @@ function FormCadastro() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const valorSemEspacos = value.replace(/[^a-zA-Z0-9]/g, ''); 
+    const valorSemEspacos = value.replace(/[^a-zA-Z0-9@.]/g, ''); 
     setNovoCoordenador((prevState) => ({
       ...prevState,
       [name]: valorSemEspacos,
