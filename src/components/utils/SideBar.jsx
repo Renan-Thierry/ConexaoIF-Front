@@ -6,12 +6,8 @@ import { Link } from 'react-router-dom';
 
 function SideBar() {
   const navegação = useNavigate();
-
   const logout = () => {
-    // Limpar os dados de autenticação (por exemplo, o token) do armazenamento local
     localStorage.removeItem("accessToken");
-
-    // Redirecionar para a página de login
     navegação("/Login");
   };
     return(
@@ -43,7 +39,7 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Lista" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
+                    <Link to="/AddAlunosNV" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
                         <span className={styles.icone}><VscMail /></span>
                         <span className={styles.titulo}>Enviar Mensagem</span>
                     </Link>

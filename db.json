@@ -1,54 +1,10 @@
 {
-  "Professor": [],
   "Mensagens": [
     {
-      "grupo": "TSI - P5",
-      "texto": "Bom dia pessoal, n tem aula",
-      "id": 1
-    }
-  ],
-  "Coordenador": [
-    {
-      "nome": "ota",
-      "email": "ota@gmail.com",
-      "senha": "ota",
-      "telefone": "982176732",
-      "disciplina": "CD",
-      "registroTrabalho": "segunda...sexta.",
-      "id": 1
-    }
-  ],
-  "Alunos": [
-    {
-      "nome": "joao",
-      "email": "joao@gmail.com",
-      "senha": "joao",
-      "telefone": "982176732",
-      "matricula": 9854387543,
-      "id": 1
-    },
-    {
-      "nome": "joao2",
-      "email": "joao@gmail.com",
-      "senha": "joao",
-      "telefone": "982176732",
-      "matricula": 9854387543,
-      "id": 2
-    },
-    {
-      "nome": "joao3",
-      "email": "joao@gmail.com",
-      "senha": "joao",
-      "telefone": "982176732",
-      "matricula": 9854387543,
-      "id": 3
-    }
-  ],
-  "Cursos": [
-    {
-      "nome": "TSI",
-      "instituicao": "IFPB",
-      "id": 1
+          "number": 5583993035187,
+          "message": "iae boe",
+          "file": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ifpb.edu.br%2Fnoticias%2F2019%2F05%2Fconselho-superior-convoca-para-reuniao-ordinaria%2Flogo-ifpb-vertical.png%2Fview&psig=AOvVaw1-Jd8PUMll9Co87HAvk1Me&ust=1696992895373000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCIix4K696oEDFQAAAAAdAAAAABAE",
+          "caption": "O conexaoIF funcionou"
     }
   ]
 }

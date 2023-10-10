@@ -1,5 +1,5 @@
 import SideBar from "../utils/SideBar";
-import styles from '../styles/GruposUser.module.css'
+import styles from './styles/GruposUser.module.css'
 import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
 import React, { useEffect, useState } from "react";

@@ -1,4 +1,4 @@
-import styles from '../styles/AdicionarAlunos.module.css';
+import styles from './styles/AdicionarAlunos.module.css';
 import React, { useEffect, useState } from "react";
 import SideBar from "../utils/SideBar";
 import axios from "axios";

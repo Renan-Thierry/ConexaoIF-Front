@@ -1,4 +1,4 @@
-import styles from '../styles/Tables.module.css';
+import styles from './styles/Tables.module.css';
 import React, { useEffect, useState } from 'react';
 import AdminNavBar from "../utils/AdminNavBar";
 import axios from 'axios';

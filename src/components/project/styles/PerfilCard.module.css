@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+:root {
+    --bg-color: rgb(18, 18, 20);
+    --color: rgb(225, 225, 230);
+    --corPadrao: #03A64A;
+}
+.cardPerfil {
+    width: 380px;
+    height: 520px;
+    display: flex;
+    margin-top: 50px;
+    margin-left: 40px;
+    flex-direction: column;
+    background-color: rgb(32, 32, 36);
+    align-items: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.479);
+    border-radius: 10px;
+}
+.cardPerfil > img {
+    width: 100px;
+    height: 100px;
+    margin-top: 30px;
+    border-radius: 50%;
+    border: 5px solid var(--corPadrao);
+}
+.cardPerfil > h4 {
+    color: var(--color);
+    font-size: 1.2em;
+    font-weight: 300;
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+.cardPerfil > .card_Information {
+    width: 90%;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    border-radius: 8px;
+    background-color: rgb(41, 41, 46);
+}
+.card_Information > p {
+    width: 100%;
+    text-align: left;
+    color: var(--color);
+    margin-bottom: 8px;
+    font-size: .9em;
+}
+.card_Information svg {
+    width: 40px;
+    font-size: 1.4em;
+}
+.cardPerfil span {
+    color: var(--color);
+    font-weight: bolder;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+.btn_CardPerfil {
+    margin: auto;
+}
+.btn_CardPerfil > button {
+    width: 120px;
+    height: 40px;
+    margin: 20px;
+    border-radius: 5px;
+    color: var(--color);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.479);
+}
+.btn1 {
+    background-color: var(--corPadrao);
+    font-size: 1.2em;
+    border: none;
+    transition: all 0.2s;
+}
+.btn1:hover {
+    background-color: #1b884a;
+    transform: scale(1.04);
+}
+.btn2 {
+    background-color: rgb(209, 23, 23);
+    font-size: 1.2em;
+    border: none;
+    transition: all 0.2s;
+}
+.btn2:hover {
+    transform: scale(1.04);
+}
+

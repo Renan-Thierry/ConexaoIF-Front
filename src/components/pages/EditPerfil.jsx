@@ -1,20 +1,16 @@
-import styles from '../styles/EditPerfil.module.css';
+import styles from './styles/EditPerfil.module.css';
 import React, { useEffect, useState } from "react";
 import SideBar from "../utils/SideBar";
 import axios from "axios";
-import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-
+import PerfilCard from '../project/PerfilCard';
 
 function EditPerfil() {
   const navegação = useNavigate();
   const [coordenadores, setCoordenadores] = useState([]);
   const [editCoordenadoresId, setEditCoordenadoresId] = useState(null);
   const [editCoordenadoresDados, setEditCoordenadoresDados] = useState({});
-    // eslint-disable-next-line
-  const [filtroCoordenador, setFiltroCoordenador] = useState("");
   const [cursos, setCursos] = useState([]);
-      // eslint-disable-next-line
   const [mensagemErro, setMensagemErro] = useState('');
 
   useEffect(() => {
@@ -26,8 +22,7 @@ function EditPerfil() {
   }, [navegação]);
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:5000/api/curso")
+    axios.get("http://127.0.0.1:5000/api/curso")
       .then((response) => setCursos(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -64,8 +59,11 @@ function EditPerfil() {
   };
 
   const saveEditCoordenador = () => {
-    axios
-      .put(`http://127.0.0.1:5000/api/coordenador/${editCoordenadoresId}`, editCoordenadoresDados)
+    if (!editCoordenadoresDados.nome || !editCoordenadoresDados.email || !editCoordenadoresDados.senha || !editCoordenadoresDados.telefone || !editCoordenadoresDados.disciplina || !editCoordenadoresDados.registrodeTrabalho || !editCoordenadoresDados.curso) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }else{
+    axios.put(`http://127.0.0.1:5000/api/coordenador/${editCoordenadoresId}`, editCoordenadoresDados)
       .then((response) => {
         const updatedCoordenadores = coordenadores.map((coordenador) => {
           if (coordenador.id === editCoordenadoresId) {
@@ -75,7 +73,6 @@ function EditPerfil() {
         });
         setCoordenadores(updatedCoordenadores);
         setEditCoordenadoresId(null);
-        window.location.reload();
       })
       .catch((error) => {
         if (error.response && error.response.data && error.response.data.message) {
@@ -84,58 +81,42 @@ function EditPerfil() {
           console.log(error);
           alert('Email ou Senha já existentes');
         }
-      });
+      });}
   };
-  
-  const filtro_coordenador = coordenadores.filter((coordenador) =>
-    coordenador.nome && coordenador.nome.toLowerCase().includes(filtroCoordenador.toLowerCase())
-  );
   
   return (
     <>
       <SideBar />
           <main className={styles.conteudo}>
-            <h1>Coordenador</h1>
+            <h1 className={styles.texto_header}>Coordenadores</h1>
             {editCoordenadoresId ? (
               <div className={styles.editForm}>
-              <h1>Editar Perfil</h1>
-                <div className={styles.formGroup}>
+              <h2>Editar Perfil</h2>
+                <form className={styles.formGroup}>
                   <label>Nome:</label>
                   <input type="text" value={editCoordenadoresDados.nome} onChange={(e) => {
                       const nomeSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
                       setEditCoordenadoresDados({ ...editCoordenadoresDados, nome: nomeSemEspacosEspeciais })}} required />
-                </div>
-                <div className={styles.formGroup}>
                   <label>Email:</label>
                   <input type="email" value={editCoordenadoresDados.email} onChange={(e) => {
                       const emailSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9@.]/g, ''); 
                       setEditCoordenadoresDados({ ...editCoordenadoresDados, email: emailSemEspacosEspeciais })}} required />
-                </div>
-                <div className={styles.formGroup}>
                   <label>Senha:</label>
                   <input type="password" value={editCoordenadoresDados.senha} onChange={(e) => {
                       const senhaSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9@.!]/g, ''); 
                       setEditCoordenadoresDados({ ...editCoordenadoresDados, senha: senhaSemEspacosEspeciais })}} required />
-                </div>
-                <div className={styles.formGroup}>
                   <label>Telefone:</label>
                   <input type="number" value={editCoordenadoresDados.telefone} onChange={(e) => {
                       const telefoneSemEspacosEspeciais = e.target.value.replace(/[^0-9]/g, '');
                       setEditCoordenadoresDados({ ...editCoordenadoresDados, telefone: telefoneSemEspacosEspeciais })}} required />
-                </div>
-                <div className={styles.formGroup}>
                   <label>Disciplina:</label>
                   <input type="text" value={editCoordenadoresDados.disciplina} onChange={(e) => {
-                      const disciplinaSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+                      const disciplinaSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, ' ');
                       setEditCoordenadoresDados({ ...editCoordenadoresDados, disciplina: disciplinaSemEspacosEspeciais })}} required />
-                </div>
-                <div className={styles.formGroup}>
                   <label>Registro de Trabalho:</label>
                   <input type="text" value={editCoordenadoresDados.registrodeTrabalho} onChange={(e) => {
                       const registroSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
                       setEditCoordenadoresDados({ ...editCoordenadoresDados, registrodeTrabalho: registroSemEspacosEspeciais })}} required />
-                </div>
-                <div className={styles.formGroup}>
                   <label>Curso:</label>
                   <select value={editCoordenadoresDados.curso.id} onChange={(e) =>
                       setEditCoordenadoresDados({...editCoordenadoresDados, curso: { id: e.target.value }})}>
@@ -146,51 +127,20 @@ function EditPerfil() {
                       </option>
                     ))}
                   </select>
-                </div>
                 <button onClick={saveEditCoordenador}>Salvar</button>
                 {mensagemErro && <p>{mensagemErro}</p>}
+                </form>
               </div>
             ) : (
-              <section className={styles.section_tabela}>
-                <table className={styles.table} >
-                  <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Nome</th>
-                      <th>Email</th>
-                      <th>Senha</th>
-                      <th>Telefone</th>
-                      <th>Disciplina</th>
-                      <th>Registro de trabalho</th> 
-                      <th>Curso</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filtro_coordenador.map((coordenador) => {
-                      return (
-                        <tr key={coordenador.id}>
-                          <td>{coordenador.id}</td>
-                          <td>{coordenador.nome}</td>
-                          <td>{coordenador.email}</td>
-                          <td>{coordenador.senha}</td>
-                          <td>{coordenador.telefone}</td>
-                          <td>{coordenador.disciplina}</td>
-                          <td>{coordenador.registrodeTrabalho}</td>
-                          <td>{coordenador.curso ? coordenador.curso.nome : ""}</td>
-                          <div className={styles.icones}>
-                            <button onClick={() => editCoordenador(coordenador.id)} className={styles.icone1}>
-                              <BsPencil />
-                            </button>
-                            <button onClick={() => removeCoordenador(coordenador.id)} className={styles.icone2}>
-                              <BsFillTrashFill />
-                            </button>
-                          </div>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </section>
+              <section className={styles.CardPerfil}>
+                {coordenadores.map((coordenador) => {
+                  return (
+                    <PerfilCard key={coordenador.id} nome={coordenador.nome} email={coordenador.email}
+                    telefone={coordenador.telefone} disciplina={coordenador.disciplina} rgTrabalho={coordenador.registrodeTrabalho} curso={coordenador.curso ? coordenador.curso.nome : ""}
+                    edit={() => editCoordenador(coordenador.id)} remove={() => removeCoordenador(coordenador.id)}/>
+                  )
+                  })}
+                </section>
             )}
           </main>
     </>

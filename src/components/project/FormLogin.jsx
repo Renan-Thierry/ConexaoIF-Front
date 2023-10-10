@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from '../styles/FormLogin.module.css'
+import styles from './styles/FormLogin.module.css'
 import axios from "axios";
 import { Link } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import FormLogin from '../project/FormLogin';
-import styles from '../styles/Login.module.css';
+import styles from './styles/Login.module.css';
 import logo from '../../img/connections.png'
 
 function Login(){

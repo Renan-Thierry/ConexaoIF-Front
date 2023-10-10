@@ -1,5 +1,5 @@
 import FormCadastro from "../project/FormCadastro";
-import styles from "../styles/Cadastro.module.css";
+import styles from "./styles/Cadastro.module.css";
 import logo from "../../img/connections.png"
 import { Link } from "react-router-dom";
 

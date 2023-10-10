@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/FormCadastro.module.css'
+import styles from './styles/FormCadastro.module.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -65,7 +65,7 @@ function FormCadastro() {
     <main className={styles.form_Cadastro}>
       <h2>Crie sua conta</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" maxLength="50" placeholder="Nome" name="nome" value={novoCoordenador.nome} onChange={handleChange} required/>
+        <input type="text" minLength="3" maxLength="50" placeholder="Nome" name="nome" value={novoCoordenador.nome} onChange={handleChange} required/>
         <input type="email" placeholder="Email" name="email" value={novoCoordenador.email} onChange={handleChange} required/>
         <input type="password" minLength="6" placeholder="Senha" name="senha" value={novoCoordenador.senha} onChange={handleChange} required/>
         <input type="number" minLength="14" placeholder="Telefone" name="telefone" value={novoCoordenador.telefone} onChange={handleChange} required/>

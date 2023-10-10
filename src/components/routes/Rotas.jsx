@@ -19,6 +19,7 @@ import EditPerfil from '../pages/EditPerfil';
 import AdicionarAlunos from '../pages/AdicionarAlunos';
 import Lista from '../pages/Lista';
 import AlunosConectados from '../pages/AlunosConectados';
+import AddAlunosNV from '../pages/AddAlunosNV';
 
 function Rotas() {
     return(
@@ -43,7 +44,10 @@ function Rotas() {
               <Route path="/GruposUser" element={<GruposUser />} />
               <Route path="/EditPerfil" element={<EditPerfil />} />
               <Route path="/AdicionarAlunos" element={<AdicionarAlunos />} />
+
               <Route path="/Lista" element={<Lista />} />
+              <Route path="/AddAlunosNV" element={<AddAlunosNV />} />
+              
               <Route path="/AlunosConectados" element={<AlunosConectados />} />
             </Routes>
           </Router>
