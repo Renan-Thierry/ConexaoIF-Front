@@ -8,9 +8,12 @@ import axios from "axios";
 
 function AddAlunosNV() {
     const [envioWhats, setEnvioWhats] = useState([]);
-    const [number, setNumber] = useState('');
-    const [message, setMessage] = useState('');
-    const [caption, seCaption] = useState('');
+    const [adcDados, setAdcDados] = useState({
+        "number": "",
+        "message": "",
+        "file": "",
+        "caption": ""
+    })
 
     useEffect(() => {
         fetch("http://localhost:5000/Mensagens", {method: 'GET',
@@ -23,15 +26,12 @@ function AddAlunosNV() {
         })
         }, [])
 
-    const addMsg = () => {
-        const adcDados = {number, message, caption}
-        fetch("http://localhost:5000/Mensagens", {method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-        .then((resp) => alert("Dados enviados"))
+    const addMsg = (mensagem) => {
+        axios.post("http://localhost:5000/Mensagens", mensagem)
+        .then((resp) => {
+            setEnvioWhats(...envioWhats, mensagem)
+        })
         .cath((err) => console.log(err))
-    })
     }
 
     return(
@@ -67,8 +67,7 @@ function AddAlunosNV() {
                     <textarea placeholder="Escreva Sua Mensagem..."></textarea>
                     <button onClick={addMsg}>Enviar</button>
                 </section>
-            </div>
-            
+            </div>    
         </main>
         </>
     )

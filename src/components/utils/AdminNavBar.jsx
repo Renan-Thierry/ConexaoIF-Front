@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from './AdminNavBar.module.css' 
+import styles from './styles/AdminNavBar.module.css' 
 import { Link } from "react-router-dom";
 import logo from '../../img/connections.png'
 

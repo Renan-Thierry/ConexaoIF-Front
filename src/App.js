@@ -1,4 +1,4 @@
-import Rotas from "./components/routes/Rotas";
+import Rotas from './components/routes/Rotas';
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import styles from './SideBar.module.css';
+import styles from './styles/SideBar.module.css';
 import logo from '../../img/connections.png';
 import { VscOrganization, VscSignOut, VscEdit, VscPersonAdd, VscMail, VscLinkExternal, VscInfo, VscAccount } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
@@ -39,7 +39,7 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/AddAlunosNV" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
+                    <Link to="/Lista" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
                         <span className={styles.icone}><VscMail /></span>
                         <span className={styles.titulo}>Enviar Mensagem</span>
                     </Link>

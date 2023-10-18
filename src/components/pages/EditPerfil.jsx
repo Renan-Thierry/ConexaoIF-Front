@@ -11,7 +11,6 @@ function EditPerfil() {
   const [editCoordenadoresId, setEditCoordenadoresId] = useState(null);
   const [editCoordenadoresDados, setEditCoordenadoresDados] = useState({});
   const [cursos, setCursos] = useState([]);
-  const [mensagemErro, setMensagemErro] = useState('');
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -128,7 +127,6 @@ function EditPerfil() {
                     ))}
                   </select>
                 <button onClick={saveEditCoordenador}>Salvar</button>
-                {mensagemErro && <p>{mensagemErro}</p>}
                 </form>
               </div>
             ) : (
