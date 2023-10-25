@@ -39,9 +39,12 @@
     font-size: 40px;
     color: #fff;
 }
-.item2{
-    margin-left: 3.5em;
-    font-size: 22px;
+.item {
+    display: flex;
+    align-items: center;
+}
+.btn_sair {
+    margin-right: .3em;
 }
 
 @media screen and (max-width: 768px) {

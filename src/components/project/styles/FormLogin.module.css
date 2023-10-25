@@ -67,6 +67,10 @@
     border-radius: 5px;
     border: 1px solid black;
 }
+.content_Form button:hover {
+    background-color: #1b884a;
+    transform: scale(1.04);
+}
 .content_Form hr {
     width: 70%;
     margin-top: 20px;
@@ -81,4 +85,8 @@
     width: 76%;
     margin-top: 20px;
     background-color: var(--corPadrao);
+}
+.content_Form .btn_Cadastro:hover {
+    background-color: #1b884a;
+    transform: scale(1.04);
 }

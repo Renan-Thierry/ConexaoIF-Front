@@ -39,7 +39,7 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Lista" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
+                    <Link to="/AddAlunosNV" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
                         <span className={styles.icone}><VscMail /></span>
                         <span className={styles.titulo}>Enviar Mensagem</span>
                     </Link>

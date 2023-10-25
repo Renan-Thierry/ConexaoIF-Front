@@ -18,6 +18,8 @@ function Home() {
                 </div>
                 <img src={logo2} alt='Imagem inicial'/>
             </section>
+            <section >
+            </section>
         </main>
         </>
     )

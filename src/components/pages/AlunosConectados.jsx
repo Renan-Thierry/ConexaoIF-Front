@@ -58,8 +58,7 @@ function AlunosConectados() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:5000/api/alunogrupo?_expand=aluno&_expand=grupo")
+    axios.get("http://127.0.0.1:5000/api/alunogrupo?_expand=aluno&_expand=grupo")
       .then((response) => {
         const data = response.data.map((alunoGrupo) => ({
           ...alunoGrupo,

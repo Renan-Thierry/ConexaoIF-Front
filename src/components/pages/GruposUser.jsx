@@ -4,9 +4,6 @@ import axios from "axios";
 import {BsPencil, BsFillTrashFill} from "react-icons/bs"
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from '../utils/Button';
-
-
 
 function GruposUser() {
     const navegação = useNavigate();
@@ -130,7 +127,7 @@ function GruposUser() {
               {!editGrupoId && (
                 <form className={styles.form_filtro}>
                 <input type="text" placeholder="Pesquisar" value={filtroGrupo} onChange={(e) => setFiltroGrupo(e.target.value)}/>
-                <Button text="Adicionar" onClick={adicionarGrupo}/>
+                <button text="Adicionar" onClick={adicionarGrupo}>Enviar</button>
               </form>
               )}
               {editGrupoId ? (

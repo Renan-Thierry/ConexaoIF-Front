@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from './styles/FormLogin.module.css'
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 function FormLogin() {
@@ -28,17 +29,36 @@ function FormLogin() {
   
       if (coordenadorEncontrado) {
         setAccessToken(response.data.access_token);
-        localStorage.setItem("accessToken", response.data.access_token); // Armazenar o token no armazenamento local
-        alert("Login feito com Sucesso");
+        localStorage.setItem("accessToken", response.data.access_token);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          background: 'rgb(18, 18, 20)',
+          color: '#fff',
+          title: 'Login realizado com sucesso!',
+          showConfirmButton: false,
+          timer: 2000
+        })
         navegação("/EditPerfil");
       } else {
-        // Usuários que não sejam coordenadores
-        alert("Usuário sem permissão");
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Usuario sem permissão!',
+            background: 'rgb(18, 18, 20)',
+            color: '#fff'
+          })
       }
       
     })
     .catch((error) => {
-      alert("Usuário e senha incorretos");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Usuario e Senha Incorretos!',
+        background: 'rgb(18, 18, 20)',
+        color: '#fff'
+      })
     });
 };
   useEffect(() => {

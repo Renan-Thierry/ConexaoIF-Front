@@ -1,44 +1,49 @@
 import SideBar from "../utils/SideBar";
 import styles from "../pages/styles/AdicionarAlunosNV.module.css";
 import logo1 from "../../img/google-mail-gmail-icon-logo-symbol-free-png.webp";
-import logo2 from "../../img/download.png";
+import logo2 from "../../img/dow.png";
 import logo3 from "../../img/pngtree-whatsapp-icon-png-image_6315990.png"
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 function AddAlunosNV() {
     const [envioWhats, setEnvioWhats] = useState([]);
     const [adcDados, setAdcDados] = useState({
         "number": "",
         "message": "",
-        "file": "",
-        "caption": ""
-    })
+    });
+    const [whatsSelect, setWhatsSelect] = useState(false);
 
-    useEffect(() => {
-        fetch("http://localhost:5000/Mensagens", {method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }})
-        .then(resp => resp.json())
-        .then((data) => {
-            setEnvioWhats(data)
-        })
-        }, [])
-
-    const addMsg = (mensagem) => {
-        axios.post("http://localhost:5000/Mensagens", mensagem)
-        .then((resp) => {
-            setEnvioWhats(...envioWhats, mensagem)
-        })
-        .cath((err) => console.log(err))
-    }
+        const addMsgWhatsapp = () => {
+            fetch("http://localhost:3001/Mensagens", {method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }, body: JSON.stringify(adcDados),
+            })
+            .then((resp) => {
+                return resp.json()
+            })
+            .then((data) => {
+                setEnvioWhats([...envioWhats, adcDados]);
+                setAdcDados({
+                    "number": "",
+                    "message": "",
+                });
+            })
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                background: 'rgb(18, 18, 20)',
+                color: '#fff',
+                title: 'Mensagem enviada Com Sucesso!',
+                showConfirmButton: false,
+                timer: 2000
+              })}
 
     return(
         <>
         <SideBar />
         <main className={styles.main_content}>
-        {console.log(envioWhats)}
             <h1>Enviar Mensagens</h1>
             <div className={styles.AddAlunos_conteudo}>
                 <section className={styles.sessao1}>
@@ -53,19 +58,26 @@ function AddAlunosNV() {
                         </div>
                         <div>
                             <label htmlFor="check3"><img src={logo3} alt="icone-whatsapp" width="50px"/></label>
-                            <input id="check3" type="checkbox" />
+                            <input id="check3" type="checkbox" checked={whatsSelect} onChange={() => setWhatsSelect(!whatsSelect)}/>
                         </div>
                     </div>
-
                     <h2>Envio de Mensagens(Multiplos Alunos):</h2>
                     <input type="file" id="file"/>
                 <h2>Envio de Mensagem(Aluno Unico):</h2>
-                <input type="number" placeholder="DDD + NUMERO"/>
+                <input type="number" placeholder="DDD + NUMERO" value={adcDados.number} onChange={(e) => setAdcDados({ ...adcDados, number: e.target.value })}/>
+                {whatsSelect && (
+                    <>
+                    <h2>Escanear QrCode:</h2>
+                    <button>
+                        <a href="http://localhost:8000/" target="_blank" without rel="noreferrer">Clique aki</a>
+                    </button>
+                    </>
+                )}
                 </section>
                 <section className={styles.sessao2}>
                     <h2>Digite sua Mensagem:</h2>
-                    <textarea placeholder="Escreva Sua Mensagem..."></textarea>
-                    <button onClick={addMsg}>Enviar</button>
+                    <textarea placeholder="Escreva Sua Mensagem..." value={adcDados.message} onChange={(e) => setAdcDados({ ...adcDados, message: e.target.value })}></textarea>
+                    <button onClick={addMsgWhatsapp}>Enviar</button>
                 </section>
             </div>    
         </main>

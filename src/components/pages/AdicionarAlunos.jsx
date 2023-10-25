@@ -4,7 +4,8 @@ import SideBar from "../utils/SideBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
-import AlunoCard from "../project/AlunoCard"
+import AlunoCard from "../project/AlunoCard";
+import Swal from 'sweetalert2';
 
 function Alunos() { 
   const navegação = useNavigate();
@@ -95,7 +96,23 @@ function Alunos() {
     axios.delete(`http://127.0.0.1:5000/api/aluno/${id}`)
     .then((response) => {
       const AttListaAlunos = alunos.filter((aluno) => aluno.id !== id);
-      setAlunos(AttListaAlunos);
+      Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Se voce apagar não tem mais volta!",
+        icon: 'Cuidado!',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, deletar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deletado!',
+            'O aluno foi apagado com sucesso',
+            'success'
+          )}
+        setAlunos(AttListaAlunos);
+      })
       })
     .catch((error) => console.log(error));
   };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './styles/FormCadastro.module.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function FormCadastro() {
   const [cursos, setCursos] = useState([]);
@@ -26,12 +27,26 @@ function FormCadastro() {
         console.log(response.data);
         setAccessToken(response.data.access_token);
         localStorage.setItem("accessToken", response.data.access_token); 
-        alert('Cadastro feito com sucesso');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          background: 'rgb(18, 18, 20)',
+          color: '#fff',
+          title: 'Cadastro realizado com sucesso!',
+          showConfirmButton: false,
+          timer: 2000
+        })
         navigate('/EditPerfil');
       })
       .catch((error) => {
         if (error.response && error.response.data && error.response.data.message) {
-          alert(error.response.data.message);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Usuario e Senha ja existentes!',
+            background: 'rgb(18, 18, 20)',
+            color: '#fff'
+          })
         } else {
           console.log(error);
         }

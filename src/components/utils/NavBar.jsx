@@ -1,7 +1,7 @@
 import styles from './styles/NavBar.module.css';
 import { Link } from 'react-router-dom';
 import logo from '../../img/connections.png';
-import { VscSignIn } from "react-icons/vsc";
+import { VscAccount } from "react-icons/vsc";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useState } from 'react';
 
@@ -32,7 +32,7 @@ function NavBar () {
                           <Link to="/" className={styles.item} style={{ color: 'inherit' }}>Sobre</Link>
                         </li>
                         <li>
-                          <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}><VscSignIn className={styles.btn_sair}/></Link>
+                          <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}><VscAccount className={styles.btn_sair}/>Entrar</Link>
                         </li>
                         <li>
                         </li>

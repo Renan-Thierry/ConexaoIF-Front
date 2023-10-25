@@ -62,3 +62,7 @@
     border-radius: 5px;
     border: 1px solid black;
 }
+.form_Cadastro button:hover {
+    background-color: #1b884a;
+    transform: scale(1.04);
+}
