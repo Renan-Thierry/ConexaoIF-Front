@@ -1,5 +1,5 @@
 import styles from './styles/Home.module.css'
-import logo2 from '../../img/www.gif'
+import logo2 from '../../img/Connected world-cuate.png'
 import { Link } from 'react-router-dom'
 import NavBar from '../utils/NavBar';
 

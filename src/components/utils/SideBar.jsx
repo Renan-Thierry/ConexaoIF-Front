@@ -13,7 +13,6 @@ function SideBar() {
     return(
         <div className={styles.SideBar}>
             <ul>
-                
                 <li className={styles.logo}>
                     <Link to="/" style={{ color: 'inherit' }}>
                         <span className={styles.icone}><img src={logo} alt='Logo do site' width='30px'/></span>
@@ -39,21 +38,21 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/AddAlunosNV" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
+                    <Link to="/EnvioDeMensagem" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
                         <span className={styles.icone}><VscMail /></span>
                         <span className={styles.titulo}>Enviar Mensagem</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/AlunosConectados" style={{ color: 'inherit' }}>       {/*to="/AlunosConectados"*/}
+                    <Link to="/AlunosConectados2" style={{ color: 'inherit' }}>       {/*to="/AlunosConectados"*/}
                         <span className={styles.icone}><VscLinkExternal /></span>
                         <span className={styles.titulo}>Alunos Conectados</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Sobre" style={{ color: 'inherit' }}>        {/*to="/Sobre*/}
+                    <Link to="/Ajuda" style={{ color: 'inherit' }}>        {/*to="/Sobre*/}
                         <span className={styles.icone}><VscInfo /></span>
-                        <span className={styles.titulo}>Sobre</span>
+                        <span className={styles.titulo}>Guia De Usuario</span>
                     </Link>
                 </li>
                 

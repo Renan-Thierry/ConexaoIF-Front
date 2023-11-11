@@ -80,8 +80,7 @@ function Alunos() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:5000/api/curso")
+    axios.get("http://127.0.0.1:5000/api/curso")
       .then((response) => setCursos(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -110,8 +109,11 @@ function Alunos() {
             'Deletado!',
             'O aluno foi apagado com sucesso',
             'success'
-          )}
-        setAlunos(AttListaAlunos);
+          )
+          setAlunos(AttListaAlunos)};
+        if(result.isDismissed){
+          navegação("/AdicionarAlunos")
+        }
       })
       })
     .catch((error) => console.log(error));
@@ -173,7 +175,7 @@ function Alunos() {
               <h2>Editar Aluno</h2>
                 <label>Nome:</label>
                 <input type="text" value={editAlunosDados.nome} onChange={(e) => {
-                  const nomeSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+                  const nomeSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, ' ');
                 setEditAlunosDados({ ...editAlunosDados, nome: nomeSemEspacosEspeciais })}} required/>
                 <label>Email:</label>
                 <input type="email" minLength="3" value={editAlunosDados.email} onChange={(e) => {

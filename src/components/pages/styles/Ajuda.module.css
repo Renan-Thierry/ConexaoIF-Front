@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+:root {
+    --bg-color: rgb(18, 18, 20);
+    --color: rgb(225, 225, 230);
+    --corPadrao: #03A64A;
+}
+.conteudo_Ajuda {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.conteudo_Ajuda > .titulo_Ajuda {
+  width: 100%;
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  padding: 15px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.479);
+}
+.conteudo_Ajuda > .sessao {
+  width: 100%;
+  height: 400px;
+  padding: 10px 100px;
+  color: var(--color);
+}
+.sessao > h1{
+  display: flex;
+  align-items: center;
+  font-size: 2.5em;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.sessao div{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 10%;
+}
+.sessao div > img {
+  width: 520px;
+  height: 280px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.479);
+}
+.sessao div > p {
+  width: 700px;
+}
+.conteudo_Ajuda > .sessao2 {
+  width: 100%;
+  height: 400px;
+  padding: 10px 100px;
+  color: var(--color);
+}
+.sessao2 > h1{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  font-size: 2.5em;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.sessao2 div{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 10%;
+}
+.sessao2 div > img {
+  width: 520px;
+  height: 280px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.479);
+}
+.sessao2 div > p {
+  width: 700px;
+}

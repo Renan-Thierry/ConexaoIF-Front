@@ -1,35 +1,7 @@
 {
   "Mensagens": [
     {
-      "id": 1,
-      "number": 5583993035187,
-      "message": "iae boe"
-    },
-    {
-      "number": "9834287432",
-      "message": "ola meu mano",
-      "id": 2
-    },
-    {
-      "number": "",
-      "message": "",
-      "id": 3
-    },
-    {
-      "{\"number\":\"874534543\",\"message\":\"pegou boy\"}": "",
-      "id": 4
-    },
-    {
-      "{\"number\":\"9832541732\",\"message\":\"iae boeee, morro asfalto desfilando de playboy\"}": "",
-      "id": 5
-    },
-    {
-      "{\"number\":\"8758346732\",\"message\":\"ola, eu enviei essa!\"}": "",
-      "id": 6
-    },
-    {
-      "{\"number\":\"847567343\",\"message\":\"iae\"}": "",
-      "id": 7
+      "id": 1
     }
   ]
 }

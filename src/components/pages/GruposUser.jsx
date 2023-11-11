@@ -133,42 +133,14 @@ function GruposUser() {
               {editGrupoId ? (
                 <div className={styles.editForm}>
                   <form  onSubmit={saveEditGrupo}>
-
-                  <div className={styles.formGroup}>
-                  <label>Título:</label>
-                  <input
-                    type="text"
-                    value={editGruposDados.titulo}
-                    onChange={(e) => setEditGruposDados({ ...editGruposDados, titulo: e.target.value })}
-                    required
-                  /></div>
-                  <div className={styles.formGroup}>
-                  <label>Link:</label>
-                  <input
-                    type="text"
-                    value={editGruposDados.link}
-                    onChange={(e) => setEditGruposDados({ ...editGruposDados, link: e.target.value })}
-                    required
-                  /></div>
-                  <div className={styles.formGroup}>
-                  <label>Mensagem:</label>
-                  <textarea
-                    type="text"
-                    value={editGruposDados.mensagem}
-                    onChange={(e) => setEditGruposDados({ ...editGruposDados, mensagem: e.target.value })}
-                    required
-                  /></div>
-                  <div className={styles.formGroup}>
-                  <label>Período:</label>
-                  <select
-                    value={editGruposDados.periodo.id}
-                    onChange={(e) =>
-                      setEditGruposDados({
-                        ...editGruposDados,
-                        periodo: { id: e.target.value }
-                      })
-                    }
-                  >
+                    <label>Título:</label>
+                    <input type="text" value={editGruposDados.titulo} onChange={(e) => setEditGruposDados({ ...editGruposDados, titulo: e.target.value })} required />
+                    <label>Link:</label>
+                    <input type="text" value={editGruposDados.link} onChange={(e) => setEditGruposDados({ ...editGruposDados, link: e.target.value })} required />
+                    <label>Mensagem:</label>
+                    <textarea type="text" value={editGruposDados.mensagem} onChange={(e) => setEditGruposDados({ ...editGruposDados, mensagem: e.target.value })} required />
+                    <label>Período:</label>
+                    <select value={editGruposDados.periodo.id} onChange={(e) => setEditGruposDados({...editGruposDados,periodo: { id: e.target.value }})}>
                     <option value="">Selecione um periodo</option>
                     {periodos.map((periodo) => (
                       <option key={periodo.id} value={periodo.id}>
@@ -176,18 +148,8 @@ function GruposUser() {
                       </option>
                     ))}
                   </select>
-                </div>
-                  <div className={styles.formGroup}>
                     <label>Coordenador:</label>
-                    <select
-                      value={editGruposDados.coordenador.id}
-                      onChange={(e) =>
-                        setEditGruposDados({
-                          ...editGruposDados,
-                          coordenador: { id: e.target.value }
-                        })
-                      }
-                    >
+                    <select value={editGruposDados.coordenador.id} onChange={(e) => setEditGruposDados({...editGruposDados, coordenador: { id: e.target.value }})}>
                       <option value="">Selecione um coordenador</option>
                       {coordenadores.map((coordenador) => (
                         <option key={coordenador.id} value={coordenador.id}>
@@ -195,7 +157,6 @@ function GruposUser() {
                         </option>
                       ))}
                     </select>
-                  </div>
                   <button type="submit">Salvar</button>
                   </form>
                 </div>
@@ -204,12 +165,12 @@ function GruposUser() {
                 <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>TÍTULO</th>
-                      <th>LINK</th>
-                      <th>MENSAGEM</th>
-                      <th>PERÍODO</th>
-                      <th>COORDENADOR</th>
+                      <th>Id</th>
+                      <th>Titulo</th>
+                      <th>Link</th>
+                      <th>Mensagem</th>
+                      <th>Periodo</th>
+                      <th>Coordenador</th>
                     </tr>
                   </thead>
                   <tbody>

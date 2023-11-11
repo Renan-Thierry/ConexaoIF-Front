@@ -1,23 +1,23 @@
-import SideBar from "../utils/SideBar";
 import styles from  './styles/Sobre.module.css'
 import {FaGithub} from 'react-icons/fa'
 import { useNavigate } from "react-router-dom";
 import React, { useEffect} from "react";
+import NavBar from "../utils/NavBar";
 
 function Sobre() {
-    const navegação = useNavigate();
-    useEffect(() => {
-        const accessToken = localStorage.getItem("accessToken");
+    // const navegação = useNavigate();
+    // useEffect(() => {
+    //     const accessToken = localStorage.getItem("accessToken");
       
-        if (!accessToken) {
-          navegação("/Sobre");
-        } 
+    //     if (!accessToken) {
+    //       //navegação("/Sobre");
+    //     } 
   
-      }, [navegação]);
+    //   }, [navegação]);
 
     return(
         <>
-        <SideBar />
+        <NavBar />
         <div className={styles.conteudo_pgn}>
         <div className={styles.conteudo_edit}>
             <h1>Sobre o Projeto</h1>

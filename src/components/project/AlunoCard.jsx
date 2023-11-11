@@ -1,5 +1,5 @@
 import styles from "./styles/AlunoCard.module.css";
-import AlunoIcone from "../../img/AlunoCardIcone.png";
+import AlunoIcone from "../../img/blog_mini_4.jpg";
 import { HiOutlineTerminal, HiOutlineMail,  HiOutlineAcademicCap } from "react-icons/hi";
 import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 

@@ -22,7 +22,6 @@ function AlunosConectados() {
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
-
     if (!accessToken) {
       navegação('/Login');
     }
@@ -31,8 +30,7 @@ function AlunosConectados() {
   const cadastrarAlunoGrupo = () => {
     novoAlunoGrupo.aluno_id = alunoId;
     novoAlunoGrupo.grupo_id = grupoId;
-    axios
-      .post("http://127.0.0.1:5000/api/alunogrupo", novoAlunoGrupo)
+    axios.post("http://127.0.0.1:5000/api/alunogrupo", novoAlunoGrupo)
       .then((response) => {
         setModoEdicao(false);
         window.location.reload();
@@ -47,12 +45,10 @@ function AlunosConectados() {
   };
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:5000/api/aluno")
+    axios.get("http://127.0.0.1:5000/api/aluno")
       .then((response) => setAlunos(response.data))
       .catch((error) => console.log(error));
-    axios
-      .get("http://127.0.0.1:5000/api/grupo")
+    axios.get("http://127.0.0.1:5000/api/grupo")
       .then((response) => setGrupos(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -70,8 +66,7 @@ function AlunosConectados() {
   }, []);
 
   const removeAlunoGrupo = (id) => {
-    axios
-      .delete(`http://127.0.0.1:5000/api/alunogrupo/${id}`)
+    axios.delete(`http://127.0.0.1:5000/api/alunogrupo/${id}`)
       .then((response) => {
         const updatedAlunosGrupo = alunosGrupo.filter((alunoGrupo) => alunoGrupo.id !== id);
         setAlunosGrupo(updatedAlunosGrupo);
@@ -92,7 +87,6 @@ function AlunosConectados() {
     )
   );
 
-
   const adicionarAlunoGrupo = () => {
     setModoEdicao(true);
     setMensagemErro("");
@@ -100,8 +94,7 @@ function AlunosConectados() {
 
   const fetchPeriodAndCourse = (alunoGrupo) => {
     if (alunoGrupo.aluno && alunoGrupo.aluno.periodo_id && alunoGrupo.aluno.curso_id) {
-      axios
-        .get(`http://127.0.0.1:5000/api/periodo/${alunoGrupo.aluno.periodo_id}`)
+      axios.get(`http://127.0.0.1:5000/api/periodo/${alunoGrupo.aluno.periodo_id}`)
         .then((response) => {
           const periodo = response.data;
           alunoGrupo.aluno.periodo = periodo;
@@ -109,8 +102,7 @@ function AlunosConectados() {
         })
         .catch((error) => console.log(error));
       
-      axios
-        .get(`http://127.0.0.1:5000/api/curso/${alunoGrupo.aluno.curso_id}`)
+      axios.get(`http://127.0.0.1:5000/api/curso/${alunoGrupo.aluno.curso_id}`)
         .then((response) => {
           const curso = response.data;
           alunoGrupo.aluno.curso = curso;
@@ -131,26 +123,21 @@ function AlunosConectados() {
             <h1>Alunos Conectados</h1>
             {!modoEdicao && (
               <form className={styles.form_filtro}>
-              <input
-                type="text"
-                placeholder="id/nome do grupo/nome do aluno"
-                value={filtroAlunoGrupo}
-                onChange={(e) => setFiltroAlunoGrupo(e.target.value)}
-              />
-            <button onClick={adicionarAlunoGrupo} style={{ visibility: 'hidden' }}></button>
+                <input type="text" placeholder="id/nome do grupo/nome do aluno" value={filtroAlunoGrupo} onChange={(e) => setFiltroAlunoGrupo(e.target.value)}/>
+                <button onClick={adicionarAlunoGrupo} style={{ visibility: 'hidden' }}></button>
             </form>
             )}
             <section className={styles.section_tabela}>
               <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>ALUNO</th>
-                    <th>PERÍODO</th>
-                    <th>ID DO ALUNO</th>
-                    <th>ID DO GRUPO</th>
-                    <th> TÍTULO DO GRUPO</th>
-                    <th>CURSO</th>
+                    <th>Id</th>
+                    <th>Aluno</th>
+                    <th>Periodo</th>
+                    <th>Id do aluno</th>
+                    <th>Id do grupo</th>
+                    <th> Titulo do grupo</th>
+                    <th>Curso</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -178,11 +165,7 @@ function AlunosConectados() {
                 <div className={styles.editForm}>
                   <div className={styles.formGroup}>
                     <label>Aluno:</label>
-                    <select
-                      value={novoAlunoGrupo.aluno_id || ""}
-                      onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, aluno_id: e.target.value })}
-                      required
-                    >
+                    <select value={novoAlunoGrupo.aluno_id || ""} onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, aluno_id: e.target.value })} required >
                       <option value="">Selecione um aluno</option>
                       {alunos.map((aluno) => (
                         <option key={aluno.id} value={aluno.id}>
@@ -193,11 +176,7 @@ function AlunosConectados() {
                   </div>
                   <div className={styles.formGroup}>
                     <label>Grupo:</label>
-                    <select
-                      value={novoAlunoGrupo.grupo_id || ""}
-                      onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, grupo_id: e.target.value })}
-                      required
-                    >
+                    <select value={novoAlunoGrupo.grupo_id || ""} onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, grupo_id: e.target.value })} required >
                       <option value="">Selecione um grupo</option>
                       {grupos.map((grupo) => (
                         <option key={grupo.id} value={grupo.id}>
@@ -208,7 +187,6 @@ function AlunosConectados() {
                   </div>
                   <button onClick={cadastrarAlunoGrupo}>Cadastrar</button>
                   {mensagemErro && <p>{mensagemErro.mensagem}</p>}
-
                 </div>
               ) : null}
             </section>

@@ -26,10 +26,10 @@ function NavBar () {
                           <Link to="/" className={styles.item} style={{ color: 'inherit' }}>Home</Link>
                         </li>
                         <li>
-                          <Link to="/" className={styles.item} style={{ color: 'inherit' }}>Vantagens</Link>
+                          <Link to="/Serviços" className={styles.item} style={{ color: 'inherit' }}>Serviços</Link>
                         </li>
                         <li>
-                          <Link to="/" className={styles.item} style={{ color: 'inherit' }}>Sobre</Link>
+                          <Link to="/Sobre" className={styles.item} style={{ color: 'inherit' }}>Sobre</Link>
                         </li>
                         <li>
                           <Link to="/Login" className={`${styles.item} ${styles.item2}`} style={{ color: 'inherit' }}><VscAccount className={styles.btn_sair}/>Entrar</Link>

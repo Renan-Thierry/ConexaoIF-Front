@@ -57,7 +57,7 @@ function FormLogin() {
         title: 'Oops...',
         text: 'Usuario e Senha Incorretos!',
         background: 'rgb(18, 18, 20)',
-        color: '#fff'
+        color: '#fff',
       })
     });
 };
