@@ -19,7 +19,6 @@ import EditPerfil from '../pages/EditPerfil';
 import AdicionarAlunos from '../pages/AdicionarAlunos';
 import Lista from '../pages/Lista';
 import AlunosConectados from '../pages/AlunosConectados';
-import AlunosConectados2 from '../pages/AlunosConectados';
 import EnvioDeMensagem from '../pages/EnvioDeMensagem';
 import Servicos from '../pages/Servicos';
 import Ajuda from '../pages/Ajuda';
@@ -54,7 +53,6 @@ function Rotas() {
               <Route path="/EnvioDeMensagem" element={<EnvioDeMensagem />} />
               
               <Route path="/AlunosConectados" element={<AlunosConectados />} />
-              <Route path="/AlunosConectados2" element={<AlunosConectados2 />} />
             </Routes>
           </Router>
         </div>

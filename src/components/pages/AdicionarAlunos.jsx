@@ -92,32 +92,37 @@ function Alunos() {
   }, []);
 
   const removeAluno = (id) => {
-    axios.delete(`http://127.0.0.1:5000/api/aluno/${id}`)
-    .then((response) => {
-      const AttListaAlunos = alunos.filter((aluno) => aluno.id !== id);
-      Swal.fire({
-        title: 'Você tem certeza?',
-        text: "Se voce apagar não tem mais volta!",
-        icon: 'Cuidado!',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, deletar!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Deletado!',
-            'O aluno foi apagado com sucesso',
-            'success'
-          )
-          setAlunos(AttListaAlunos)};
-        if(result.isDismissed){
-          navegação("/AdicionarAlunos")
-        }
-      })
-      })
-    .catch((error) => console.log(error));
-  };
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Se você apagar não tem mais volta!',
+      icon: 'Cuidado!',
+      showCancelButton: true,
+      confirmButtonColor: '#03A64A',
+      color: '#FFF',
+      background: 'rgb(32, 32, 36)',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, deletar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://127.0.0.1:5000/api/aluno/${id}`)
+          .then((response) => {
+            const AttListaAlunos = alunos.filter((aluno) => aluno.id !== id);
+            Swal.fire({
+              title: 'Deletado!',
+              text: 'O aluno foi apagado com sucesso',
+              icon: 'success',
+              confirmButtonColor: '#03A64A',
+              color: '#FFF',
+              background: 'rgb(32, 32, 36)',
+            });
+            setAlunos(AttListaAlunos);
+          })
+          .catch((error) => console.log(error));
+      } else if (result.isDismissed) {
+        navegação("/AdicionarAlunos");
+      }
+    });
+  };  
 
   const editAluno = (id) => {
     axios.get(`http://127.0.0.1:5000/api/aluno/${id}`)
@@ -172,7 +177,7 @@ function Alunos() {
           {editAlunosId ? (
             <div className={styles.EditForm_Alunos}>
               <form className={styles.FormAlunos}>
-              <h2>Editar Aluno</h2>
+                <h2>Editar Aluno</h2>
                 <label>Nome:</label>
                 <input type="text" value={editAlunosDados.nome} onChange={(e) => {
                   const nomeSemEspacosEspeciais = e.target.value.replace(/[^a-zA-Z0-9]/g, ' ');

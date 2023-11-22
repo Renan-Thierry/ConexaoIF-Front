@@ -30,23 +30,21 @@ function EmailForm() {
         alert('Nenhum email encontrado');
         return;
       }
-
       const firstEmail = emailsData[0];
-
       setFileData(emailsData);
       setTituloGrupo(firstEmail.titulo);
       setMensagemManual(firstEmail.mensagem);
       setGrupoLink(firstEmail.link);
       setNumEmails(emailsData.length);
     } catch (error) {
-      console.error(error);
-      alert('Ocorreu um erro ao buscar os emails.');
+        console.error(error);
+        alert('Ocorreu um erro ao buscar os emails.');
     }
   };
 
   useEffect(() => {
     fetchEmailData();
-  }, []); // Adicione a função fetchEmailData como dependência
+  }, []);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,35 +56,28 @@ function EmailForm() {
   
     try {
       setEnviando(true);
-  
       const response = await axios.post('http://localhost:5000/send', payload);
       alert(response.data.message);
       navegação('/Lista');
-  
-     // Salvar no banco de dados
+
      const alunoGrupoData = fileData.map(email => ({
       aluno: { id: email.id },
       grupo: { id: email.grupo_id.id }
     }));
     
     const saveAlunoGrupoPromises = [];
-    
+
     for (const data of alunoGrupoData) {
       saveAlunoGrupoPromises.push(axios.post('http://localhost:5000/api/alunogrupo', data));
     }
     
     try {
       await Promise.all(saveAlunoGrupoPromises);
-    
-      // Atualizar os dados buscando novamente
       await fetchEmailData();
     } catch (error) {
-      console.error(error);
-      alert('Atenção: Um ou mais alunos receberam a mensagem, mas já estão vinculados ao referente grupo.');
+        console.error(error);
+        alert('Atenção: Um ou mais alunos receberam a mensagem, mas já estão vinculados ao referente grupo.');
     }
-    
-
-
     } catch (error) {
       console.error(error);
       alert('Ocorreu um erro ao enviar o e-mail.');
@@ -98,49 +89,26 @@ function EmailForm() {
   return (
     <>
       <SideBar />
-      <div className={styles.containerAdminNavBar}>
-        <div className={styles.container}>
-          <main>
-            <h1>Mensagem</h1>
-            <div className={styles.conteudo}>{/* Content */}</div>
-
-            <form onSubmit={handleSubmit}>
-              <div className={styles.editForm}>
-                <div className={styles.formGroup}>
-                  <label>Título do Grupo:</label>
-                  <span id="titulo_grupo">{tituloGrupo}</span>
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Link do Grupo:</label>
-                  <span id="link_grupo">{grupoLink}</span>
-                </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="mensagem_manual">Mensagem Padrão:</label>
-                  <textarea
-                    id="mensagem_manual"
-                    name="mensagem_manual"
-                    rows="4"
-                    cols="50"
-                    required
-                    placeholder={mensagemManual ? '' : 'Digite a mensagem'}
-                    value={mensagemManual}
-                    onChange={(e) => setMensagemManual(e.target.value)}
-                  ></textarea>
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Número de Alunos Selecionados:</label>
-                  <span id="num_emails">{numEmails}</span>
-                </div>
-                <div className={styles.editForm}>
-                  <button type="submit" disabled={enviando}>
-                    {enviando ? 'Enviando...' : 'Enviar'}
-                  </button>
-                </div>
-              </div>
-            </form>
-          </main>
+      <main>
+        <h1 className={styles.tituloEmail}>Mensagem</h1>
+        <div className={styles.formularioEmail}>
+        <form onSubmit={handleSubmit} className={styles.EmailForm}>
+          <h2>Envio da mensagem</h2>
+              <label>Título do Grupo:</label>
+              <span id="titulo_grupo">{tituloGrupo}</span>
+              <label>Link do Grupo:</label>
+              <span id="link_grupo">{grupoLink}</span>
+              <label>Número de Alunos Selecionados:</label>
+              <span id="num_emails">{numEmails}</span>
+              <label htmlFor="mensagem_manual">Mensagem Padrão:</label>
+              <textarea id="mensagem_manual" name="mensagem_manual" rows="4" cols="50" required placeholder={mensagemManual ? '' : 'Digite a mensagem'} value={mensagemManual} onChange={(e) => setMensagemManual(e.target.value)}>
+              </textarea>
+              <button type="submit" disabled={enviando}>
+                {enviando ? 'Enviando...' : 'Enviar'}
+              </button>
+        </form>
         </div>
-      </div>
+      </main>
     </>
   );
 }

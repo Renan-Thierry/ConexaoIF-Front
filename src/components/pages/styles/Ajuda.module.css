@@ -54,6 +54,7 @@
 }
 .sessao div > p {
   width: 700px;
+  text-indent: 20px;
 }
 .conteudo_Ajuda > .sessao2 {
   width: 100%;
@@ -83,4 +84,5 @@
 }
 .sessao2 div > p {
   width: 700px;
+  text-indent: 20px;
 }

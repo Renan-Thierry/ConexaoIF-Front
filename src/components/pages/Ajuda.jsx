@@ -15,13 +15,13 @@ function Ajuda(){
             <h1><BsFill1CircleFill /><span>Passo</span></h1>
             <div>
               <img src={ajuda1} alt="Sessao1" />
-              <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:</p>
+              <p>Para realizar o envio das mensagens às diversas plataformas disponíveis, é essencial começar clicando em uma das opções estrategicamente apresentadas ao seu alcance. Esse passo inicial, apesar de sua aparente simplicidade, desempenha um papel fundamental ao conceder a você a capacidade de direcionar suas mensagens de maneira fácil e eficaz. Ao realizar esta ação, abre-se a porta para uma experiência mais aprimorada, caracterizada pela fluidez e intuição, proporcionando um ambiente interativo mais eficiente e intuitivo. Este ponto de partida torna-se, assim, a base para uma jornada de comunicação facilitada e otimizada.</p>
             </div>
         </section>
         <section className={styles.sessao2}>
           <h1><BsFill2CircleFill /><span>Passo</span></h1>
           <div>
-            <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:</p>
+            <p>Após clicar nas opções apresentadas anteriormente, é necessário preencher os dados solicitados por cada plataforma. Você tem a flexibilidade de enviar mensagens para um único aluno, preenchendo os campos necessários, ou pode optar por selecionar um arquivo CSV e enviar para uma lista de alunos. Além disso, oferecemos a conveniência de enviar arquivos diretamente aos alunos. Este processo intuitivo proporciona a você múltiplas escolhas para personalizar e otimizar suas interações, seja para comunicação individualizada ou para gerenciar eficientemente listas de alunos através de arquivos CSV.</p>
             <img src={ajuda2} alt="Sessao2" />
           </div>
         </section>
@@ -29,7 +29,7 @@ function Ajuda(){
           <h1><BsFill3CircleFill /><span>Passo</span></h1>
           <div>
           <img src={ajuda3} alt="Sessao2" />
-            <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:</p>
+            <p>Após executar os passos anteriores com precisão, sua próxima ação consistirá em clicar no botão de envio. Imediatamente, você será agraciado com uma notificação, indicando que os dados cuidadosamente preenchidos foram enviados com sucesso. Este momento é marcado por um feedback positivo, proporcionando-lhe a confirmação tranquilizadora de que sua interação foi concluída de maneira eficiente e bem-sucedida.</p>
           </div>
         </section>
       </div>

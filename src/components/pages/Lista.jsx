@@ -118,86 +118,66 @@ function Lista() {
     axios
       .post('http://127.0.0.1:5000/api/salvar-json', { filePath, dataStr })
       .then(() => {
-        navigate('/EmailForm'); // Navega para a rota '/EmailForm'
+        navigate('/EmailForm');
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
   
   return (
     <>
     <SideBar />
-    <div className={styles.containerAdminNavBar}>
-          <div className={styles.container}>
-            <main>
-            <h1>Mensagem</h1>
-            <div className={styles.conteudo}>{/* Content */}</div>
-            <div>
-              <div className={styles.editForm}>
-                <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Curso:</label>
-                  <Select
-                    options={cursos.map((curso) => ({
-                      value: curso.id,
-                      label: curso.nome,
-                      className: styles.blueOption,
-                    }))}
-                    value={novaLista.cursoSelecionado}
-
-                    onChange={handleCursoSelect}
-                    required
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Grupo:</label>
-                  <Select
-                    options={grupos.map((grupo, index) => ({
-                      value: grupo,
-                      label: grupo.titulo,
-                      className: styles.blueOption,
-                      mensagem: gruposMensagem[index], // Retrieve the mensagem from gruposMensagem array
-                    }))}
-                    value={grupoEscolhido}
-                    onChange={handleGrupoSelect}
-                    placeholder="Selecione um grupo"
-                    required
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <label style={{ color: 'white' }}>Alunos/Período:</label>
-                  <Select
-                    isMulti
-                    options={alunos
-                      .filter((aluno) => aluno.curso.id === novaLista.cursoId)
-                      .map((aluno) => ({
-                        value: aluno.id,
-                        label: aluno.nome + ' - ' + aluno.periodo.semestrereferencia,
-                        className: styles.blueOption,
-                        email: aluno.email,
-                        link: '',
-                        titulo: '',
-                        curso_id: novaLista.cursoId,
-                      }))}
-                    value={alunosSelecionados}
-                    onChange={handleAlunosSelect}
-                    required
-                  />
-                </div>
+    <main>
+    <h1>Mensagem</h1>
+      <form className={styles.ConteudoLista}>
+        <h2>Envio da Mensagem</h2>
+            <div className={styles.selectDados}>
+            <label>Curso:</label>
+            <Select
+              options={cursos.map((curso) => ({
+                value: curso.id,
+                label: curso.nome,
+                className: styles.blueOption,
+              }))}
+              value={novaLista.cursoSelecionado}
+              placeholder="Selecione o curso"
+              onChange={handleCursoSelect}
+              required />
+            </div>
+            <div className={styles.selectDados}>
+            <label>Grupo:</label>
+            <Select options={grupos.map((grupo, index) => ({
+                value: grupo,
+                label: grupo.titulo,
+                className: styles.blueOption,
+                mensagem: gruposMensagem[index], 
+              }))}
+              value={grupoEscolhido}
+              onChange={handleGrupoSelect}
+              placeholder="Selecione um grupo"
+              required />
               </div>
-              <div className={styles.editForm}>
-
-        <button onClick={generateJsonFile}>Gerar Lista</button>
-        </div>
-            <div>
-            <div>
-            </div>
-            </div>
-            </div>
-            </main>
-      </div>
-      </div>
+            <div className={styles.selectDados}>
+            <label>Alunos/Período:</label>
+            <Select isMulti options={alunos.filter((aluno) => aluno.curso.id === novaLista.cursoId)
+                .map((aluno) => ({
+                  value: aluno.id,
+                  label: aluno.nome + ' - ' + aluno.periodo.semestrereferencia,
+                  className: styles.blueOption,
+                  email: aluno.email,
+                  link: '',
+                  titulo: '',
+                  curso_id: novaLista.cursoId,
+                }))}
+              value={alunosSelecionados}
+              placeholder="Selecione os alunos/periodos"
+              onChange={handleAlunosSelect}
+              required />
+              </div>
+            <button onClick={generateJsonFile}>Gerar Lista</button>
+          </form>
+        </main>
     </>
   );
 }
