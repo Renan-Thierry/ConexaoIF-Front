@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from './styles/SideBar.module.css';
 import logo from '../../img/connections.png';
-import { VscOrganization, VscSignOut, VscEdit, VscPersonAdd, VscMail, VscLinkExternal, VscInfo, VscAccount } from "react-icons/vsc";
+import { VscOrganization, VscSignOut, VscEdit, VscPersonAdd, VscMail, VscLinkExternal, VscInfo, VscAccount, VscHome } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
 
 function SideBar() {
@@ -20,7 +20,13 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/EditPerfil" style={{ color: 'inherit' }}>    {/*to="/EditPerfil"*/}
+                    <Link to="/Inicio" style={{ color: 'inherit' }}>
+                        <span className={styles.icone}><VscHome /></span>
+                        <span className={styles.titulo}>Home</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/EditPerfil" style={{ color: 'inherit' }}>
                         <span className={styles.icone}><VscEdit /></span>
                         <span className={styles.titulo}>Editar Perfil</span>
                     </Link>

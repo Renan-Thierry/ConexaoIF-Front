@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  ;
+}
+
+:root {
+  --bg-color: rgb(18, 18, 20);
+  --color: rgb(225, 225, 230);
+  --corPadrao: #03A64A;
+}
+
+.Inicio_conteudo {
+  width: 100%;
+}
+
+.Inicio_conteudo>h1 {
+  width: 100%;
+  font-family: var(--font0);
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  padding: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.479);
+}
+
+.Inicio_conteudo .Inicio_body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.Inicio_body>h1 {
+  margin-top: 40px;
+  font-size: 2.3em;
+}
+
+.Inicio_body .spanIF {
+  background-color: black;
+  color: #fff;
+  padding: 0px 10px 0px 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.Inicio_body .spanCNX {
+  color: #03A64A;
+}
+
+.Inicio_body>p {
+  margin: 5px;
+}
+
+.Inicio_body button {
+  width: 150px;
+  height: 50px;
+  background-color: var(--corPadrao);
+  color: #fff;
+  margin: 40px 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+.Inicio_body button:hover {
+  background-color: #1b884a;
+  transform: scale(1.04);
+}
+
+.Inicio_body>img {
+  border-top: 20px;
+  width: 380px;
+}

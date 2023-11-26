@@ -98,99 +98,99 @@ function AlunosConectados() {
         .then((response) => {
           const periodo = response.data;
           alunoGrupo.aluno.periodo = periodo;
-          setAlunosGrupo((prevAlunosGrupo) => [...prevAlunosGrupo]); 
+          setAlunosGrupo((prevAlunosGrupo) => [...prevAlunosGrupo]);
         })
         .catch((error) => console.log(error));
-      
+
       axios.get(`http://127.0.0.1:5000/api/curso/${alunoGrupo.aluno.curso_id}`)
         .then((response) => {
           const curso = response.data;
           alunoGrupo.aluno.curso = curso;
-          setAlunosGrupo((prevAlunosGrupo) => [...prevAlunosGrupo]); 
+          setAlunosGrupo((prevAlunosGrupo) => [...prevAlunosGrupo]);
         })
         .catch((error) => console.log(error));
     }
   };
 
   useEffect(() => {
-    alunosGrupo.forEach(fetchPeriodAndCourse); 
+    alunosGrupo.forEach(fetchPeriodAndCourse);
   }, [alunosGrupo]);
 
   return (
     <>
       <SideBar />
-          <main className={styles.conteudo}>
-            <h1>Alunos Conectados</h1>
-            {!modoEdicao && (
-              <form className={styles.form_filtro}>
-                <input type="text" placeholder="id/nome do grupo/nome do aluno" value={filtroAlunoGrupo} onChange={(e) => setFiltroAlunoGrupo(e.target.value)}/>
-                <button onClick={adicionarAlunoGrupo} style={{ visibility: 'hidden' }}></button>
-            </form>
-            )}
-            <section className={styles.section_tabela}>
-              <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Aluno</th>
-                    <th>Periodo</th>
-                    <th>Id do aluno</th>
-                    <th>Id do grupo</th>
-                    <th> Titulo do grupo</th>
-                    <th>Curso</th>
+      <main className={styles.conteudo}>
+        <h1>Alunos Conectados</h1>
+        {!modoEdicao && (
+          <form className={styles.form_filtro}>
+            <input type="text" placeholder="id/nome do grupo/nome do aluno" value={filtroAlunoGrupo} onChange={(e) => setFiltroAlunoGrupo(e.target.value)} />
+            <button onClick={adicionarAlunoGrupo} style={{ visibility: 'hidden' }}></button>
+          </form>
+        )}
+        <section className={styles.section_tabela}>
+          <table className={`${styles.table} ${modoEdicao ? styles.hidden : ""}`} style={{ display: modoEdicao ? "none" : "table" }}>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Aluno</th>
+                <th>Periodo</th>
+                <th>Id do aluno</th>
+                <th>Id do grupo</th>
+                <th> Titulo do grupo</th>
+                <th>Curso</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtro_AlunoGrupo.map((alunoGrupo) => {
+                return (
+                  <tr key={alunoGrupo.id}>
+                    <td>{alunoGrupo.id}</td>
+                    <td>{alunoGrupo.aluno ? alunoGrupo.aluno.nome : ""}</td>
+                    <td>{alunoGrupo.aluno && alunoGrupo.aluno.periodo ? alunoGrupo.aluno.periodo.semestrereferencia : ""}</td>
+                    <td>{alunoGrupo.aluno ? alunoGrupo.aluno.id : ""}</td>
+                    <td>{alunoGrupo.grupo ? alunoGrupo.grupo.id : ""}</td>
+                    <td>{alunoGrupo.grupo ? alunoGrupo.grupo.titulo : ""}</td>
+                    <td>{alunoGrupo.aluno && alunoGrupo.aluno.curso ? alunoGrupo.aluno.curso.nome : ""}</td>
+                    <div className={styles.icones}>
+                      <button onClick={() => removeAlunoGrupo(alunoGrupo.id)} className={styles.icone2}>
+                        <BsFillTrashFill />
+                      </button>
+                    </div>
                   </tr>
-                </thead>
-                <tbody>
-                  {filtro_AlunoGrupo.map((alunoGrupo) => {
-                    return (
-                      <tr key={alunoGrupo.id}>
-                        <td>{alunoGrupo.id}</td>
-                        <td>{alunoGrupo.aluno ? alunoGrupo.aluno.nome : ""}</td>
-                        <td>{alunoGrupo.aluno && alunoGrupo.aluno.periodo ? alunoGrupo.aluno.periodo.semestrereferencia : ""}</td>
-                        <td>{alunoGrupo.aluno ? alunoGrupo.aluno.id : ""}</td>
-                        <td>{alunoGrupo.grupo ? alunoGrupo.grupo.id : ""}</td>
-                        <td>{alunoGrupo.grupo ? alunoGrupo.grupo.titulo : ""}</td>
-                        <td>{alunoGrupo.aluno && alunoGrupo.aluno.curso ? alunoGrupo.aluno.curso.nome : ""}</td>
-                        <div className={styles.icones}>
-                        <button onClick={() => removeAlunoGrupo(alunoGrupo.id)} className={styles.icone2}>
-                          <BsFillTrashFill />
-                        </button>
-                      </div>  
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-              {modoEdicao ? (
-                <div className={styles.editForm}>
-                  <div className={styles.formGroup}>
-                    <label>Aluno:</label>
-                    <select value={novoAlunoGrupo.aluno_id || ""} onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, aluno_id: e.target.value })} required >
-                      <option value="">Selecione um aluno</option>
-                      {alunos.map((aluno) => (
-                        <option key={aluno.id} value={aluno.id}>
-                          {aluno.nome}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Grupo:</label>
-                    <select value={novoAlunoGrupo.grupo_id || ""} onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, grupo_id: e.target.value })} required >
-                      <option value="">Selecione um grupo</option>
-                      {grupos.map((grupo) => (
-                        <option key={grupo.id} value={grupo.id}>
-                          {grupo.titulo}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <button onClick={cadastrarAlunoGrupo}>Cadastrar</button>
-                  {mensagemErro && <p>{mensagemErro.mensagem}</p>}
-                </div>
-              ) : null}
-            </section>
-          </main>
+                );
+              })}
+            </tbody>
+          </table>
+          {modoEdicao ? (
+            <div className={styles.editForm}>
+              <div className={styles.formGroup}>
+                <label>Aluno:</label>
+                <select value={novoAlunoGrupo.aluno_id || ""} onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, aluno_id: e.target.value })} required >
+                  <option value="">Selecione um aluno</option>
+                  {alunos.map((aluno) => (
+                    <option key={aluno.id} value={aluno.id}>
+                      {aluno.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Grupo:</label>
+                <select value={novoAlunoGrupo.grupo_id || ""} onChange={(e) => setNovoAlunoGrupo({ ...novoAlunoGrupo, grupo_id: e.target.value })} required >
+                  <option value="">Selecione um grupo</option>
+                  {grupos.map((grupo) => (
+                    <option key={grupo.id} value={grupo.id}>
+                      {grupo.titulo}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button onClick={cadastrarAlunoGrupo}>Cadastrar</button>
+              {mensagemErro && <p>{mensagemErro.mensagem}</p>}
+            </div>
+          ) : null}
+        </section>
+      </main>
     </>
   );
 }

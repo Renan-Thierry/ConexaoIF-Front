@@ -22,41 +22,43 @@ import AlunosConectados from '../pages/AlunosConectados';
 import EnvioDeMensagem from '../pages/EnvioDeMensagem';
 import Servicos from '../pages/Servicos';
 import Ajuda from '../pages/Ajuda';
+import Inicial from '../pages/Inicial';
 
 function Rotas() {
-    return(
-        <div>
-          <Router>
-            <Routes>
-            <Route path="/" element={<Home />} />
-              <Route path="/Cadastro" element={<Cadastro />} />
-              <Route path="/Login" element={<Login />} />
-              <Route path="/Sobre" element={<Sobre />} />
-              <Route path="/Ajuda" element={<Ajuda />} />
-              <Route path="/Professor" element={<Professor />} />
-              <Route path="/Serviços" element={<Servicos />} />
-              <Route path="/Mensagem" element={<Mensagem />} />
-              <Route path="/Coordenador" element={<Coordenador />} />
-              <Route path="/Alunos" element={<Alunos />} />
-              <Route path="/Curso" element={<Curso />} />
-              <Route path="/Endereco" element={<Endereco />} />
-              <Route path="/Grupo" element={<Grupo />} />
-              <Route path="/Instituicao" element={<Instituicao />} />
-              <Route path="/Periodos" element={<Periodos />} />
-              <Route path="/Pessoas" element={<Pessoas />} />
-              <Route path="/EmailForm" element={<EmailForm />} />
-              <Route path="/GruposUser" element={<GruposUser />} />
-              <Route path="/EditPerfil" element={<EditPerfil />} />
-              <Route path="/AdicionarAlunos" element={<AdicionarAlunos />} />
+  return (
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Cadastro" element={<Cadastro />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Sobre" element={<Sobre />} />
+          <Route path="/Ajuda" element={<Ajuda />} />
+          <Route path="/Professor" element={<Professor />} />
+          <Route path="/Serviços" element={<Servicos />} />
+          <Route path="/Mensagem" element={<Mensagem />} />
+          <Route path="/Coordenador" element={<Coordenador />} />
+          <Route path="/Alunos" element={<Alunos />} />
+          <Route path="/Curso" element={<Curso />} />
+          <Route path="/Endereco" element={<Endereco />} />
+          <Route path="/Grupo" element={<Grupo />} />
+          <Route path="/Instituicao" element={<Instituicao />} />
+          <Route path="/Periodos" element={<Periodos />} />
+          <Route path="/Pessoas" element={<Pessoas />} />
+          <Route path="/EmailForm" element={<EmailForm />} />
+          <Route path="/GruposUser" element={<GruposUser />} />
+          <Route path="/EditPerfil" element={<EditPerfil />} />
+          <Route path="/AdicionarAlunos" element={<AdicionarAlunos />} />
+          <Route path="/Inicio" element={<Inicial />} />
 
-              <Route path="/Lista" element={<Lista />} />
-              <Route path="/EnvioDeMensagem" element={<EnvioDeMensagem />} />
-              
-              <Route path="/AlunosConectados" element={<AlunosConectados />} />
-            </Routes>
-          </Router>
-        </div>
-    )
+          <Route path="/Lista" element={<Lista />} />
+          <Route path="/EnvioDeMensagem" element={<EnvioDeMensagem />} />
+
+          <Route path="/AlunosConectados" element={<AlunosConectados />} />
+        </Routes>
+      </Router>
+    </div>
+  )
 }
 
 export default Rotas;

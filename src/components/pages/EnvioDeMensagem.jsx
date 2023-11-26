@@ -5,7 +5,7 @@ import logo2 from "../../img/dow.png";
 import logo3 from "../../img/pngtree-whatsapp-icon-png-image_6315990.png";
 import seta from "../../img/seta-direita.png";
 import iconeInicial from "../../img/Connected world-pana.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { CiExport, CiFaceSmile } from "react-icons/ci";
 import emailJs from "@emailjs/browser";
@@ -24,6 +24,7 @@ function AddAlunosNV() {
         "number": "",
         "message": "",
     });
+    const [fileData, setFileData] = useState([]);
 
     const lerArquivoCSV = (e) => {
         const arquivo = e.target.files[0];
@@ -32,20 +33,30 @@ function AddAlunosNV() {
                 header: true,
                 dynamicTyping: true,
                 complete: (resultado) => {
-                    setDadosCSV(resultado.data);
-                    enviarDadosCSVParaAPI(resultado.data);
-                }, error: (err) => { console.log("erro ao analizar arquivo. ", err.message); }
+                    const dadosComID = resultado.data.map((item, index) => ({
+                        id: index + 1,
+                        ...item,
+                    }));
+                    setDadosCSV(dadosComID);
+                    enviarDadosCSVParaAPI(dadosComID);
+                },
+                error: (err) => { console.log("erro ao analisar arquivo. ", err.message); }
             })
         }
     }
+
     const enviarDadosCSVParaAPI = (data) => {
+        const dadosConvertidos = data.map(item => ({
+            ...item,
+            numero: item.numero.toString()
+        }));
         if (data.length > 0) {
             fetch("http://localhost:3001/Mensagens", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(dadosConvertidos),
             })
                 .then((resp) => resp.json())
                 .then((data) => {
@@ -80,8 +91,49 @@ function AddAlunosNV() {
                     Swal.fire({ position: 'top-end', icon: 'error', background: 'rgb(18, 18, 20)', color: '#fff', title: 'Erro ao enviar a mensagem!', showConfirmButton: false, timer: 2000 });
                 });
         } else if (dadosCSV.length > 0) {
+            fetch("http://localhost:3001/Mensagens")
+                .then((resp) => resp.json())
+                .then((data) => {
+                    setFileData(data);
+                })
+                .catch((error) => {
+                    console.error("Erro ao obter dados de http://localhost:3001/Mensagens:", error);
+                });
         }
     }
+    useEffect(() => {
+        const enviarMensagensComIntervalo = async () => {
+            if (fileData && fileData.length > 0) {
+                for (let i = 0; i < fileData.length; i++) {
+                    const item = fileData[i];
+                    for (let j = 0; j < item.length; j++) {
+                        const data = item[j];
+                        const mensagem = {
+                            number: data.numero,
+                            message: adcDados.message,
+                        };
+
+                        fetch("http://localhost:8000/zdg-message", {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(mensagem),
+                        })
+                            .then((resp) => resp.json())
+                            .then((data) => {
+                                console.log("Dados enviados para mensagens 2", data);
+                            })
+                            .catch((error) => {
+                                console.error("Erro ao enviar dados para mensagens 2:", error);
+                            });
+                        await new Promise(resolve => setTimeout(resolve, 10000));
+                    }
+                }
+            }
+        };
+        enviarMensagensComIntervalo();
+    }, [fileData, adcDados.message]);
 
     const addMsgGmail = () => {
         if (email) {
@@ -265,8 +317,6 @@ function AddAlunosNV() {
                                 <input type="file" accept=".csv" id="arquivo" name="arquivo" onChange={lerArquivoCSV} />
                                 <h3>Envio de Mensagem(Aluno Único):</h3>
                                 <input type="text" placeholder="ID DO GRUPO" />
-                                <h3>Digite seu Nome:</h3>
-                                <input type="text" placeholder="Digite seu nome" />
                             </div>
                         )}
                     </section>
@@ -275,7 +325,7 @@ function AddAlunosNV() {
                         <h3>Enviar arquivo:</h3>
                         <label htmlFor="arquivo">
                             <CiExport />
-                            <span>Fazer upload de arquivo</span>
+                            <span>Em Breve</span>
                         </label>
                         <input type="file" id="arquivo" name="arquivo" />
                         <h3>Digite sua Mensagem:</h3>
@@ -292,7 +342,6 @@ function AddAlunosNV() {
                         {telegramSelect && (
                             <button onClick={enviarMensagens}>Enviar</button>
                         )}
-
                     </section>
                 </div>
             </main>

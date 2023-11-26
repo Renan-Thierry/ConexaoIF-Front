@@ -4,13 +4,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    ;
 }
+
 :root {
     --bg-color: rgb(18, 18, 20);
     --color: rgb(225, 225, 230);
     --corPadrao: #03A64A;
 }
+
 /* Versao Mobile */
 .sessao1 {
     width: 100%;
@@ -19,14 +22,17 @@
     padding-top: 50px;
     position: relative;
 }
+
 .sessao1 h1 {
     color: var(--color);
     font-size: 3em;
     margin-left: 50px;
 }
+
 .sessao1 span {
     color: var(--corPadrao);
 }
+
 .sessao1 h2 {
     width: 80%;
     font-size: 19px;
@@ -34,11 +40,13 @@
     font-weight: normal;
     margin-left: 50px;
 }
+
 .sessao1 a {
     position: absolute;
     top: 110%;
     left: 32%;
 }
+
 .sessao1 button {
     width: 200px;
     height: 50px;
@@ -50,10 +58,12 @@
     border: 1px solid black;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.479);
 }
+
 .sessao1 button:hover {
     background-color: #1b884a;
     transform: scale(1.04);
 }
+
 .sessao1 img {
     width: 90%;
     margin: auto;
@@ -68,27 +78,33 @@
         justify-content: center;
         gap: 10%;
     }
+
     .sessao1 h2 {
         width: 100%;
     }
+
     .sessao1 img {
         width: 450px;
     }
-    .sessao1 > div {
+
+    .sessao1>div {
         display: flex;
         flex-direction: column;
         margin: auto;
         justify-content: left;
     }
+
     .sessao1 a {
         top: 62%;
         left: 5%;
     }
+
     .sessao1 button {
         margin-top: 20px;
         height: 60px;
     }
 }
+
 @media screen and (min-width: 1025px) {
     .sessao1 {
         display: flex;
@@ -97,21 +113,26 @@
         justify-content: right;
         gap: 10%;
     }
+
     .sessao1 h2 {
         width: 100%;
     }
+
     .sessao1 img {
-        width: 450px;
+        width: 400px;
     }
-    .sessao1 > div {
+
+    .sessao1>div {
         width: 500px;
         margin: auto;
         justify-content: center;
     }
+
     .sessao1 a {
         top: 61.5%;
         left: 10%;
     }
+
     .sessao1 button {
         margin-top: 20px;
         height: 60px;
