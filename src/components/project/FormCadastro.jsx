@@ -27,26 +27,12 @@ function FormCadastro() {
         console.log(response.data);
         setAccessToken(response.data.access_token);
         localStorage.setItem("accessToken", response.data.access_token);
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          background: 'rgb(18, 18, 20)',
-          color: '#fff',
-          title: 'Cadastro realizado com sucesso!',
-          showConfirmButton: false,
-          timer: 2000
-        })
+        Swal.fire({ position: 'top-end', icon: 'success', background: 'rgb(18, 18, 20)', color: '#fff', title: 'Cadastro realizado com sucesso!', showConfirmButton: false, timer: 2000 })
         navigate('/Inicio');
       })
       .catch((error) => {
         if (error.response && error.response.data && error.response.data.message) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Usuario e Senha ja existentes!',
-            background: 'rgb(18, 18, 20)',
-            color: '#fff'
-          })
+          Swal.fire({ icon: 'error', title: 'Oops...', text: 'Usuario e Senha ja existentes!', background: 'rgb(18, 18, 20)', color: '#fff', confirmButtonColor: '#03A64A' })
         } else {
           console.log(error);
         }

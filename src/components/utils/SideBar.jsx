@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from './styles/SideBar.module.css';
 import logo from '../../img/connections.png';
-import { VscOrganization, VscSignOut, VscEdit, VscPersonAdd, VscMail, VscLinkExternal, VscInfo, VscAccount, VscHome } from "react-icons/vsc";
+import { VscOrganization, VscSignOut, VscEdit, VscMail, VscInfo, VscAccount, VscHome } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
 
 function SideBar() {
@@ -32,31 +32,19 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/AdicionarAlunos" style={{ color: 'inherit' }}>    {/*to="/AdicionarAlunos"*/}
-                        <span className={styles.icone}><VscPersonAdd /></span>
-                        <span className={styles.titulo}>Adicionar Alunos</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/GruposUser" style={{ color: 'inherit' }}>     {/*to="/GruposUser"*/}
-                        <span className={styles.icone}><VscOrganization /></span>
-                        <span className={styles.titulo}>Listar Grupos</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/EnvioDeMensagem" style={{ color: 'inherit' }}>     {/*to="/Lista"*/}
+                    <Link to="/EnvioDeMensagem" style={{ color: 'inherit' }}>
                         <span className={styles.icone}><VscMail /></span>
                         <span className={styles.titulo}>Enviar Mensagem</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/AlunosConectados" style={{ color: 'inherit' }}>       {/*to="/AlunosConectados"*/}
-                        <span className={styles.icone}><VscLinkExternal /></span>
-                        <span className={styles.titulo}>Alunos Conectados</span>
+                    <Link to="/ControleAlunos" style={{ color: 'inherit' }}>
+                        <span className={styles.icone}><VscOrganization /></span>
+                        <span className={styles.titulo}>Controle de Alunos</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/Ajuda" style={{ color: 'inherit' }}>        {/*to="/Sobre*/}
+                    <Link to="/Ajuda" style={{ color: 'inherit' }}>
                         <span className={styles.icone}><VscInfo /></span>
                         <span className={styles.titulo}>Guia De Usuario</span>
                     </Link>
@@ -69,7 +57,7 @@ function SideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link style={{ color: 'inherit' }}>   {/*to="/Sobre"*/}
+                    <Link style={{ color: 'inherit' }}>
                         <span className={styles.icone}><VscAccount /></span>
                         <span className={styles.titulo}>Usuario</span>
                     </Link>

@@ -33,11 +33,11 @@ function FormLogin() {
           Swal.fire({ position: 'top-end', icon: 'success', background: 'rgb(18, 18, 20)', color: '#fff', title: 'Login realizado com sucesso!', showConfirmButton: false, timer: 2000 })
           navegação("/Inicio");
         } else {
-          Swal.fire({ icon: 'error', title: 'Oops...', text: 'Usuario sem permissão!', background: 'rgb(18, 18, 20)', color: '#fff' })
+          Swal.fire({ icon: 'error', title: 'Oops...', text: 'Usuario sem permissão!', background: 'rgb(18, 18, 20)', color: '#fff', confirmButtonColor: '#03A64A' })
         }
       })
       .catch((error) => {
-        Swal.fire({ icon: 'error', title: 'Oops...', text: 'Usuario e Senha Incorretos!', background: 'rgb(18, 18, 20)', color: '#fff', })
+        Swal.fire({ icon: 'error', title: 'Oops...', text: 'Usuario e Senha Incorretos!', background: 'rgb(18, 18, 20)', color: '#fff', confirmButtonColor: '#03A64A' })
       });
   };
   useEffect(() => {

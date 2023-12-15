@@ -13,16 +13,12 @@ import Grupo from '../tables/Grupo';
 import Instituicao from '../tables/Instituicao';
 import Periodos from '../tables/Periodos';
 import Pessoas from '../tables/Pessoas';
-import EmailForm from '../pages/EmailForm';
-import GruposUser from '../pages/GruposUser';
 import EditPerfil from '../pages/EditPerfil';
-import AdicionarAlunos from '../pages/AdicionarAlunos';
-import Lista from '../pages/Lista';
-import AlunosConectados from '../pages/AlunosConectados';
 import EnvioDeMensagem from '../pages/EnvioDeMensagem';
 import Servicos from '../pages/Servicos';
 import Ajuda from '../pages/Ajuda';
 import Inicial from '../pages/Inicial';
+import ControleAlunos from '../pages/ControleAlunos';
 
 function Rotas() {
   return (
@@ -34,8 +30,12 @@ function Rotas() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Ajuda" element={<Ajuda />} />
-          <Route path="/Professor" element={<Professor />} />
           <Route path="/Serviços" element={<Servicos />} />
+          <Route path="/EditPerfil" element={<EditPerfil />} />
+          <Route path="/Inicio" element={<Inicial />} />
+          <Route path="/EnvioDeMensagem" element={<EnvioDeMensagem />} />
+          <Route path="/ControleAlunos" element={<ControleAlunos />} />
+          <Route path="/Professor" element={<Professor />} />
           <Route path="/Mensagem" element={<Mensagem />} />
           <Route path="/Coordenador" element={<Coordenador />} />
           <Route path="/Alunos" element={<Alunos />} />
@@ -45,16 +45,6 @@ function Rotas() {
           <Route path="/Instituicao" element={<Instituicao />} />
           <Route path="/Periodos" element={<Periodos />} />
           <Route path="/Pessoas" element={<Pessoas />} />
-          <Route path="/EmailForm" element={<EmailForm />} />
-          <Route path="/GruposUser" element={<GruposUser />} />
-          <Route path="/EditPerfil" element={<EditPerfil />} />
-          <Route path="/AdicionarAlunos" element={<AdicionarAlunos />} />
-          <Route path="/Inicio" element={<Inicial />} />
-
-          <Route path="/Lista" element={<Lista />} />
-          <Route path="/EnvioDeMensagem" element={<EnvioDeMensagem />} />
-
-          <Route path="/AlunosConectados" element={<AlunosConectados />} />
         </Routes>
       </Router>
     </div>

@@ -11,6 +11,8 @@ import { CiExport, CiFaceSmile } from "react-icons/ci";
 import emailJs from "@emailjs/browser";
 import Papa from "papaparse";
 import axios from 'axios';
+import { VscWarning } from "react-icons/vsc";
+import { useNavigate } from "react-router-dom";
 
 function AddAlunosNV() {
     const [envioWhats, setEnvioWhats] = useState([]);
@@ -20,11 +22,23 @@ function AddAlunosNV() {
     const [dadosCSV, setDadosCSV] = useState([]);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [telegramId, setTelegramId] = useState("");
+    const [telegramGPId, setTelegramGPId] = useState("");
+    const [arquivoMidia, setArquivoMidia] = useState("");
     const [adcDados, setAdcDados] = useState({
         "number": "",
         "message": "",
     });
     const [fileData, setFileData] = useState([]);
+    const navegação = useNavigate();
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem("accessToken");
+
+        if (!accessToken) {
+            navegação("/Login");
+        }
+    }, [navegação]);
 
     const lerArquivoCSV = (e) => {
         const arquivo = e.target.files[0];
@@ -48,8 +62,9 @@ function AddAlunosNV() {
     const enviarDadosCSVParaAPI = (data) => {
         const dadosConvertidos = data.map(item => ({
             ...item,
-            numero: item.numero.toString()
+            numero: item.numero ? item.numero.toString() : ""
         }));
+
         if (data.length > 0) {
             fetch("http://localhost:3001/Mensagens", {
                 method: "POST",
@@ -194,21 +209,39 @@ function AddAlunosNV() {
     };
     const addMsgTelegram = async () => {
         const botToken = '6670122612:AAHukvvuFhZfk56x1cgiqlZUwQIB9fYb720';
-        const chatId = '1609132344';
+        const chatId = telegramId;
+        const chatIdGP = telegramGPId;
+
         try {
-            if (!botToken || !chatId) {
-                throw new Error('Token do bot ou ID do chat ausentes.');
+            if (chatIdGP) {
+                const response = await axios.post(
+                    `https://api.telegram.org/bot${botToken}/sendMessage`,
+                    {
+                        chat_id: chatIdGP,
+                        text: adcDados.message,
+                    }
+                );
+                console.log('Mensagem enviada:', response.data);
             }
-            const response = await axios.post(
-                `https://api.telegram.org/bot${botToken}/sendMessage`,
-                {
-                    chat_id: chatId,
-                    text: adcDados.message,
-                }
-            );
-            console.log('Mensagem enviada:', response.data);
+
+            if (chatId) {
+                const response = await axios.post(
+                    `https://api.telegram.org/bot${botToken}/sendMessage`,
+                    {
+                        chat_id: chatId,
+                        text: adcDados.message,
+                    }
+                );
+                console.log('Mensagem enviada:', response.data);
+            }
+            setTelegramGPId("");
+            setTelegramId("");
+            adcDados.message = "";
+            Swal.fire({ position: 'top-end', icon: 'success', background: 'rgb(18, 18, 20)', color: '#fff', title: 'Mensagem enviada com sucesso!', showConfirmButton: false, timer: 2000, });
         } catch (error) {
-            console.error('Erro ao enviar mensagem:', error.message);
+            console.error('Erro ao enviar mensagem:', error);
+
+            Swal.fire({ position: 'top-end', icon: 'error', background: 'rgb(18, 18, 20)', color: '#fff', title: 'Erro ao enviar mensagem!', showConfirmButton: false, timer: 2000, });
         }
     };
 
@@ -224,6 +257,27 @@ function AddAlunosNV() {
             addMsgTelegram();
         }
     };
+    const handleCheckboxChange = (checkbox) => {
+        switch (checkbox) {
+            case 'gmail':
+                setGmailSelect(true);
+                setTelegramSelect(false);
+                setWhatsSelect(false);
+                break;
+            case 'telegram':
+                setGmailSelect(false);
+                setTelegramSelect(true);
+                setWhatsSelect(false);
+                break;
+            case 'whatsapp':
+                setGmailSelect(false);
+                setTelegramSelect(false);
+                setWhatsSelect(true);
+                break;
+            default:
+                break;
+        }
+    };
 
     return (
         <>
@@ -235,15 +289,15 @@ function AddAlunosNV() {
                         <div className={styles.icons}>
                             <div>
                                 <label htmlFor="check1"><img src={logo1} alt="icone-gmail" width="50px" /></label>
-                                <input id="check1" type="checkbox" checked={gmailSelect} onChange={() => setGmailSelect(!gmailSelect)} />
+                                <input id="check1" type="checkbox" checked={gmailSelect} onChange={() => handleCheckboxChange('gmail')} />
                             </div>
                             <div>
                                 <label htmlFor="check2"><img src={logo2} alt="icone-telegram" width="50px" /></label>
-                                <input id="check2" type="checkbox" checked={telegramSelect} onChange={() => setTelegramSelect(!telegramSelect)} />
+                                <input id="check2" type="checkbox" checked={telegramSelect} onChange={() => handleCheckboxChange('telegram')} />
                             </div>
                             <div>
                                 <label htmlFor="check3"><img src={logo3} alt="icone-whatsapp" width="50px" /></label>
-                                <input id="check3" type="checkbox" checked={whatsSelect} onChange={() => setWhatsSelect(!whatsSelect)} />
+                                <input id="check3" type="checkbox" checked={whatsSelect} onChange={() => handleCheckboxChange('whatsapp')} />
                             </div>
                         </div>
                         {!whatsSelect && !gmailSelect && !telegramSelect && (
@@ -300,23 +354,13 @@ function AddAlunosNV() {
                         )}
                         {telegramSelect && (
                             <div>
-                                <h3>Envio de Mensagens(Multíplos Alunos):</h3>
-                                <label htmlFor="arquivo" className={styles.inputfile}>
-                                    {dadosCSV.length ? (
-                                        <div>
-                                            <CiFaceSmile />
-                                            <span>Arquivo Selecionado</span>
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            <CiExport />
-                                            <span>Fazer upload de arquivo</span>
-                                        </div>
-                                    )}
+                                <label className={styles.inputfileTelegram}>
+                                    <VscWarning />A api Oficial do Telegram não permite o envio em massa para pessoas sem primeiro a interação do usuario!
                                 </label>
-                                <input type="file" accept=".csv" id="arquivo" name="arquivo" onChange={lerArquivoCSV} />
+                                <h3>Envio de Mensagens(Para Grupo):</h3>
+                                <input type="text" placeholder="ID DO GRUPO" value={telegramGPId} onChange={(e) => setTelegramGPId(e.target.value)}></input>
                                 <h3>Envio de Mensagem(Aluno Único):</h3>
-                                <input type="text" placeholder="ID DO GRUPO" />
+                                <input type="text" placeholder="ID DO ALUNO" value={telegramId} onChange={(e) => setTelegramId(e.target.value)} />
                             </div>
                         )}
                     </section>
@@ -325,9 +369,9 @@ function AddAlunosNV() {
                         <h3>Enviar arquivo:</h3>
                         <label htmlFor="arquivo">
                             <CiExport />
-                            <span>Em Breve</span>
+                            <span>Fazer upload de Arquivo</span>
                         </label>
-                        <input type="file" id="arquivo" name="arquivo" />
+                        <input type="file" id="arquivo" name="arquivo" value={arquivoMidia} onChange={(e) => setArquivoMidia(e.target.value)} />
                         <h3>Digite sua Mensagem:</h3>
                         <textarea placeholder="Escreva Sua Mensagem..." value={adcDados.message} onChange={(e) => setAdcDados({ ...adcDados, message: e.target.value })}></textarea>
                         {!gmailSelect && !whatsSelect && !telegramSelect && (

@@ -5,8 +5,19 @@ import ajuda1 from "../../img/img-ajuda/ajuda1.png";
 import ajuda2 from "../../img/img-ajuda/ajuda2.png";
 import ajuda3 from "../../img/img-ajuda/ajuda3.png";
 import ajuda4 from "../../img/img-ajuda/ajuda4.png";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Ajuda() {
+  const navegação = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (!accessToken) {
+      navegação("/Login");
+    }
+  }, [navegação]);
   return (
     <>
       <SideBar />

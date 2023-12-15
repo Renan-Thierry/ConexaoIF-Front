@@ -4,6 +4,7 @@ import SideBar from "../utils/SideBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PerfilCard from '../project/PerfilCard';
+import Swal from 'sweetalert2';
 
 function EditPerfil() {
   const navegação = useNavigate();
@@ -33,15 +34,37 @@ function EditPerfil() {
   }, []);
 
   const removeCoordenador = (id) => {
-    axios.delete(`http://127.0.0.1:5000/api/coordenador/${id}`)
-      .then((response) => {
-        const AttListaCoordenador = coordenadores.filter((coordenador) => coordenador.id !== id);
-        setCoordenadores(AttListaCoordenador);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Se você apagar não tem mais volta!',
+      icon: 'Cuidado!',
+      showCancelButton: true,
+      confirmButtonColor: '#03A64A',
+      color: '#FFF',
+      background: 'rgb(32, 32, 36)',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, deletar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://127.0.0.1:5000/api/coordenador/${id}`)
+          .then((response) => {
+            const AttListaCoordenador = coordenadores.filter((coordenador) => coordenador.id !== id);
+            Swal.fire({
+              title: 'Deletado!',
+              text: 'O aluno foi apagado com sucesso',
+              icon: 'success',
+              confirmButtonColor: '#03A64A',
+              color: '#FFF',
+              background: 'rgb(32, 32, 36)',
+            });
+            setCoordenadores(AttListaCoordenador);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      }
+    });
+  }
 
   const editCoordenador = (id) => {
     axios.get(`http://127.0.0.1:5000/api/coordenador/${id}`)
